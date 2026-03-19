@@ -15,6 +15,10 @@ XIncludeFile "Context.pbi"             ; RequestContext lifecycle: Advance, Abor
 XIncludeFile "Middleware/Logger.pbi"   ; Logger middleware: method/path/status/elapsed
 XIncludeFile "Middleware/Recovery.pbi" ; Recovery middleware: OnError -> 500 response
 XIncludeFile "Binding.pbi"             ; Request binding: Param, Query, PostForm, JSON
+XIncludeFile "Middleware/Cookie.pbi"   ; Cookie parsing (incoming) + Set-Cookie (outgoing)
+XIncludeFile "Middleware/Session.pbi"  ; In-memory session store (uses Cookie)
+XIncludeFile "Middleware/BasicAuth.pbi" ; HTTP Basic Authentication middleware
+XIncludeFile "Middleware/CSRF.pbi"     ; CSRF token generation + validation (uses Session, Binding)
 XIncludeFile "../../pure_jinja/PureJinja.pbi" ; PureJinja template engine (Jinja2-compatible)
 XIncludeFile "Rendering.pbi"           ; Response rendering: JSON, HTML, Text, Redirect, File, Render
 XIncludeFile "Engine.pbi"              ; Top-level API: NewApp(), Run(), GET(), POST(), Use(), …

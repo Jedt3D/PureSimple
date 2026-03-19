@@ -10,6 +10,50 @@ Versioning follows `v0.{phase}.0` during the pre-1.0 development phases.
 
 ---
 
+## [0.7.0] — 2026-03-20 · P7: Sessions, Cookies, BasicAuth, CSRF
+
+### Added
+- `src/Middleware/Cookie.pbi` — `Cookie` module:
+  - `Cookie::Get(*C, name)` — parse value from `*C\Cookie` (raw Cookie header)
+  - `Cookie::Set(*C, name, value, [path], [maxAge])` — append Set-Cookie directive to
+    `*C\SetCookies` (Chr(10)-delimited; Max-Age omitted when 0)
+- `src/Middleware/Session.pbi` — `Session` module with in-memory store:
+  - `Session::Middleware(*C)` — reads `_psid` cookie; creates new session if missing;
+    loads session KV into context; writes session cookie; auto-saves after chain returns
+  - `Session::Get(*C, key)` / `Session::Set(*C, key, val)` — last-write-wins KV store
+  - `Session::ID(*C)` — current 32-hex-char session ID
+  - `Session::Save(*C)` — persist context session back to in-memory store
+  - `Session::ClearStore()` — wipe all sessions (for tests)
+- `src/Middleware/BasicAuth.pbi` — `BasicAuth` module:
+  - `BasicAuth::SetCredentials(user, pass)` — configure expected credentials
+  - `BasicAuth::Middleware(*C)` — decode Base64 credentials from `*C\Authorization`;
+    abort 401 if missing, malformed, or wrong; store `_auth_user` in KV store on success
+- `src/Middleware/CSRF.pbi` — `CSRF` module:
+  - `CSRF::GenerateToken()` — 32-char random hex token (128-bit)
+  - `CSRF::SetToken(*C)` — store token in session + Set-Cookie response
+  - `CSRF::ValidateToken(*C, token)` — compare against session-stored token
+  - `CSRF::Middleware(*C)` — skip GET/HEAD; validate `_csrf` form field for all other
+    methods; abort 403 on mismatch
+- `tests/P7_Auth_Test.pbi` — 41 assertions across 13 suites
+
+### Changed
+- `src/Types.pbi` — added `Cookie.s`, `SetCookies.s`, `Authorization.s`,
+  `SessionID.s`, `SessionKeys.s`, `SessionVals.s` fields to `RequestContext`
+- `src/Context.pbi` — `Ctx::Init` resets all six new fields
+- `src/PureSimple.pb` — added Cookie/Session/BasicAuth/CSRF includes (after Binding,
+  before PureJinja, since CSRF depends on Binding::PostForm)
+- `tests/run_all.pb` — enabled `P7_Auth_Test.pbi`
+
+### Notes
+- `data` is a reserved PureBasic keyword (used in the `Data` statement); renamed to
+  `sessData` in Session middleware
+- `Base64Encoder(*buf, size)` returns a string; `Base64Decoder(str, *buf, size)`
+  writes to a buffer and returns decoded byte count — parameters are not symmetric
+- Session uses last-write-wins for duplicate keys: `Session::Set` always appends;
+  `Session::Get` returns the last occurrence
+
+---
+
 ## [0.6.0] — 2026-03-19 · P6: SQLite3 Integration + Migrations
 
 ### Added

@@ -3,7 +3,7 @@
 A lightweight web framework for **PureBasic 6.x**, inspired by Go's Gin and Chi. Compiles to a single native binary with zero external runtime dependencies.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-![Status: P6 SQLite](https://img.shields.io/badge/status-P6%20SQLite-yellow)
+![Status: P7 Auth](https://img.shields.io/badge/status-P7%20Auth-yellow)
 
 ---
 
@@ -102,6 +102,28 @@ PureSimple/
     setup-server.sh  # One-time server provisioning
   templates/         # Default Jinja2 HTML templates (404.html, 500.html)
 ```
+
+---
+
+## Features (P7)
+
+### Cookies
+- `Cookie::Get(@ctx, "name")` — read from incoming `Cookie:` header (`*C\Cookie`)
+- `Cookie::Set(@ctx, "name", "value", [path], [maxAge])` — append Set-Cookie directive
+
+### Sessions
+- `Session::Middleware` — reads/creates `_psid` cookie; loads session into context KV; auto-saves
+- `Session::Get(@ctx, "key")` / `Session::Set(@ctx, "key", "val")` — per-request session data
+- `Session::Save(@ctx)` — persist session back to in-memory store
+
+### HTTP Basic Auth
+- `BasicAuth::SetCredentials("user", "pass")` — configure expected credentials
+- `BasicAuth::Middleware` — decode `Authorization: Basic <base64>` header; abort 401 on failure
+
+### CSRF Protection
+- `CSRF::GenerateToken()` — 32-char random hex token (128-bit)
+- `CSRF::SetToken(@ctx)` — store in session + Set-Cookie
+- `CSRF::Middleware` — skip GET/HEAD; validate `_csrf` form field for POST/PUT/PATCH/DELETE; abort 403
 
 ---
 
@@ -218,7 +240,7 @@ DB::Migrate(db)   ; idempotent — skips already-applied versions
 | P4 | Response rendering + PureJinja integration | **done** |
 | P5 | Route groups + structured error handling | **done** |
 | P6 | SQLite3 integration + migrations | **done** |
-| P7 | Sessions, cookies, BasicAuth, CSRF | planned |
+| P7 | Sessions, cookies, BasicAuth, CSRF | **done** |
 | P8 | Logging, .env config, run modes, scaffold | planned |
 | P9 | Documentation + example apps | planned |
 | P10 | Multi-DB abstraction (PostgreSQL, MySQL) | planned |

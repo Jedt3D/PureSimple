@@ -42,6 +42,14 @@ DeclareModule Types
 
     ; JSON binding — handle to the parsed JSON object (Binding::BindJSON / FreeJSON)
     JSONHandle.i
+
+    ; Cookie / session (populated by Cookie and Session middleware)
+    Cookie.s            ; raw incoming Cookie header, e.g. "session=abc; foo=bar"
+    SetCookies.s        ; accumulated Set-Cookie directives (Chr(10)-delimited)
+    Authorization.s     ; raw Authorization header, e.g. "Basic dXNlcjpwYXNz"
+    SessionID.s         ; current session ID (set by Session::Middleware)
+    SessionKeys.s       ; session KV keys (Chr(9)-delimited, loaded from store)
+    SessionVals.s       ; session KV values (Chr(9)-delimited, loaded from store)
   EndStructure
 
   ; HandlerFunc — universal handler/middleware procedure signature
