@@ -3,7 +3,7 @@
 A lightweight web framework for **PureBasic 6.x**, inspired by Go's Gin and Chi. Compiles to a single native binary with zero external runtime dependencies.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-![Status: P5 Route Groups](https://img.shields.io/badge/status-P5%20Route%20Groups-yellow)
+![Status: P6 SQLite](https://img.shields.io/badge/status-P6%20SQLite-yellow)
 
 ---
 
@@ -105,6 +105,32 @@ PureSimple/
 
 ---
 
+## Features (P6)
+
+### SQLite Database
+```purebasic
+db = DB::Open("app.db")           ; or ":memory:"
+DB::Exec(db, "CREATE TABLE users (id INTEGER, name TEXT)")
+DB::Exec(db, "INSERT INTO users VALUES (1, 'Alice')")
+
+DB::BindStr(db, 0, "Alice")
+DB::Query(db, "SELECT id FROM users WHERE name = ?")
+While DB::NextRow(db)
+  id = DB::GetInt(db, 0)
+Wend
+DB::Done(db)
+DB::Close(db)
+```
+
+### Migration Runner
+```purebasic
+DB::AddMigration(1, "CREATE TABLE users (id INTEGER PRIMARY KEY, email TEXT)")
+DB::AddMigration(2, "ALTER TABLE users ADD COLUMN name TEXT")
+DB::Migrate(db)   ; idempotent — skips already-applied versions
+```
+
+---
+
 ## Features (P5)
 
 ### Route Groups
@@ -191,7 +217,7 @@ PureSimple/
 | P3 | Request binding (Param, Query, JSON, Form, File) | **done** |
 | P4 | Response rendering + PureJinja integration | **done** |
 | P5 | Route groups + structured error handling | **done** |
-| P6 | SQLite3 integration + migrations | planned |
+| P6 | SQLite3 integration + migrations | **done** |
 | P7 | Sessions, cookies, BasicAuth, CSRF | planned |
 | P8 | Logging, .env config, run modes, scaffold | planned |
 | P9 | Documentation + example apps | planned |

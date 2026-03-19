@@ -19,7 +19,7 @@ XIncludeFile "../../pure_jinja/PureJinja.pbi" ; PureJinja template engine (Jinja
 XIncludeFile "Rendering.pbi"           ; Response rendering: JSON, HTML, Text, Redirect, File, Render
 XIncludeFile "Engine.pbi"              ; Top-level API: NewApp(), Run(), GET(), POST(), Use(), …
 XIncludeFile "Group.pbi"               ; RouterGroup: sub-router with prefix + group middleware
+XIncludeFile "DB/SQLite.pbi"           ; SQLite adapter + migration runner
 
 ; Future phases will add:
 ;   XIncludeFile "Config.pbi"
-;   XIncludeFile "DB/SQLite.pbi"

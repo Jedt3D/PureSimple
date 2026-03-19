@@ -23,7 +23,7 @@ XIncludeFile "P2_Middleware_Test.pbi"
 XIncludeFile "P3_Binding_Test.pbi"
 XIncludeFile "P4_Rendering_Test.pbi"
 XIncludeFile "P5_Groups_Test.pbi"
-;   XIncludeFile "P6_SQLite_Test.pbi"
+XIncludeFile "P6_SQLite_Test.pbi"
 ;   XIncludeFile "P7_Auth_Test.pbi"
 ;   XIncludeFile "P8_Config_Test.pbi"
 
