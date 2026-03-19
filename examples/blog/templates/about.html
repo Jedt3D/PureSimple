@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About — {{ site_name }}</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 720px; margin: 4vh auto; padding: 0 1.5rem; color: #222; }
+    nav  { margin-bottom: 2rem; }
+    nav a { margin-right: 1rem; color: #0057b7; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><a href="/">← Home</a><a href="/about">About</a></nav>
+  <h1>About {{ site_name }}</h1>
+  <p>
+    This blog is built with <strong>PureSimple</strong>, a lightweight web framework for PureBasic 6.x
+    inspired by Go's Gin and Chi. It compiles to a single native binary with zero external runtime
+    dependencies.
+  </p>
+  <p>
+    Templates are rendered by <a href="https://github.com/Jedt3D/pure_jinja">PureJinja</a>,
+    a Jinja2-compatible template engine written entirely in PureBasic.
+  </p>
+</body>
+</html>

@@ -5,10 +5,10 @@
     {
       "path": "examples/hello_world/main.pb",
       "type": "source",
-      "sizeBytes": 533,
-      "modTime": "2026-03-19T14:40:15Z",
-      "lineCount": 16,
-      "sha256": "024bc90697522aebc8a13d4fc7f5e25e1d5545c607ef33a4e5720b191cb6faa8"
+      "sizeBytes": 1344,
+      "modTime": "2026-03-19T17:33:43Z",
+      "lineCount": 44,
+      "sha256": "e07de757cb1eb2fca884c1b9b31a6ef4d885239ca0fb49a159dd6b18e6ecc0f0"
     },
     {
       "path": "src/Binding.pbi",
@@ -17,6 +17,14 @@
       "modTime": "2026-03-19T16:37:37Z",
       "lineCount": 179,
       "sha256": "dad53f35368164807000513dab56ad59500c4922855c007c30ac1b9f5e8a5e1b"
+    },
+    {
+      "path": "src/Config.pbi",
+      "type": "include",
+      "sizeBytes": 3400,
+      "modTime": "2026-03-19T17:33:43Z",
+      "lineCount": 108,
+      "sha256": "a60995f0bb80b947684fe0bdb42a11d534585ae56d9ed0423848634218708b67"
     },
     {
       "path": "src/Context.pbi",
@@ -37,10 +45,10 @@
     {
       "path": "src/Engine.pbi",
       "type": "include",
-      "sizeBytes": 4499,
-      "modTime": "2026-03-19T16:57:57Z",
-      "lineCount": 146,
-      "sha256": "013920c37a2722720678fe99852841a3eb57726b9b9d867dd9d9bb782a589e1c"
+      "sizeBytes": 4843,
+      "modTime": "2026-03-19T17:33:43Z",
+      "lineCount": 159,
+      "sha256": "6be041651d338eb1626a423856aba9d34193173d85c49319dfff58b2edf4df88"
     },
     {
       "path": "src/Group.pbi",
@@ -49,6 +57,14 @@
       "modTime": "2026-03-19T16:57:57Z",
       "lineCount": 111,
       "sha256": "c25f22112360a8486ee0342ae5a1d7a01c2b12922db1517993ea0549209899b9"
+    },
+    {
+      "path": "src/Log.pbi",
+      "type": "include",
+      "sizeBytes": 2921,
+      "modTime": "2026-03-19T17:33:43Z",
+      "lineCount": 103,
+      "sha256": "c90827ec6b252e6b781a4ad900100fdfbd74b7fa51ca255e821dcdb3a0cb816a"
     },
     {
       "path": "src/Middleware/BasicAuth.pbi",
@@ -101,10 +117,10 @@
     {
       "path": "src/PureSimple.pb",
       "type": "source",
-      "sizeBytes": 1901,
-      "modTime": "2026-03-19T17:21:36Z",
-      "lineCount": 29,
-      "sha256": "e171113c9d8f750784162966fd62c3b4e0a599ffeb04fa7f33d2645d26551e3f"
+      "sizeBytes": 2021,
+      "modTime": "2026-03-19T17:33:43Z",
+      "lineCount": 28,
+      "sha256": "4fa0317a2acde36f9b8568188ac8962adbe5428ca7ad29958f245708ce6d6a62"
     },
     {
       "path": "src/Rendering.pbi",
@@ -195,6 +211,14 @@
       "sha256": "b8d238f9e4637dc686dbbf2d31f53360cb2e4e4551c03240f8703f880f8edb71"
     },
     {
+      "path": "tests/P8_Config_Test.pbi",
+      "type": "include",
+      "sizeBytes": 4204,
+      "modTime": "2026-03-19T17:33:43Z",
+      "lineCount": 109,
+      "sha256": "9affdef86e3a9bd19e6876458edd5047c7321597c6a38a0d9426cba73eb76620"
+    },
+    {
       "path": "tests/TestHarness.pbi",
       "type": "include",
       "sizeBytes": 3740,
@@ -205,17 +229,17 @@
     {
       "path": "tests/run_all.pb",
       "type": "source",
-      "sizeBytes": 1156,
-      "modTime": "2026-03-19T17:21:36Z",
+      "sizeBytes": 1152,
+      "modTime": "2026-03-19T17:33:43Z",
       "lineCount": 37,
-      "sha256": "b9ddc79e55648fb3c646543561a6f7541146dc6925bfdbe1e0b8f701a055bffe"
+      "sha256": "9ce9e5692eac37294881cd1619c573daf5c36ae0f638fac30c673177ae4a9a32"
     }
   ],
   "stats": {
-    "totalFiles": 26,
+    "totalFiles": 29,
     "sourceFiles": 3,
-    "includeFiles": 23,
+    "includeFiles": 26,
     "formFiles": 0,
-    "totalLines": 3018
+    "totalLines": 3378
   }
 }

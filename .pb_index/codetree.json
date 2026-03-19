@@ -1,7 +1,20 @@
 {
   "examples/hello_world/main.pb": {
     "type": "source",
-    "procedures": {},
+    "procedures": {
+      "HealthHandler": {
+        "line": 42,
+        "endLine": 44,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "HelloHandler": {
+        "line": 38,
+        "endLine": 40,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      }
+    },
     "structures": {},
     "enumerations": {},
     "constants": {},
@@ -12,7 +25,7 @@
     "globals": {},
     "includes": [
       {
-        "line": 10,
+        "line": 7,
         "path": "../../src/PureSimple.pb",
         "directive": "XIncludeFile"
       }
@@ -114,6 +127,72 @@
       "_TmpVals": {
         "line": 31,
         "type": ".s"
+      }
+    },
+    "includes": []
+  },
+  "src/Config.pbi": {
+    "type": "include",
+    "procedures": {
+      "Get": {
+        "line": 70,
+        "endLine": 75,
+        "returnType": ".s",
+        "params": "Key.s, Fallback.s = \"\""
+      },
+      "GetInt": {
+        "line": 80,
+        "endLine": 85,
+        "returnType": ".i",
+        "params": "Key.s, Fallback.i = 0"
+      },
+      "Has": {
+        "line": 97,
+        "endLine": 99,
+        "returnType": ".i",
+        "params": "Key.s"
+      },
+      "Load": {
+        "line": 40,
+        "endLine": 65,
+        "returnType": ".i",
+        "params": "Path.s"
+      },
+      "Reset": {
+        "line": 104,
+        "endLine": 106,
+        "returnType": "",
+        "params": ""
+      },
+      "Set": {
+        "line": 90,
+        "endLine": 92,
+        "returnType": "",
+        "params": "Key.s, Val.s"
+      }
+    },
+    "structures": {},
+    "enumerations": {},
+    "constants": {},
+    "macros": {},
+    "interfaces": {},
+    "modules": {
+      "Config_declare": {
+        "line": 20,
+        "endLine": 27,
+        "kind": "declare"
+      },
+      "Config_impl": {
+        "line": 29,
+        "endLine": 108,
+        "kind": "impl"
+      }
+    },
+    "prototypes": {},
+    "globals": {
+      "NewMap _C": {
+        "line": 32,
+        "type": ".s()"
       }
     },
     "includes": []
@@ -378,98 +457,110 @@
     "type": "include",
     "procedures": {
       "Any": {
-        "line": 68,
-        "endLine": 74,
+        "line": 71,
+        "endLine": 77,
         "returnType": "",
         "params": "Pattern.s, Handler.i"
       },
       "AppendGlobalMiddleware": {
-        "line": 96,
-        "endLine": 101,
+        "line": 99,
+        "endLine": 104,
         "returnType": "",
         "params": "*C.RequestContext"
       },
       "CombineHandlers": {
-        "line": 86,
-        "endLine": 92,
+        "line": 89,
+        "endLine": 95,
         "returnType": "",
         "params": "*C.RequestContext, RouteHandler.i"
       },
       "DELETE": {
-        "line": 64,
-        "endLine": 66,
+        "line": 67,
+        "endLine": 69,
         "returnType": "",
         "params": "Pattern.s, Handler.i"
       },
       "GET": {
-        "line": 48,
-        "endLine": 50,
+        "line": 51,
+        "endLine": 53,
         "returnType": "",
         "params": "Pattern.s, Handler.i"
       },
       "HandleMethodNotAllowed": {
-        "line": 134,
-        "endLine": 144,
+        "line": 137,
+        "endLine": 147,
         "returnType": "",
         "params": "*C.RequestContext"
       },
       "HandleNotFound": {
-        "line": 116,
-        "endLine": 126,
+        "line": 119,
+        "endLine": 129,
         "returnType": "",
         "params": "*C.RequestContext"
       },
+      "Mode": {
+        "line": 155,
+        "endLine": 157,
+        "returnType": ".s",
+        "params": ""
+      },
       "NewApp": {
-        "line": 38,
-        "endLine": 40,
+        "line": 41,
+        "endLine": 43,
         "returnType": ".i",
         "params": ""
       },
       "PATCH": {
-        "line": 60,
-        "endLine": 62,
+        "line": 63,
+        "endLine": 65,
         "returnType": "",
         "params": "Pattern.s, Handler.i"
       },
       "POST": {
-        "line": 52,
-        "endLine": 54,
+        "line": 55,
+        "endLine": 57,
         "returnType": "",
         "params": "Pattern.s, Handler.i"
       },
       "PUT": {
-        "line": 56,
-        "endLine": 58,
+        "line": 59,
+        "endLine": 61,
         "returnType": "",
         "params": "Pattern.s, Handler.i"
       },
       "ResetMiddleware": {
-        "line": 104,
-        "endLine": 108,
+        "line": 107,
+        "endLine": 111,
         "returnType": "",
         "params": ""
       },
       "Run": {
-        "line": 44,
-        "endLine": 46,
+        "line": 47,
+        "endLine": 49,
         "returnType": ".i",
         "params": "Port.i"
       },
       "SetMethodNotAllowedHandler": {
-        "line": 129,
-        "endLine": 131,
+        "line": 132,
+        "endLine": 134,
         "returnType": "",
         "params": "Handler.i"
       },
+      "SetMode": {
+        "line": 150,
+        "endLine": 152,
+        "returnType": "",
+        "params": "NewMode.s"
+      },
       "SetNotFoundHandler": {
-        "line": 111,
-        "endLine": 113,
+        "line": 114,
+        "endLine": 116,
         "returnType": "",
         "params": "Handler.i"
       },
       "Use": {
-        "line": 77,
-        "endLine": 82,
+        "line": 80,
+        "endLine": 85,
         "returnType": "",
         "params": "Handler.i"
       }
@@ -478,7 +569,7 @@
     "enumerations": {},
     "constants": {
       "#_MAX_MW": {
-        "line": 30,
+        "line": 32,
         "value": "32"
       }
     },
@@ -487,31 +578,35 @@
     "modules": {
       "Engine_declare": {
         "line": 8,
-        "endLine": 25,
+        "endLine": 27,
         "kind": "declare"
       },
       "Engine_impl": {
-        "line": 27,
-        "endLine": 146,
+        "line": 29,
+        "endLine": 159,
         "kind": "impl"
       }
     },
     "prototypes": {},
     "globals": {
       "Dim _MW": {
-        "line": 31,
+        "line": 33,
         "type": ".i(#_MAX_MW)"
       },
       "_MWCount": {
-        "line": 32,
-        "type": ".i"
-      },
-      "_MethodNotAllowed": {
         "line": 34,
         "type": ".i"
       },
+      "_MethodNotAllowed": {
+        "line": 36,
+        "type": ".i"
+      },
+      "_Mode": {
+        "line": 37,
+        "type": ".s"
+      },
       "_NotFoundHandler": {
-        "line": 33,
+        "line": 35,
         "type": ".i"
       }
     },
@@ -600,6 +695,99 @@
     },
     "prototypes": {},
     "globals": {},
+    "includes": []
+  },
+  "src/Log.pbi": {
+    "type": "include",
+    "procedures": {
+      "Dbg": {
+        "line": 87,
+        "endLine": 89,
+        "returnType": "",
+        "params": "Msg.s"
+      },
+      "Error": {
+        "line": 99,
+        "endLine": 101,
+        "returnType": "",
+        "params": "Msg.s"
+      },
+      "Info": {
+        "line": 91,
+        "endLine": 93,
+        "returnType": "",
+        "params": "Msg.s"
+      },
+      "SetLevel": {
+        "line": 72,
+        "endLine": 74,
+        "returnType": "",
+        "params": "Level.i"
+      },
+      "SetOutput": {
+        "line": 79,
+        "endLine": 81,
+        "returnType": "",
+        "params": "Filename.s"
+      },
+      "Warn": {
+        "line": 95,
+        "endLine": 97,
+        "returnType": "",
+        "params": "Msg.s"
+      },
+      "_Write": {
+        "line": 48,
+        "endLine": 67,
+        "returnType": "",
+        "params": "LevelStr.s, Msg.s"
+      }
+    },
+    "structures": {},
+    "enumerations": {},
+    "constants": {
+      "#LevelDebug": {
+        "line": 25,
+        "value": "0"
+      },
+      "#LevelError": {
+        "line": 28,
+        "value": "3"
+      },
+      "#LevelInfo": {
+        "line": 26,
+        "value": "1"
+      },
+      "#LevelWarn": {
+        "line": 27,
+        "value": "2"
+      }
+    },
+    "macros": {},
+    "interfaces": {},
+    "modules": {
+      "Log_declare": {
+        "line": 24,
+        "endLine": 36,
+        "kind": "declare"
+      },
+      "Log_impl": {
+        "line": 38,
+        "endLine": 103,
+        "kind": "impl"
+      }
+    },
+    "prototypes": {},
+    "globals": {
+      "_Level": {
+        "line": 41,
+        "type": ".i"
+      },
+      "_Output": {
+        "line": 42,
+        "type": ".s"
+      }
+    },
     "includes": []
   },
   "src/Middleware/BasicAuth.pbi": {
@@ -978,6 +1166,16 @@
       {
         "line": 26,
         "path": "DB/SQLite.pbi",
+        "directive": "XIncludeFile"
+      },
+      {
+        "line": 27,
+        "path": "Config.pbi",
+        "directive": "XIncludeFile"
+      },
+      {
+        "line": 28,
+        "path": "Log.pbi",
         "directive": "XIncludeFile"
       }
     ]
@@ -1649,6 +1847,26 @@
     },
     "includes": []
   },
+  "tests/P8_Config_Test.pbi": {
+    "type": "include",
+    "procedures": {
+      "P8_Config_Tests": {
+        "line": 13,
+        "endLine": 107,
+        "returnType": "",
+        "params": ""
+      }
+    },
+    "structures": {},
+    "enumerations": {},
+    "constants": {},
+    "macros": {},
+    "interfaces": {},
+    "modules": {},
+    "prototypes": {},
+    "globals": {},
+    "includes": []
+  },
   "tests/TestHarness.pbi": {
     "type": "include",
     "procedures": {
@@ -1777,6 +1995,11 @@
       {
         "line": 27,
         "path": "P7_Auth_Test.pbi",
+        "directive": "XIncludeFile"
+      },
+      {
+        "line": 28,
+        "path": "P8_Config_Test.pbi",
         "directive": "XIncludeFile"
       }
     ]
