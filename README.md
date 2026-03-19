@@ -24,8 +24,8 @@ A lightweight web framework for **PureBasic 6.x**, inspired by Go's Gin and Chi.
 ┌─────────▼──────┐  ┌──────────▼────────────────────┐
 │PureSimple      │  │PureJinja                      │
 │HTTPServer      │  │Jinja2-compatible templates    │
-│HTTP/1.1, TLS,  │  │35 filters · 599 tests         │
-│compression,    │  │v1.4.0                         │
+│HTTP/1.1, TLS,  │  │36 filters · 599+ tests        │
+│compression,    │  │v1.4.1                         │
 │static files    │  └───────────────────────────────┘
 │v1.x            │
 └────────────────┘
@@ -90,7 +90,7 @@ PureSimpleHTTPServer → dispatch callback
 PureSimple/
   src/               # Framework source (.pb entry point, .pbi modules)
   tests/             # Test harness + per-phase test files
-  examples/          # Runnable example apps (hello_world, todo, blog)
+  examples/          # Runnable example apps (hello_world, todo, blog, massively)
   docs/              # Design docs and API reference
   resources/         # common-pitfalls.md, PureBasic references
   scripts/
@@ -159,6 +159,7 @@ Book outline: [`docs/book-outline.md`](docs/book-outline.md) — *Native Web: Bu
 | [`examples/hello_world/`](examples/hello_world/main.pb) | Minimal bootstrap: Config, Log, SetMode, route registration |
 | [`examples/todo/`](examples/todo/main.pb) | JSON REST API — CRUD with in-memory list store |
 | [`examples/blog/`](examples/blog/main.pb) | HTML blog — PureJinja templates, Logger, Config |
+| [`examples/massively/`](examples/massively/README.md) | Production blog — SQLite, admin CRUD, BasicAuth, Massively theme, 10-step walk-through |
 
 ---
 
@@ -334,9 +335,9 @@ DB::Migrate(db)   ; idempotent — skips already-applied versions
 | P5 | Route groups + structured error handling | **done** |
 | P6 | SQLite3 integration + migrations | **done** |
 | P7 | Sessions, cookies, BasicAuth, CSRF | **done** |
-| P8 | Logging, .env config, run modes, scaffold | planned |
-| P9 | Documentation + example apps | planned |
-| P10 | Multi-DB abstraction (PostgreSQL, MySQL) | planned |
+| P8 | Logging, .env config, run modes, scaffold | **done** |
+| P9 | Documentation + example apps | **done** |
+| P10 | Multi-DB abstraction (PostgreSQL, MySQL) | **done** |
 
 ---
 
@@ -359,6 +360,32 @@ PureSimple follows a phased development workflow. Each phase:
 3. Merges to `main` and is tagged `v0.{N}.0`
 
 See `CLAUDE.md` for full conventions.
+
+---
+
+## Third-Party Credits
+
+The `examples/massively/` application uses third-party assets with their own licences:
+
+### Massively Theme
+[Massively by HTML5 UP](https://html5up.net/massively) by @ajlkn — licensed under the
+[Creative Commons Attribution 3.0 Unported (CCA 3.0)](https://creativecommons.org/licenses/by/3.0/)
+licence. Free for personal and commercial use. Attribution required.
+
+### Admin UI
+[Tabler](https://tabler.io/) — MIT licence.
+
+### Photography (Pexels)
+All photos are licensed under the [Pexels Licence](https://www.pexels.com/license/) (free for
+personal and commercial use; attribution appreciated but not required by the licence).
+
+| Post | Photographer | Pexels URL |
+|------|-------------|------------|
+| The Heron's Patience | Pixabay | [pexels.com/photo/158251](https://www.pexels.com/photo/158251/) |
+| Doi Inthanon in the Mist | Johannes Plenio | [pexels.com/photo/2559941](https://www.pexels.com/photo/2559941/) |
+| Rain Season Macro | Pixabay | [pexels.com/photo/931177](https://www.pexels.com/photo/931177/) |
+| Fireflies Over the Rice Fields | Aleksey Kuprikov | [pexels.com/photo/1108572](https://www.pexels.com/photo/1108572/) |
+| The Last Light at Phi Phi | Humphrey Muleba | [pexels.com/photo/3601425](https://www.pexels.com/photo/3601425/) |
 
 ---
 

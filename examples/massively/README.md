@@ -132,6 +132,22 @@ The migration runner creates it fresh if it doesn't exist.
 
 ## Credits
 
-- Theme: [Massively by HTML5 UP](https://html5up.net/massively) — CCA 3.0 license
-- Admin UI: [Tabler](https://tabler.io/) — MIT license
-- Photos: [Pexels](https://www.pexels.com/) — Pexels License
+### Theme
+[Massively](https://html5up.net/massively) by HTML5 UP (@ajlkn) — licensed under the
+[Creative Commons Attribution 3.0 Unported (CCA 3.0)](https://creativecommons.org/licenses/by/3.0/)
+licence. Free for personal and commercial use with attribution.
+
+### Admin UI
+[Tabler](https://tabler.io/) — MIT licence.
+
+### Photography
+All post photos are from [Pexels](https://www.pexels.com/) and licensed under the
+[Pexels Licence](https://www.pexels.com/license/) (free for personal and commercial use).
+
+| Post | Photographer | URL |
+|------|-------------|-----|
+| The Heron's Patience | Pixabay | [pexels.com/photo/158251](https://www.pexels.com/photo/158251/) |
+| Doi Inthanon in the Mist | Johannes Plenio | [pexels.com/photo/2559941](https://www.pexels.com/photo/2559941/) |
+| Rain Season Macro | Pixabay | [pexels.com/photo/931177](https://www.pexels.com/photo/931177/) |
+| Fireflies Over the Rice Fields | Aleksey Kuprikov | [pexels.com/photo/1108572](https://www.pexels.com/photo/1108572/) |
+| The Last Light at Phi Phi | Humphrey Muleba | [pexels.com/photo/3601425](https://www.pexels.com/photo/3601425/) |

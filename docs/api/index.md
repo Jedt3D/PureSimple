@@ -14,7 +14,7 @@ accessed via their module prefix (e.g. `Engine::GET`, `Ctx::Advance`).
 | [Rendering](rendering.md) | `src/Rendering.pbi` | Response writing: JSON, HTML, Text, Redirect, File, Render |
 | [Group](group.md) | `src/Group.pbi` | Route groups with shared prefix and middleware |
 | [Middleware](middleware.md) | `src/Middleware/*.pbi` | Logger, Recovery, Cookie, Session, BasicAuth, CSRF |
-| [DB](db.md) | `src/DB/SQLite.pbi` | SQLite adapter and migration runner |
+| [DB / DBConnect](db.md) | `src/DB/SQLite.pbi`, `src/DB/Connect.pbi` | SQLite adapter, migration runner, and multi-driver DSN factory (PostgreSQL, MySQL) |
 | [Config](config.md) | `src/Config.pbi` | .env loader and runtime key/value store |
 | [Log](log.md) | `src/Log.pbi` | Leveled logger (Debug/Info/Warn/Error) |
 

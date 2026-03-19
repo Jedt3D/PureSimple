@@ -8,6 +8,27 @@ Versioning follows `v0.{phase}.0` during the pre-1.0 development phases.
 
 ## [Unreleased]
 
+### Added
+- `examples/massively/` — "Wild & Still" production-quality nature photography blog:
+  - SQLite with 10 migrations (schema + 5 seed posts + site settings + contacts)
+  - Public routes: post list, single post, contact form (PRG pattern), health check
+  - Admin group: BasicAuth + full post CRUD + contact inbox
+  - PureJinja templates: Massively theme (public) + Tabler CDN (admin)
+  - Config via `.env`, leveled logging, custom 404 handler
+  - `examples/massively/walk-through/` — 10-step guide (introduction through Ubuntu deploy)
+  - `examples/massively/db/blog.db` — pre-seeded SQLite database committed to repo
+
+### Changed
+- `README.md` — added `examples/massively/` to Example Apps table; corrected P8/P9/P10
+  roadmap status from "planned" to "done"; added Third-Party Credits section documenting
+  Massively (CCA 3.0), Tabler (MIT), and five Pexels photographs with per-photo attribution
+- `docs/api/index.md` — updated DB module entry to reflect both SQLite and DBConnect modules
+
+### Dependencies
+- `pure_jinja` — added `split` filter (unblocks all Massively templates that use
+  `split('\n')`, `split('|')`, `split('\n\n')`); replaced silent unknown-filter pass-through
+  with `JinjaError::SetError` so missing filters surface immediately
+
 ---
 
 ## [0.10.0] — 2026-03-20 · P10: Multi-DB Abstraction (PostgreSQL, MySQL)
