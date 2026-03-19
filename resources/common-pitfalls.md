@@ -298,6 +298,42 @@ This is the **opposite** of `Dim`: `Dim a(32)` → 33 elements (0..32);
 
 ---
 
+## `DatabaseError()` takes no parameters
+
+```purebasic
+; WRONG — compile error: Incorrect number of parameters
+msg.s = DatabaseError(db)
+
+; RIGHT — global last-error string, no argument needed
+msg.s = DatabaseError()
+```
+
+---
+
+## `Next` cannot be used as a procedure name (reserved keyword)
+
+This applies to any PureBasic context, not just database code. `Next` closes
+`For…Next` loops and is reserved. Examples from PureSimple:
+- `Ctx::Advance` instead of `Ctx::Next`
+- `DB::NextRow` instead of `DB::Next`
+
+---
+
+## SQLite column and binding indices are 0-based
+
+```purebasic
+; Column access (0-based)
+GetDatabaseString(db, 0)   ; first column
+GetDatabaseString(db, 1)   ; second column
+
+; Parameter binding (0-based, for ? placeholders)
+SetDatabaseString(db, 0, "value")   ; binds the first ?
+SetDatabaseString(db, 1, "other")   ; binds the second ?
+DatabaseUpdate(db, "INSERT INTO t VALUES (?, ?)")
+```
+
+---
+
 ## `JinjaEnv::RenderString` vs `JinjaEnv::RenderTemplate`
 
 Both are valid PureJinja high-level API entry points:

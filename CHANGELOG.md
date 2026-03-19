@@ -10,6 +10,44 @@ Versioning follows `v0.{phase}.0` during the pre-1.0 development phases.
 
 ---
 
+## [0.6.0] — 2026-03-19 · P6: SQLite3 Integration + Migrations
+
+### Added
+- `src/DB/SQLite.pbi` — `DB` module wrapping PureBasic's built-in SQLite support:
+  - `DB::Open(path)` — open database (`":memory:"` for in-memory); returns handle
+  - `DB::Close(handle)` — close and free the database
+  - `DB::Exec(handle, sql)` — execute non-SELECT SQL (INSERT/UPDATE/DELETE/CREATE);
+    returns `#True` on success
+  - `DB::Query(handle, sql)` — execute SELECT; returns `#True` if rows are available
+  - `DB::NextRow(handle)` — advance cursor; returns `#True` while rows remain
+    (named `NextRow` since `Next` is a reserved PureBasic keyword)
+  - `DB::Done(handle)` — finish and free the current query result set
+  - `DB::GetStr(handle, col)` / `DB::GetInt(handle, col)` / `DB::GetFloat(handle, col)` —
+    0-based column accessors
+  - `DB::BindStr(handle, idx, val)` / `DB::BindInt(handle, idx, val)` — 0-based
+    parameter binding (call before `Exec`/`Query` with `?` placeholders)
+  - `DB::Error()` — last database error message
+  - `DB::AddMigration(version, sql)` — register a migration by version number
+  - `DB::Migrate(handle)` — create `puresimple_migrations` tracking table if needed,
+    then apply all pending migrations in registration order; idempotent
+  - `DB::ResetMigrations()` — clear registered migrations (used between tests)
+- `tests/P6_SQLite_Test.pbi` — 46 assertions across 11 suites: Open, Exec DDL+DML,
+  Query rows, GetFloat, BindStr, BindInt, error handling, Migrate (run/idempotent/incremental),
+  Close
+
+### Changed
+- `src/PureSimple.pb` — added `DB/SQLite.pbi` include
+- `tests/run_all.pb` — enabled `P6_SQLite_Test.pbi`
+
+### Notes
+- `DatabaseError()` in PureBasic takes no parameters (global last-error string)
+- `DB::NextRow` is used instead of `DB::Next` because `Next` is a PureBasic keyword
+  (closes `For…Next` loops and cannot be redeclared as a procedure)
+- Migrations are tracked by version integer in `puresimple_migrations`; running
+  `DB::Migrate` twice is safe — already-applied versions are skipped
+
+---
+
 ## [0.5.0] — 2026-03-19 · P5: Route Groups + Structured Error Handling
 
 ### Added
