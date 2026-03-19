@@ -38,6 +38,9 @@ DeclareModule Types
     ; General-purpose KV store for middleware communication (Set/Get helpers)
     StoreKeys.s
     StoreVals.s
+
+    ; JSON binding — handle to the parsed JSON object (Binding::BindJSON / FreeJSON)
+    JSONHandle.i
   EndStructure
 
   ; HandlerFunc — universal handler/middleware procedure signature

@@ -10,6 +10,39 @@ Versioning follows `v0.{phase}.0` during the pre-1.0 development phases.
 
 ---
 
+## [0.3.0] — 2026-03-19 · P3: Request Binding
+
+### Added
+- `src/Binding.pbi` — `Binding` module with full request-data extraction:
+  - `Binding::Param(*C, name)` — route param (delegates to Ctx::Param)
+  - `Binding::Query(*C, name)` — lazy-parsed query string (`?k=v&...`); caches
+    decoded key/value pairs in `*C\QueryKeys`/`*C\QueryVals` on first access
+  - `Binding::PostForm(*C, field)` — URL-encoded body field; parses on demand
+  - `Binding::BindJSON(*C)` — parses `*C\Body` as JSON; stores handle in
+    `*C\JSONHandle`; frees any previous handle automatically
+  - `Binding::JSONString/JSONInteger/JSONBool(*C, key)` — top-level JSON field
+    accessors; return safe defaults if handle is 0 or key is absent
+  - `Binding::ReleaseJSON(*C)` — frees the JSON handle and resets to 0
+    (named ReleaseJSON to avoid shadowing PureBasic's built-in `FreeJSON`)
+- `tests/P3_Binding_Test.pbi` — 27 assertions across 9 suites: Param,
+  Query, Query percent-encoding, PostForm, PostForm URL decoding, BindJSON,
+  ReleaseJSON, invalid JSON body, empty body
+
+### Changed
+- `src/Types.pbi` — added `JSONHandle.i` field to `RequestContext`
+- `src/Context.pbi` — `Ctx::Init` resets `*C\JSONHandle = 0`
+- `src/PureSimple.pb` — added `Binding.pbi` include (before Engine.pbi)
+- `tests/run_all.pb` — enabled `P3_Binding_Test.pbi`
+
+### Notes
+- `FreeJSON` is a PureBasic built-in; the module procedure is named
+  `ReleaseJSON` to prevent shadowing it inside `Module Binding`
+- URL decoding supports `+` → space and `%XX` hex sequences
+- `Binding::Query` caches parsed results — subsequent calls on the same
+  context are O(n) lookup, not O(n) parse
+
+---
+
 ## [0.2.0] — 2026-03-19 · P2: Middleware Engine
 
 ### Added

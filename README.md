@@ -3,7 +3,7 @@
 A lightweight web framework for **PureBasic 6.x**, inspired by Go's Gin and Chi. Compiles to a single native binary with zero external runtime dependencies.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-![Status: P2 Middleware Engine](https://img.shields.io/badge/status-P2%20Middleware%20Engine-yellow)
+![Status: P3 Request Binding](https://img.shields.io/badge/status-P3%20Request%20Binding-yellow)
 
 ---
 
@@ -105,6 +105,18 @@ PureSimple/
 
 ---
 
+## Features (P3)
+
+### Request Binding
+- `Binding::Param(*C, "name")` — route parameter (set by router)
+- `Binding::Query(*C, "name")` — query string (`?key=value`); lazy-parsed and cached; URL-decoded (`+`, `%XX`)
+- `Binding::PostForm(*C, "field")` — URL-encoded form body field; URL-decoded
+- `Binding::BindJSON(*C)` — parse JSON body; store handle in context
+- `Binding::JSONString` / `JSONInteger` / `JSONBool` — typed top-level JSON field accessors
+- `Binding::ReleaseJSON(*C)` — free JSON handle
+
+---
+
 ## Features (P2)
 
 ### Middleware Engine
@@ -143,7 +155,7 @@ PureSimple/
 | P0 | Project foundation, test harness, deploy scripts | **done** |
 | P1 | Core router + Context | **done** |
 | P2 | Middleware engine (Next, Abort, Logger, Recovery) | **done** |
-| P3 | Request binding (Param, Query, JSON, Form, File) | planned |
+| P3 | Request binding (Param, Query, JSON, Form, File) | **done** |
 | P4 | Response rendering + PureJinja integration | planned |
 | P5 | Route groups + structured error handling | planned |
 | P6 | SQLite3 integration + migrations | planned |
