@@ -1,5 +1,5 @@
 ; PureSimple.pb — Framework entry point
-; Include order: Types → Router → Context → Engine → (future modules)
+; Include order: Types → Router → Context → Middleware → Engine → (future modules)
 ; All phase modules are added here as they are implemented.
 ;
 ; Integration note:
@@ -10,16 +10,16 @@
 
 EnableExplicit
 
-XIncludeFile "Types.pbi"    ; Structure definitions + PS_HandlerFunc prototype
-UseModule Types             ; import RequestContext, PS_HandlerFunc etc. into global scope
-XIncludeFile "Router.pbi"   ; Segment-level trie router (Insert / Match)
-XIncludeFile "Context.pbi"  ; RequestContext lifecycle: Next, Abort, Param, KV
-XIncludeFile "Engine.pbi"   ; Top-level API: NewApp(), Run(), GET(), POST(), …
+XIncludeFile "Types.pbi"               ; Structure definitions + PS_HandlerFunc prototype
+UseModule Types                        ; import RequestContext, PS_HandlerFunc etc. into global scope
+XIncludeFile "Router.pbi"              ; Segment-level trie router (Insert / Match)
+XIncludeFile "Context.pbi"             ; RequestContext lifecycle: Advance, Abort, Param, KV
+XIncludeFile "Middleware/Logger.pbi"   ; Logger middleware: method/path/status/elapsed
+XIncludeFile "Middleware/Recovery.pbi" ; Recovery middleware: OnError -> 500 response
+XIncludeFile "Engine.pbi"              ; Top-level API: NewApp(), Run(), GET(), POST(), Use(), …
 
 ; Future phases will add:
 ;   XIncludeFile "Config.pbi"
-;   XIncludeFile "Middleware/Logger.pbi"
-;   XIncludeFile "Middleware/Recovery.pbi"
 ;   XIncludeFile "Binding.pbi"
 ;   XIncludeFile "Rendering.pbi"
 ;   XIncludeFile "DB/SQLite.pbi"
