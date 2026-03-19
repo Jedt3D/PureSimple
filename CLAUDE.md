@@ -154,10 +154,13 @@ The app runs as `www-data` under systemd (`/opt/puresimple/app`). Caddy handles 
 
 The test runner (`tests/run_all.pb`) uses macro-based assertions:
 ```purebasic
-Assert(expr)           ; fails if expr is #False
-AssertEqual(a, b)      ; fails if a <> b
-AssertString(a, b)     ; fails if a <> b (string comparison)
+Check(expr)            ; fails if expr is #False
+CheckEqual(a, b)       ; fails if a <> b (numeric)
+CheckStr(a, b)         ; fails if a <> b (string comparison)
 ```
+Note: PureBasic 6.x pre-defines `Assert()` and `AssertString()` as built-in halt-on-fail macros
+(from `pureunit.res`). The harness uses `Check`/`CheckEqual`/`CheckStr` to avoid those conflicts
+and to support count-and-continue reporting (all failures shown, not just the first).
 
 Every phase's tests must all pass before merging. All previously passing tests must continue to pass (no regressions).
 
