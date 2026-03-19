@@ -1,0 +1,14 @@
+[Unit]
+Description=PureSimple Web Framework
+After=network.target
+
+[Service]
+ExecStart=/opt/puresimple/app
+Restart=on-failure
+RestartSec=5
+WorkingDirectory=/opt/puresimple
+User=www-data
+Environment=PURESIMPLE_MODE=release
+
+[Install]
+WantedBy=multi-user.target

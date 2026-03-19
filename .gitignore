@@ -1,0 +1,15 @@
+# PureBasic compiled outputs
+*.exe
+app
+app_new
+app.bak
+run_all
+hello_world
+*.o
+*.purebasic_tmp
+
+# macOS
+.DS_Store
+
+# Environment
+.env
