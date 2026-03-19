@@ -23,7 +23,7 @@ A lightweight web framework for **PureBasic 6.x**, inspired by Go's Gin and Chi.
           │                    │
 ┌─────────▼──────┐  ┌──────────▼────────────────────┐
 │PureSimple      │  │PureJinja                      │
-│HTTPServer      │  │Jinja2-compatible templates    │
+│HTTPServer      │  │Jinja-compatible templates    │
 │HTTP/1.1, TLS,  │  │34 filters + 3 aliases · 599+   │
 │compression,    │  │v1.4.1                         │
 │static files    │  └───────────────────────────────┘
@@ -43,7 +43,7 @@ All three repos compile into **one binary**. No interpreter, no VM, no shared li
 | Repo | Role |
 |------|------|
 | [`PureSimpleHTTPServer`](https://github.com/Jedt3D/PureSimpleHTTPServer) | HTTP/1.1 listener, TLS, compression, static files |
-| [`PureJinja`](https://github.com/Jedt3D/PureJinja) | Jinja2-compatible template engine |
+| [`PureJinja`](https://github.com/Jedt3D/PureJinja) | Jinja-compatible template engine |
 | **`PureSimple`** ← you are here | Router, middleware, context, binding, rendering |
 
 ---
@@ -100,7 +100,7 @@ PureSimple/
     Caddyfile        # Caddy reverse proxy config
     puresimple.service  # systemd unit
     setup-server.sh  # One-time server provisioning
-  templates/         # Default Jinja2 HTML templates (404.html, 500.html)
+  templates/         # Default Jinja HTML templates (404.html, 500.html)
 ```
 
 ---
@@ -275,7 +275,7 @@ DB::Migrate(db)   ; idempotent — skips already-applied versions
 - `Rendering::Status(*C, status)` — set status code only (body unchanged)
 - `Rendering::Redirect(*C, url, [status])` — HTTP redirect; sets `*C\Location` (default 302)
 - `Rendering::File(*C, path)` — send a file from disk; 404 if not found
-- `Rendering::Render(*C, templateName, [dir])` — render a Jinja2 template via PureJinja;
+- `Rendering::Render(*C, templateName, [dir])` — render a Jinja template via PureJinja;
   variables come from the request KV store (`Ctx::Set`)
 
 ---

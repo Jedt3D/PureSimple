@@ -226,7 +226,7 @@ it, readers can compile, test, and debug any code in the PureSimple repository.
 - `Rendering::HTML` and `Rendering::Text`
 - `Rendering::Redirect` — 302 vs 301
 - `Rendering::File` — serving static content
-- `Rendering::Render` — Jinja2 templates with PureJinja
+- `Rendering::Render` — Jinja templates with PureJinja
 
 **Illustration:** Gutenberg printing press assembling a page (pen sketch)
 **Listings:** JSON response; HTML response; redirect; file serving; Render with template + KV vars
@@ -257,11 +257,11 @@ it, readers can compile, test, and debug any code in the PureSimple repository.
 
 ## Part III — Templates
 
-### Chapter 11: PureJinja — Jinja2 Templates in PureBasic
+### Chapter 11: PureJinja — Jinja Templates in PureBasic
 
 *Tagline: The template engine that speaks Python syntax and runs at C speed.*
 
-**Objectives:** Write Jinja2 templates, use inheritance and filters, render templates from handlers.
+**Objectives:** Write Jinja templates, use inheritance and filters, render templates from handlers.
 
 - Template syntax: `{{ variable }}`, `{% if %}`, `{% for %}`, filters
 - `Rendering::Render` and the KV store as template context

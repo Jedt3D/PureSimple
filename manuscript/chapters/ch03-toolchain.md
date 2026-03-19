@@ -111,7 +111,7 @@ XIncludeFile "Middleware/Cookie.pbi"   ; Cookie parsing + Set-Cookie
 XIncludeFile "Middleware/Session.pbi"  ; In-memory session store
 XIncludeFile "Middleware/BasicAuth.pbi"; HTTP Basic Authentication
 XIncludeFile "Middleware/CSRF.pbi"     ; CSRF token generation + validation
-XIncludeFile "../../pure_jinja/PureJinja.pbi"  ; Jinja2 template engine
+XIncludeFile "../../pure_jinja/PureJinja.pbi"  ; Jinja template engine
 XIncludeFile "Rendering.pbi"           ; Response: JSON, HTML, Text, Redirect, File
 XIncludeFile "Engine.pbi"              ; Top-level API: NewApp, Run, GET, POST, Use
 XIncludeFile "Group.pbi"               ; RouterGroup: sub-router with prefix

@@ -10,7 +10,7 @@ This appendix provides answers to all review questions from Chapters 1 through 2
 
 **Q:** Name the three repositories in the PureSimple ecosystem and explain what each one does.
 
-**A:** The three repositories are **PureSimpleHTTPServer**, **PureSimple**, and **PureJinja**. PureSimpleHTTPServer is the HTTP/1.1 listener that handles low-level socket operations, TLS termination, gzip compression, and static file serving. PureSimple is the web framework layer that provides routing (via a radix trie), middleware chaining, request context management, request binding, response rendering, database integration, sessions, authentication, and configuration. PureJinja is a Jinja2-compatible template engine with 37 registered filters (34 unique implementations plus 3 aliases) that compiles templates at C speed. All three repositories compile into a single native binary through PureBasic's `XIncludeFile` inclusion mechanism -- there is no runtime linking, no package manager, and no deployment dependency chain.
+**A:** The three repositories are **PureSimpleHTTPServer**, **PureSimple**, and **PureJinja**. PureSimpleHTTPServer is the HTTP/1.1 listener that handles low-level socket operations, TLS termination, gzip compression, and static file serving. PureSimple is the web framework layer that provides routing (via a radix trie), middleware chaining, request context management, request binding, response rendering, database integration, sessions, authentication, and configuration. PureJinja is a Jinja-compatible template engine with 37 registered filters (34 unique implementations plus 3 aliases) that compiles templates at C speed. All three repositories compile into a single native binary through PureBasic's `XIncludeFile` inclusion mechanism -- there is no runtime linking, no package manager, and no deployment dependency chain.
 
 ### Question 2
 
@@ -270,7 +270,7 @@ curl http://localhost:8080/files/images/photo.jpg
 
 **Q:** How does the KV store allow middleware to pass data to handlers?
 
-**A:** The KV store is a pair of Chr(9)-delimited string fields on `RequestContext` (`StoreKeys` and `StoreVals`). When middleware calls `Ctx::Set(*C, "user_id", "42")`, the key and value are appended to these fields. When a downstream handler calls `Ctx::Get(*C, "user_id")`, it searches `StoreKeys` for the matching key and returns the corresponding value from `StoreVals`. Because the store exists on the per-request context, data is automatically scoped to the current request and cannot leak between concurrent requests. The same store is used by `Rendering::Render` to populate template variables -- any key/value pair set with `Ctx::Set` becomes available as `{{ key }}` in Jinja2 templates.
+**A:** The KV store is a pair of Chr(9)-delimited string fields on `RequestContext` (`StoreKeys` and `StoreVals`). When middleware calls `Ctx::Set(*C, "user_id", "42")`, the key and value are appended to these fields. When a downstream handler calls `Ctx::Get(*C, "user_id")`, it searches `StoreKeys` for the matching key and returns the corresponding value from `StoreVals`. Because the store exists on the per-request context, data is automatically scoped to the current request and cannot leak between concurrent requests. The same store is used by `Rendering::Render` to populate template variables -- any key/value pair set with `Ctx::Set` becomes available as `{{ key }}` in Jinja templates.
 
 ---
 
@@ -393,7 +393,7 @@ Group::GET(@v2, "/users", @ListUsersV2())
 
 ### Question 1
 
-**Q:** What is the difference between `{{ variable }}` and `{% block %}` in Jinja2?
+**Q:** What is the difference between `{{ variable }}` and `{% block %}` in Jinja?
 
 **A:** `{{ variable }}` is an expression tag that outputs the value of a variable or expression to the rendered HTML. It is replaced by the variable's string value at render time. `{% block %}` is a statement tag that defines a named content block for template inheritance. When a child template extends a parent template, it can override specific blocks to replace their content while keeping everything else from the parent. Expression tags produce output directly; statement tags control the template structure and logic (including `if`, `for`, `extends`, and `block`). You use `{{ }}` when you want to display data and `{% %}` when you want to control what gets displayed.
 

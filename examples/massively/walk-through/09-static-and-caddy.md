@@ -53,7 +53,7 @@ yourdomain.com {
     js/
     webfonts/
     images/
-  templates/        Jinja2 templates (read by PureSimple at runtime)
+  templates/        Jinja templates (read by PureSimple at runtime)
 ```
 
 ## Template path in production

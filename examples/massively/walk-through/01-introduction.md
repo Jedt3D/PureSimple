@@ -14,7 +14,7 @@ Browser → Caddy (TLS, /static/*) → PureSimple binary (dynamic routes) → SQ
 |-------|-----------|------|
 | HTTP listener | PureSimpleHTTPServer | Accept connections, handle TLS, compression |
 | Router | PureSimple Router | Radix trie, `:param`, groups |
-| Templates | PureJinja | Jinja2-compatible, compiled in |
+| Templates | PureJinja | Jinja-compatible, compiled in |
 | Database | SQLite (built-in) | Posts, contacts, site settings |
 | Static files | Caddy | CSS, JS, webfonts served directly from disk |
 | Admin UI | Tabler (CDN) | Clean dashboard without bundlers |

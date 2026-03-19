@@ -192,7 +192,7 @@ Each line follows the format: `id|slug|title|published_at|photo_url|excerpt|publ
 
 This is not elegant. It is not how you would design a data transfer mechanism if you were starting from scratch. It is how you solve the problem when your template engine operates on strings and your context store is a flat key-value map. And it works. It has worked in production since the blog launched. Sometimes the pragmatic solution is the right solution.
 
-> **Compare:** In Go's `html/template`, you pass a slice of structs directly to `Execute`. In Python's Jinja2, you pass a list of dictionaries. In PureSimple, you pass a pipe-delimited string and `split` it in the template. Different rivers, same ocean. The blog posts still appear on the page.
+> **Compare:** In Go's `html/template`, you pass a slice of structs directly to `Execute`. In Python's Jinja, you pass a list of dictionaries. In PureSimple, you pass a pipe-delimited string and `split` it in the template. Different rivers, same ocean. The blog posts still appear on the page.
 
 The `AllPostsToStr` procedure is identical but removes the `WHERE published = 1` filter, returning both published posts and drafts. The admin panel uses it. The public site uses `PostsToStr`.
 

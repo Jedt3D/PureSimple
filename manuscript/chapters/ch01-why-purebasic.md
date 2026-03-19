@@ -61,7 +61,7 @@ PureSimple is not a single repository. It is an ecosystem of three repositories 
 graph TD
     A["Your Application<br/>(main.pb)"] --> B["PureSimple<br/>Router, Middleware, Context,<br/>Binding, Rendering, Engine"]
     B --> C["PureSimpleHTTPServer<br/>HTTP/1.1 listener, TLS,<br/>compression, static files"]
-    B --> D["PureJinja<br/>Jinja2-compatible template engine<br/>34 filters + 3 aliases, 599 tests"]
+    B --> D["PureJinja<br/>Jinja-compatible template engine<br/>34 filters + 3 aliases, 599 tests"]
 
     style A fill:#f5f5f5,stroke:#333,stroke-width:2px
     style B fill:#e8e8e8,stroke:#4A90D9,stroke-width:2px
@@ -74,7 +74,7 @@ graph TD
 
 **PureSimple** is the framework layer -- and the subject of this book. It provides the router (a radix trie that maps URL patterns to handler procedures), the request context (a per-request struct that carries method, path, headers, body, parameters, and a key-value store), the middleware chain (Logger, Recovery, BasicAuth, CSRF, Session), request binding (query strings, form data, JSON), response rendering (JSON, HTML, text, redirects, files, templates), route groups, a SQLite database adapter with a migration runner, configuration loading from `.env` files, and levelled logging. That is a long list, but the source code for all of it fits in roughly a dozen `.pbi` files.
 
-**PureJinja** is a Jinja2-compatible template engine written in PureBasic. If you have used Jinja2 in Python, the syntax is identical: `{{ variable }}`, `{% if condition %}`, `{% for item in list %}`, `{% extends "base.html" %}`. PureJinja supports 34 built-in filters (plus 3 aliases, giving 37 registered names), template inheritance, and block overrides. It has 599 tests of its own. PureSimple calls PureJinja's `RenderString` API to render HTML templates.
+**PureJinja** is a Jinja-compatible template engine written in PureBasic. If you have used Jinja in Python, the syntax is identical: `{{ variable }}`, `{% if condition %}`, `{% for item in list %}`, `{% extends "base.html" %}`. PureJinja supports 34 built-in filters (plus 3 aliases, giving 37 registered names), template inheritance, and block overrides. It has 599 tests of its own. PureSimple calls PureJinja's `RenderString` API to render HTML templates.
 
 The integration pattern is straightforward. Your `main.pb` includes PureSimple with a single line:
 
@@ -213,7 +213,7 @@ That is the entire development loop: write code, compile, run, test in the brows
 
 ## Summary
 
-PureBasic compiles web applications into single native binaries with no runtime dependencies. The PureSimple ecosystem splits responsibility across three repositories -- PureSimpleHTTPServer for the HTTP engine, PureSimple for routing and framework features, and PureJinja for Jinja2-compatible templates -- that merge at compile time through `XIncludeFile` directives. Setting up a development environment requires only the PureBasic compiler and three `git clone` commands. A complete web application fits in ten lines of code and compiles in seconds.
+PureBasic compiles web applications into single native binaries with no runtime dependencies. The PureSimple ecosystem splits responsibility across three repositories -- PureSimpleHTTPServer for the HTTP engine, PureSimple for routing and framework features, and PureJinja for Jinja-compatible templates -- that merge at compile time through `XIncludeFile` directives. Setting up a development environment requires only the PureBasic compiler and three `git clone` commands. A complete web application fits in ten lines of code and compiles in seconds.
 
 ## Key Takeaways
 

@@ -33,7 +33,7 @@ todo/
   .env.example       -- documented example for version control
   .gitignore         -- excludes compiled output and .env
   templates/
-    index.html       -- starter Jinja2 HTML template
+    index.html       -- starter Jinja HTML template
   static/            -- placeholder for static assets
 ```
 

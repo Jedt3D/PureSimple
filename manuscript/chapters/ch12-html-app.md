@@ -32,11 +32,11 @@ blog/
 
 The `main.pb` file contains everything: structure definitions, data initialization, handler procedures, middleware registration, route registration, and the `Engine::Run` call. For a small application, a single file is fine. For a larger application, you would split handlers and data access into separate `.pbi` files and include them with `XIncludeFile`. But for a blog with four routes and three templates, a single file keeps everything visible without jumping between files.
 
-The `templates/` directory holds your Jinja2 template files. `Rendering::Render` takes the template directory as a parameter, so you can name it anything you like, but `templates/` is the convention and the default.
+The `templates/` directory holds your Jinja template files. `Rendering::Render` takes the template directory as a parameter, so you can name it anything you like, but `templates/` is the convention and the default.
 
 The `static/` directory holds CSS, JavaScript, images, and other assets. PureSimpleHTTPServer serves static files directly when configured with `Engine::Static`. These files bypass the router and middleware chain entirely -- the HTTP server handles them at the transport level, which is both faster and more appropriate for content that does not change between requests.
 
-> **Tip:** Keep templates in a dedicated directory with the `.html` extension. Your text editor will provide HTML syntax highlighting, and designers can work on them without needing PureBasic installed. The `{%` and `{{` delimiters are standard Jinja2, which most editors recognize and highlight correctly.
+> **Tip:** Keep templates in a dedicated directory with the `.html` extension. Your text editor will provide HTML syntax highlighting, and designers can work on them without needing PureBasic installed. The `{%` and `{{` delimiters are standard Jinja, which most editors recognize and highlight correctly.
 
 ---
 
@@ -83,7 +83,7 @@ Procedure InitPosts()
   _Posts(2)\title  = "HTML Templates with PureJinja"
   _Posts(2)\author = "Alice"
   _Posts(2)\date   = "2026-03-22"
-  _Posts(2)\body   = "PureJinja brings Jinja2 templates."
+  _Posts(2)\body   = "PureJinja brings Jinja templates."
 EndProcedure
 ```
 
@@ -142,7 +142,7 @@ Before we look at the page templates, let us define a base template. All three H
 
 The `{% block title %}` and `{% block content %}` tags are extension points. Child templates override these blocks while inheriting everything else -- the `<!DOCTYPE>`, the `<nav>`, the `<footer>`. If a child template does not override a block, the base template's default content is used. For the title block, the default is the site name. For the content block, the default is empty.
 
-This is the same inheritance model used by Django, Jinja2, and Twig. If you have used any of those, the pattern is familiar. If you have not, the rule is simple: `{% extends %}` says "start with this template," and `{% block %}` says "replace this section."
+This is the same inheritance model used by Django, Jinja, and Twig. If you have used any of those, the pattern is familiar. If you have not, the rule is simple: `{% extends %}` says "start with this template," and `{% block %}` says "replace this section."
 
 Now the index template extends the base and provides its own content:
 
@@ -265,7 +265,7 @@ The template is plain HTML with one variable substitution:
 </p>
 <p>
   Templates are rendered by PureJinja, a
-  Jinja2-compatible template engine written
+  Jinja-compatible template engine written
   entirely in PureBasic.
 </p>
 {% endblock %}
@@ -452,7 +452,7 @@ The entire application -- web server, router, middleware, template engine, and a
 
 ## Summary
 
-An HTML application in PureSimple follows a straightforward structure: a `main.pb` entry point, a `templates/` directory for Jinja2 templates, and optionally a `static/` directory for CSS and assets. Handlers prepare data using the context KV store and render templates with `Rendering::Render`. List pages use the `split` pattern to pass multiple records as delimited strings. Detail pages set individual variables for each field. Error pages (404 and 500) use conditional blocks to show debug information only in development mode. The bootstrap section loads configuration, registers middleware and routes, and starts the server in a fixed, deterministic order.
+An HTML application in PureSimple follows a straightforward structure: a `main.pb` entry point, a `templates/` directory for Jinja templates, and optionally a `static/` directory for CSS and assets. Handlers prepare data using the context KV store and render templates with `Rendering::Render`. List pages use the `split` pattern to pass multiple records as delimited strings. Detail pages set individual variables for each field. Error pages (404 and 500) use conditional blocks to show debug information only in development mode. The bootstrap section loads configuration, registers middleware and routes, and starts the server in a fixed, deterministic order.
 
 ## Key Takeaways
 

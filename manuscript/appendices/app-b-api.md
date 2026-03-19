@@ -230,7 +230,7 @@ The Rendering module writes HTTP responses. Every procedure sets `StatusCode`, `
 | `Rendering::Status` | `(*C, Status.i)` | Set status code only, no body (for 204 No Content) |
 | `Rendering::Redirect` | `(*C, URL.s, Status.i = 302)` | Redirect. Sets `*C\Location`. Use 302 for temporary, 301 for permanent. |
 | `Rendering::File` | `(*C, Path.s)` | Serve a file from disk. Returns 404 if file does not exist. |
-| `Rendering::Render` | `(*C, TemplateName.s, TemplatesDir.s = "templates/")` | Render a Jinja2 template via PureJinja. Variables come from the KV store. |
+| `Rendering::Render` | `(*C, TemplateName.s, TemplatesDir.s = "templates/")` | Render a Jinja template via PureJinja. Variables come from the KV store. |
 
 ### Template Rendering Details
 

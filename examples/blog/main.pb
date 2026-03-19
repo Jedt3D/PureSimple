@@ -45,7 +45,7 @@ Procedure InitPosts()
   _Posts(2)\title  = "HTML Templates with PureJinja"
   _Posts(2)\author = "Alice"
   _Posts(2)\date   = "2026-03-22"
-  _Posts(2)\body   = "PureJinja brings Jinja2-compatible templates to native PureBasic executables."
+  _Posts(2)\body   = "PureJinja brings Jinja-compatible templates to native PureBasic executables."
 EndProcedure
 
 ; ---- Handlers --------------------------------------------------------------

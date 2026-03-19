@@ -2,7 +2,7 @@
 
 ## Template engine
 
-PureJinja is a Jinja2-compatible template engine compiled into the binary.
+PureJinja is a Jinja-compatible template engine compiled into the binary.
 It supports template inheritance (`{% extends %}`), blocks (`{% block %}`),
 variables (`{{ var }}`), for-loops, if-statements, and many built-in filters.
 
@@ -15,7 +15,7 @@ Rendering::Render(*C, "post.html", _tplDir)
 ```
 
 `Rendering::Render` reads all KV pairs from the context and passes them as
-template variables. Every `Ctx::Set` call becomes a named variable in Jinja2.
+template variables. Every `Ctx::Set` call becomes a named variable in Jinja.
 
 ## Template inheritance
 

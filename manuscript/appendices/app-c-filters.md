@@ -1,6 +1,6 @@
 # Appendix C: PureJinja Filter Reference
 
-PureJinja implements 34 built-in filters plus 3 aliases, giving 37 registered filter names compatible with Jinja2 syntax. Filters transform values inside template expressions using the pipe operator:
+PureJinja implements 34 built-in filters plus 3 aliases, giving 37 registered filter names compatible with Jinja syntax. Filters transform values inside template expressions using the pipe operator:
 
 ```
 {{ value|filtername }}

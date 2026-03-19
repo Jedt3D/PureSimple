@@ -19,7 +19,7 @@ XIncludeFile "Middleware/Cookie.pbi"   ; Cookie parsing (incoming) + Set-Cookie 
 XIncludeFile "Middleware/Session.pbi"  ; In-memory session store (uses Cookie)
 XIncludeFile "Middleware/BasicAuth.pbi" ; HTTP Basic Authentication middleware
 XIncludeFile "Middleware/CSRF.pbi"     ; CSRF token generation + validation (uses Session, Binding)
-XIncludeFile "../../pure_jinja/PureJinja.pbi" ; PureJinja template engine (Jinja2-compatible)
+XIncludeFile "../../pure_jinja/PureJinja.pbi" ; PureJinja template engine (Jinja-compatible)
 XIncludeFile "Rendering.pbi"           ; Response rendering: JSON, HTML, Text, Redirect, File, Render
 XIncludeFile "Engine.pbi"              ; Top-level API: NewApp(), Run(), GET(), POST(), Use(), …
 XIncludeFile "Group.pbi"               ; RouterGroup: sub-router with prefix + group middleware

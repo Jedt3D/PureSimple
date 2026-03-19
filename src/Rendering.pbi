@@ -91,7 +91,7 @@ Module Rendering
   EndProcedure
 
   ; ------------------------------------------------------------------
-  ; Render — render a Jinja2 template via PureJinja
+  ; Render — render a Jinja template via PureJinja
   ;   TemplateName : filename relative to TemplatesDir
   ;   Context KV store (Set/Get) is exposed as template variables.
   ; ------------------------------------------------------------------

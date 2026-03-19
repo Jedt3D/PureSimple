@@ -9,7 +9,7 @@
 - Send JSON, HTML, and plain-text responses with appropriate content types and status codes
 - Redirect clients with 302 (temporary) and 301 (permanent) status codes
 - Serve static files from disk using `Rendering::File`
-- Render Jinja2 templates through `Rendering::Render`, passing handler data via the context KV store
+- Render Jinja templates through `Rendering::Render`, passing handler data via the context KV store
 - Set bare status codes for bodyless responses like 204 No Content
 
 ---
@@ -226,7 +226,7 @@ Note that `Rendering::File` currently sets the content type to `text/html` for a
 
 ## 9.7 Template Rendering with PureJinja
 
-The most powerful rendering procedure is `Rendering::Render`. It loads a Jinja2 template file from disk, populates it with variables from the context's KV store, and sends the rendered HTML to the client. This is where PureSimple meets PureJinja, the Jinja2-compatible template engine that compiles into the same binary.
+The most powerful rendering procedure is `Rendering::Render`. It loads a Jinja template file from disk, populates it with variables from the context's KV store, and sends the rendered HTML to the client. This is where PureSimple meets PureJinja, the Jinja-compatible template engine that compiles into the same binary.
 
 ```purebasic
 ; Listing 9.13 -- Rendering a template with variables
@@ -263,7 +263,7 @@ Chapter 11 covers PureJinja's template syntax in detail -- `{{ variables }}`, `{
 
 ## Summary
 
-The Rendering module provides seven procedures that cover every common response type: `JSON` for APIs, `HTML` and `Text` for inline content, `Status` for bodyless responses, `Redirect` for navigation, `File` for serving pages from disk, and `Render` for Jinja2 templates. Each procedure sets `*C\StatusCode`, `*C\ResponseBody`, and `*C\ContentType` on the context, which PureSimpleHTTPServer reads and sends to the client. The module is deliberately thin -- it assigns fields and gets out of the way, leaving complex rendering to PureJinja.
+The Rendering module provides seven procedures that cover every common response type: `JSON` for APIs, `HTML` and `Text` for inline content, `Status` for bodyless responses, `Redirect` for navigation, `File` for serving pages from disk, and `Render` for Jinja templates. Each procedure sets `*C\StatusCode`, `*C\ResponseBody`, and `*C\ContentType` on the context, which PureSimpleHTTPServer reads and sends to the client. The module is deliberately thin -- it assigns fields and gets out of the way, leaving complex rendering to PureJinja.
 
 ## Key Takeaways
 

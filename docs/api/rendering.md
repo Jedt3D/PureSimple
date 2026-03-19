@@ -69,7 +69,7 @@ exist, writes a `404 Not Found` response instead.
 Rendering::Render(*C.RequestContext, TemplateName.s, TemplatesDir.s = "templates/")
 ```
 
-Renders a Jinja2 template using PureJinja. Template variables come from the
+Renders a Jinja template using PureJinja. Template variables come from the
 request KV store (populated via `Ctx::Set`).
 
 ```purebasic

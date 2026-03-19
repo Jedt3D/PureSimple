@@ -302,11 +302,11 @@ Versioning follows `v0.{phase}.0` during the pre-1.0 development phases.
   - `Rendering::Status(*C, status)` — sets status code only (body unchanged)
   - `Rendering::Redirect(*C, url, [status])` — sets `*C\Location` + status (default 302)
   - `Rendering::File(*C, path)` — reads file from disk; 404 if missing
-  - `Rendering::Render(*C, templateName, [templatesDir])` — renders a Jinja2
+  - `Rendering::Render(*C, templateName, [templatesDir])` — renders a Jinja
     template via PureJinja; exposes the request KV store as template variables
-- `templates/test.html` — minimal Jinja2 template used by the P4 test suite
+- `templates/test.html` — minimal Jinja template used by the P4 test suite
 - `tests/P4_Rendering_Test.pbi` — 20 assertions across 8 suites: JSON, HTML,
-  Text, Status, Redirect (302 and 301), File-missing 404, and Jinja2 Render
+  Text, Status, Redirect (302 and 301), File-missing 404, and Jinja Render
 
 ### Changed
 - `src/Types.pbi` — added `Location.s` field to `RequestContext` (used by Redirect)
@@ -429,7 +429,7 @@ Versioning follows `v0.{phase}.0` during the pre-1.0 development phases.
 - `tests/P0_Harness_Test.pbi` — self-tests verifying the harness and framework stub compile correctly
 - `examples/hello_world/main.pb` — minimal example confirming the include chain resolves
 - `resources/common-pitfalls.md` — PureBasic gotchas reference (9 entries)
-- `templates/404.html`, `templates/500.html` — default Jinja2 error templates
+- `templates/404.html`, `templates/500.html` — default Jinja error templates
 - `scripts/deploy.sh` — SSH-based deploy pipeline (pull → compile → test → swap → start → health check)
 - `scripts/rollback.sh` — emergency rollback script
 - `deploy/puresimple.service` — systemd unit for the production server

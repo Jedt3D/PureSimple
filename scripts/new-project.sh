@@ -12,7 +12,7 @@
 #     .env.example       — documented example environment variables
 #     .gitignore         — excludes compiled output and .env
 #     templates/
-#       index.html       — starter Jinja2 HTML template
+#       index.html       — starter Jinja HTML template
 #     static/            — placeholder for static assets
 
 set -euo pipefail

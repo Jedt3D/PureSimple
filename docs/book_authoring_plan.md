@@ -605,10 +605,10 @@ following the pattern established in Chapters 1-4 above.
 - **Listings:** Group::Init, Group::Use, nested SubGroup, API versioning pattern, admin group with BasicAuth
 - **Callouts:** Under the Hood (MW[32] fixed array and copy-on-SubGroup)
 
-#### Chapter 11: PureJinja — Jinja2 Templates in PureBasic (was Ch 10)
+#### Chapter 11: PureJinja — Jinja Templates in PureBasic (was Ch 10)
 - **Diagrams:** Figure 11.1 — Render pipeline (tokenize → parse → render); Figure 11.2 — Template inheritance tree
 - **Listings:** Variable output, if/for, extends/block, filter chaining, the `split` filter
-- **Callouts:** Compare (Python Jinja2 vs PureJinja — identical syntax, compiled execution)
+- **Callouts:** Compare (Python Jinja vs PureJinja — identical syntax, compiled execution)
 - **Note:** Update filter count to 36 (includes `split`)
 
 #### Chapter 12: Building an HTML Application (was Ch 11)
