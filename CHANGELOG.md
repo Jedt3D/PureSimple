@@ -10,6 +10,44 @@ Versioning follows `v0.{phase}.0` during the pre-1.0 development phases.
 
 ---
 
+## [0.5.0] — 2026-03-19 · P5: Route Groups + Structured Error Handling
+
+### Added
+- `src/Group.pbi` — `Group` module implementing `PS_RouterGroup`:
+  - `Group::Init(*G, prefix)` — initialise a group with a path prefix
+  - `Group::Use(*G, handler)` — append group-level middleware (max 32)
+  - `Group::GET/POST/PUT/PATCH/DELETE/Any(*G, pattern, handler)` — register
+    routes as `prefix + pattern` (delegates to `Router::Insert`)
+  - `Group::SubGroup(*parent, *child, subPrefix)` — create a nested group
+    that inherits parent prefix and middleware, then extends with `subPrefix`
+  - `Group::CombineHandlers(*G, *C, routeHandler)` — builds full chain:
+    global engine MW + group MW + route handler
+- `src/Context.pbi` — two new structured abort helpers:
+  - `Ctx::AbortWithStatus(*C, statusCode)` — abort + set status in one call
+  - `Ctx::AbortWithError(*C, statusCode, message)` — abort + status + plain-text body
+- `src/Engine.pbi` — error handler registry:
+  - `Engine::SetNotFoundHandler(handler)` — custom 404 handler
+  - `Engine::HandleNotFound(*C)` — call registered handler or default 404 response
+  - `Engine::SetMethodNotAllowedHandler(handler)` — custom 405 handler
+  - `Engine::HandleMethodNotAllowed(*C)` — call registered handler or default 405 response
+  - `Engine::AppendGlobalMiddleware(*C)` — expose global MW appending for Group module
+- `tests/P5_Groups_Test.pbi` — 30 assertions across 12 suites
+
+### Changed
+- `src/Types.pbi` — added `PS_RouterGroup` structure (prefix + fixed MW[32] array + count)
+- `src/Engine.pbi` — `ResetMiddleware()` now also clears custom error handlers;
+  added `_NotFoundHandler` and `_MethodNotAllowed` globals
+- `src/PureSimple.pb` — added `Group.pbi` include (after Engine.pbi)
+- `tests/run_all.pb` — enabled `P5_Groups_Test.pbi`
+
+### Notes
+- `PS_RouterGroup.MW[32]` is a fixed inline array — `SubGroup` copies MW by index
+  loop, so inherited groups are independent (adding to child does not affect parent)
+- `Engine::ResetMiddleware()` clears all state (global MW + error handlers) — call
+  between test suites to avoid interference
+
+---
+
 ## [0.4.0] — 2026-03-19 · P4: Response Rendering + PureJinja Integration
 
 ### Added

@@ -55,6 +55,15 @@ DeclareModule Types
     Running.i           ; #True once Run() is called
   EndStructure
 
+  ; PS_RouterGroup — sub-router with a shared path prefix and middleware stack
+  ; Create with Group::Init; register routes via Group::GET, POST, etc.
+  ; Supports up to 32 group-level middleware handlers.
+  Structure PS_RouterGroup
+    Prefix.s            ; path prefix prepended to all routes in this group
+    MW.i[32]            ; group-level middleware procedure addresses (indices 0..31)
+    MWCount.i           ; number of group-level middleware handlers registered
+  EndStructure
+
 EndDeclareModule
 
 Module Types

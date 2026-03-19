@@ -277,6 +277,27 @@ within that module body. Choose distinct names (e.g. `ReleaseJSON`, `CloseDB`).
 
 ---
 
+## Fixed arrays in structures use `[N]` with N elements (not N+1)
+
+Unlike `Dim a(N)` which creates N+1 elements, a **fixed array inside a structure**
+declared as `arr.i[N]` creates exactly **N elements** (indices 0 to N-1).
+
+```purebasic
+Structure Foo
+  arr.i[32]   ; exactly 32 elements: indices 0..31
+EndStructure
+
+f.Foo
+f\arr[0]  = 1    ; OK
+f\arr[31] = 999  ; OK — last valid index
+; f\arr[32] = 0  ; OUT OF BOUNDS (no runtime check without -d flag)
+```
+
+This is the **opposite** of `Dim`: `Dim a(32)` → 33 elements (0..32);
+`arr.i[32]` in a structure → 32 elements (0..31).
+
+---
+
 ## `JinjaEnv::RenderString` vs `JinjaEnv::RenderTemplate`
 
 Both are valid PureJinja high-level API entry points:
