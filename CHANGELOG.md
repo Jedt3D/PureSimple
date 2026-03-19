@@ -10,6 +10,36 @@ Versioning follows `v0.{phase}.0` during the pre-1.0 development phases.
 
 ---
 
+## [0.2.0] — 2026-03-19 · P2: Middleware Engine
+
+### Added
+- `src/Middleware/Logger.pbi` — `Logger::Middleware` logs `[LOG] METHOD /path -> STATUS (Xms)`
+  after the downstream chain returns; uses `ElapsedMilliseconds()` for timing
+- `src/Middleware/Recovery.pbi` — `Recovery::Middleware` installs `OnErrorGoto` checkpoint;
+  converts PB-runtime errors into 500 responses (note: OS signals on macOS arm64 are not
+  interceptable via `OnErrorGoto` — see `resources/common-pitfalls.md`)
+- `src/Engine.pbi` — `Engine::Use(Handler.i)` registers global middleware;
+  `Engine::CombineHandlers(*C, RouteHandler.i)` prepends global middleware then appends the
+  route handler; `Engine::ResetMiddleware()` clears global middleware (used between tests)
+- `tests/P2_Middleware_Test.pbi` — 12 assertions across 5 suites: Use+CombineHandlers,
+  middleware ordering (ABRba sequence), Logger pass-through, Recovery normal flow,
+  Recovery preserves explicit 500
+
+### Changed
+- `src/PureSimple.pb` — added `Middleware/Logger.pbi` and `Middleware/Recovery.pbi` includes;
+  updated include-order comment
+- `src/Engine.pbi` — added `UseModule Types` (needed for `*C.RequestContext` parameter in
+  `CombineHandlers`); added `_MW` array and `_MWCount` global for middleware storage
+- `tests/run_all.pb` — enabled `P2_Middleware_Test.pbi`
+
+### Notes
+- `@Module::Proc()` cannot be used in `Global` variable initialisers — it evaluates to 0;
+  wrap in a plain procedure and use `@WrapperProc()` instead
+- `OnErrorGoto` does not intercept OS signals (SIGHUP, SIGSEGV) on macOS arm64; the
+  Recovery middleware's panic path works on Linux/Windows where PB intercepts those signals
+
+---
+
 ## [0.1.0] — 2026-03-19 · P1: Core Router + Context
 
 ### Added

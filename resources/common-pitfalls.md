@@ -211,3 +211,42 @@ Procedure Advance(*C.RequestContext) ...  ; PureSimple uses Ctx::Advance
 ```
 
 Other loop-related keywords to avoid: `Break`, `Continue`, `Until`, `Wend`.
+
+---
+
+## `@Module::Proc()` cannot be used in `Global` variable initializers
+
+```purebasic
+; WRONG — evaluates to 0 at runtime
+Global handler.i = @Logger::Middleware()
+
+; RIGHT — capture via a thin wrapper procedure
+Procedure LoggerMW(*C.RequestContext)
+  Logger::Middleware(*C)
+EndProcedure
+; then use: @LoggerMW()
+```
+
+Module procedure addresses cannot be resolved in `Global` declaration initialisers.
+Wrap module procedures in plain procedures and take `@` of those instead.
+
+---
+
+## `OnErrorGoto` does not catch OS signals on macOS arm64
+
+`OnErrorGoto(?label)` uses `setjmp`/`longjmp` to intercept PureBasic-runtime-detected errors.
+On macOS arm64, OS-level signals (SIGSEGV from null-pointer, SIGHUP from `RaiseError(N)`)
+reach the process before PureBasic's checkpoint fires and terminate the process.
+
+```purebasic
+; RaiseError(1) sends signal 1 (SIGHUP) on macOS arm64 — exit 129, not caught
+RaiseError(1)
+
+; Null-pointer write also crashes before OnErrorGoto fires on macOS arm64
+Protected *p.MyStruct = 0
+*p\field = 1   ; SIGSEGV, not caught by OnErrorGoto on arm64
+```
+
+Recovery middleware using `OnErrorGoto` works on Linux and Windows where PureBasic
+intercepts these signals. On macOS arm64, only PureBasic-specific runtime errors
+(array bounds with `-d`, etc.) are reliably catchable.

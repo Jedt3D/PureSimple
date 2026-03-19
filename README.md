@@ -3,7 +3,7 @@
 A lightweight web framework for **PureBasic 6.x**, inspired by Go's Gin and Chi. Compiles to a single native binary with zero external runtime dependencies.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-![Status: P1 Router + Context](https://img.shields.io/badge/status-P1%20Router%20%2B%20Context-yellow)
+![Status: P2 Middleware Engine](https://img.shields.io/badge/status-P2%20Middleware%20Engine-yellow)
 
 ---
 
@@ -105,6 +105,19 @@ PureSimple/
 
 ---
 
+## Features (P2)
+
+### Middleware Engine
+- `Engine::Use(handler)` — register global middleware applied to every request
+- `Engine::CombineHandlers(*C, routeHandler)` — prepend global middleware then append route handler before dispatch
+- Execution order: middleware wraps the chain (onion model — A→B→route→B→A)
+
+### Bundled Middleware
+- `Logger::Middleware` — logs `[LOG] METHOD /path -> STATUS (Xms)` after the request completes
+- `Recovery::Middleware` — wraps the handler chain with `OnErrorGoto`; converts PB runtime errors into `500 Internal Server Error` (Linux/Windows; OS-level signals on macOS arm64 bypass PB's error checkpoint)
+
+---
+
 ## Features (P1)
 
 ### Router
@@ -129,7 +142,7 @@ PureSimple/
 |-------|-------------|--------|
 | P0 | Project foundation, test harness, deploy scripts | **done** |
 | P1 | Core router + Context | **done** |
-| P2 | Middleware engine (Next, Abort, Logger, Recovery) | planned |
+| P2 | Middleware engine (Next, Abort, Logger, Recovery) | **done** |
 | P3 | Request binding (Param, Query, JSON, Form, File) | planned |
 | P4 | Response rendering + PureJinja integration | planned |
 | P5 | Route groups + structured error handling | planned |
