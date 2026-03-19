@@ -3,7 +3,7 @@
 A lightweight web framework for **PureBasic 6.x**, inspired by Go's Gin and Chi. Compiles to a single native binary with zero external runtime dependencies.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-![Status: P3 Request Binding](https://img.shields.io/badge/status-P3%20Request%20Binding-yellow)
+![Status: P4 Response Rendering](https://img.shields.io/badge/status-P4%20Response%20Rendering-yellow)
 
 ---
 
@@ -105,6 +105,20 @@ PureSimple/
 
 ---
 
+## Features (P4)
+
+### Response Rendering
+- `Rendering::JSON(*C, body, [status])` — write JSON response (`application/json`)
+- `Rendering::HTML(*C, body, [status])` — write HTML response (`text/html`)
+- `Rendering::Text(*C, body, [status])` — write plain-text response
+- `Rendering::Status(*C, status)` — set status code only (body unchanged)
+- `Rendering::Redirect(*C, url, [status])` — HTTP redirect; sets `*C\Location` (default 302)
+- `Rendering::File(*C, path)` — send a file from disk; 404 if not found
+- `Rendering::Render(*C, templateName, [dir])` — render a Jinja2 template via PureJinja;
+  variables come from the request KV store (`Ctx::Set`)
+
+---
+
 ## Features (P3)
 
 ### Request Binding
@@ -156,7 +170,7 @@ PureSimple/
 | P1 | Core router + Context | **done** |
 | P2 | Middleware engine (Next, Abort, Logger, Recovery) | **done** |
 | P3 | Request binding (Param, Query, JSON, Form, File) | **done** |
-| P4 | Response rendering + PureJinja integration | planned |
+| P4 | Response rendering + PureJinja integration | **done** |
 | P5 | Route groups + structured error handling | planned |
 | P6 | SQLite3 integration + migrations | planned |
 | P7 | Sessions, cookies, BasicAuth, CSRF | planned |

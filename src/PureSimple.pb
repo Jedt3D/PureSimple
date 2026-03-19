@@ -4,9 +4,7 @@
 ;
 ; Integration note:
 ;   PureSimpleHTTPServer: XIncludeFile "../../PureSimpleHTTPServer/src/HTTPServer.pbi"
-;   PureJinja:            XIncludeFile "../../PureJinja/src/PureJinja.pbi"
-; Both repos should be cloned alongside this one; their .pbi paths are
-; referenced relative to the project root once integration lands in P4.
+;   PureJinja is cloned alongside this repo at: ../../pure_jinja/PureJinja.pbi
 
 EnableExplicit
 
@@ -17,9 +15,10 @@ XIncludeFile "Context.pbi"             ; RequestContext lifecycle: Advance, Abor
 XIncludeFile "Middleware/Logger.pbi"   ; Logger middleware: method/path/status/elapsed
 XIncludeFile "Middleware/Recovery.pbi" ; Recovery middleware: OnError -> 500 response
 XIncludeFile "Binding.pbi"             ; Request binding: Param, Query, PostForm, JSON
+XIncludeFile "../../pure_jinja/PureJinja.pbi" ; PureJinja template engine (Jinja2-compatible)
+XIncludeFile "Rendering.pbi"           ; Response rendering: JSON, HTML, Text, Redirect, File, Render
 XIncludeFile "Engine.pbi"              ; Top-level API: NewApp(), Run(), GET(), POST(), Use(), …
 
 ; Future phases will add:
 ;   XIncludeFile "Config.pbi"
-;   XIncludeFile "Rendering.pbi"
 ;   XIncludeFile "DB/SQLite.pbi"

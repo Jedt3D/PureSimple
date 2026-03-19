@@ -10,6 +10,38 @@ Versioning follows `v0.{phase}.0` during the pre-1.0 development phases.
 
 ---
 
+## [0.4.0] — 2026-03-19 · P4: Response Rendering + PureJinja Integration
+
+### Added
+- `src/Rendering.pbi` — `Rendering` module with full response-writing API:
+  - `Rendering::JSON(*C, body, [status])` — sets `application/json` content type
+  - `Rendering::HTML(*C, body, [status])` — sets `text/html` content type
+  - `Rendering::Text(*C, body, [status])` — sets `text/plain` content type
+  - `Rendering::Status(*C, status)` — sets status code only (body unchanged)
+  - `Rendering::Redirect(*C, url, [status])` — sets `*C\Location` + status (default 302)
+  - `Rendering::File(*C, path)` — reads file from disk; 404 if missing
+  - `Rendering::Render(*C, templateName, [templatesDir])` — renders a Jinja2
+    template via PureJinja; exposes the request KV store as template variables
+- `templates/test.html` — minimal Jinja2 template used by the P4 test suite
+- `tests/P4_Rendering_Test.pbi` — 20 assertions across 8 suites: JSON, HTML,
+  Text, Status, Redirect (302 and 301), File-missing 404, and Jinja2 Render
+
+### Changed
+- `src/Types.pbi` — added `Location.s` field to `RequestContext` (used by Redirect)
+- `src/Context.pbi` — `Ctx::Init` resets `*C\Location = ""`
+- `src/PureSimple.pb` — added `../../pure_jinja/PureJinja.pbi` and `Rendering.pbi`
+  includes (PureJinja before Rendering so JinjaEnv/JinjaVariant symbols resolve)
+- `tests/run_all.pb` — enabled `P4_Rendering_Test.pbi`
+
+### Notes
+- `Rendering::Render` uses `JinjaEnv::RenderTemplate` (high-level API that handles
+  Tokenize → Parse → Render internally); template variables come from `Ctx::Set` KV pairs
+- PureJinja lives at `../../pure_jinja/PureJinja.pbi` relative to `src/`
+- `Rendering::File` reads line-by-line and appends `#LF$`; suitable for template files
+  and small static assets
+
+---
+
 ## [0.3.0] — 2026-03-19 · P3: Request Binding
 
 ### Added
