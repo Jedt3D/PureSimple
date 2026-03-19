@@ -22,6 +22,8 @@ DeclareModule Engine
   Declare   HandleNotFound(*C.RequestContext)
   Declare   SetMethodNotAllowedHandler(Handler.i)
   Declare   HandleMethodNotAllowed(*C.RequestContext)
+  Declare   SetMode(Mode.s)
+  Declare.s Mode()
 EndDeclareModule
 
 Module Engine
@@ -32,6 +34,7 @@ Module Engine
   Global _MWCount.i           = 0
   Global _NotFoundHandler.i   = 0
   Global _MethodNotAllowed.i  = 0
+  Global _Mode.s              = "debug"
 
   ; NewApp() — allocate application engine.
   ; Stub: returns 0. PureSimpleHTTPServer integration will replace this.
@@ -141,6 +144,16 @@ Module Engine
       *C\ResponseBody = "405 Method Not Allowed"
       *C\ContentType  = "text/plain"
     EndIf
+  EndProcedure
+
+  ; Set the application run mode ("debug", "release", "test").
+  Procedure SetMode(NewMode.s)
+    _Mode = NewMode
+  EndProcedure
+
+  ; Return the current application run mode (default: "debug").
+  Procedure.s Mode()
+    ProcedureReturn _Mode
   EndProcedure
 
 EndModule

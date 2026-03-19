@@ -1,0 +1,205 @@
+{
+  "includes": {
+    "examples/hello_world/main.pb": [
+      "src/PureSimple.pb"
+    ],
+    "src/PureSimple.pb": [
+      "src/Types.pbi",
+      "src/Router.pbi",
+      "src/Context.pbi",
+      "src/Middleware/Logger.pbi",
+      "src/Middleware/Recovery.pbi",
+      "src/Binding.pbi",
+      "src/Middleware/Cookie.pbi",
+      "src/Middleware/Session.pbi",
+      "src/Middleware/BasicAuth.pbi",
+      "src/Middleware/CSRF.pbi",
+      "../pure_jinja/PureJinja.pbi",
+      "src/Rendering.pbi",
+      "src/Engine.pbi",
+      "src/Group.pbi",
+      "src/DB/SQLite.pbi"
+    ],
+    "tests/P0_Harness_Test.pbi": [
+      "src/Types.pbi"
+    ],
+    "tests/run_all.pb": [
+      "src/PureSimple.pb",
+      "tests/TestHarness.pbi",
+      "tests/P0_Harness_Test.pbi",
+      "tests/P1_Router_Test.pbi",
+      "tests/P2_Middleware_Test.pbi",
+      "tests/P3_Binding_Test.pbi",
+      "tests/P4_Rendering_Test.pbi",
+      "tests/P5_Groups_Test.pbi",
+      "tests/P6_SQLite_Test.pbi",
+      "tests/P7_Auth_Test.pbi"
+    ]
+  },
+  "reverse": {
+    "../pure_jinja/PureJinja.pbi": [
+      "src/PureSimple.pb"
+    ],
+    "src/Binding.pbi": [
+      "src/PureSimple.pb"
+    ],
+    "src/Context.pbi": [
+      "src/PureSimple.pb"
+    ],
+    "src/DB/SQLite.pbi": [
+      "src/PureSimple.pb"
+    ],
+    "src/Engine.pbi": [
+      "src/PureSimple.pb"
+    ],
+    "src/Group.pbi": [
+      "src/PureSimple.pb"
+    ],
+    "src/Middleware/BasicAuth.pbi": [
+      "src/PureSimple.pb"
+    ],
+    "src/Middleware/CSRF.pbi": [
+      "src/PureSimple.pb"
+    ],
+    "src/Middleware/Cookie.pbi": [
+      "src/PureSimple.pb"
+    ],
+    "src/Middleware/Logger.pbi": [
+      "src/PureSimple.pb"
+    ],
+    "src/Middleware/Recovery.pbi": [
+      "src/PureSimple.pb"
+    ],
+    "src/Middleware/Session.pbi": [
+      "src/PureSimple.pb"
+    ],
+    "src/PureSimple.pb": [
+      "tests/run_all.pb",
+      "examples/hello_world/main.pb"
+    ],
+    "src/Rendering.pbi": [
+      "src/PureSimple.pb"
+    ],
+    "src/Router.pbi": [
+      "src/PureSimple.pb"
+    ],
+    "src/Types.pbi": [
+      "tests/P0_Harness_Test.pbi",
+      "src/PureSimple.pb"
+    ],
+    "tests/P0_Harness_Test.pbi": [
+      "tests/run_all.pb"
+    ],
+    "tests/P1_Router_Test.pbi": [
+      "tests/run_all.pb"
+    ],
+    "tests/P2_Middleware_Test.pbi": [
+      "tests/run_all.pb"
+    ],
+    "tests/P3_Binding_Test.pbi": [
+      "tests/run_all.pb"
+    ],
+    "tests/P4_Rendering_Test.pbi": [
+      "tests/run_all.pb"
+    ],
+    "tests/P5_Groups_Test.pbi": [
+      "tests/run_all.pb"
+    ],
+    "tests/P6_SQLite_Test.pbi": [
+      "tests/run_all.pb"
+    ],
+    "tests/P7_Auth_Test.pbi": [
+      "tests/run_all.pb"
+    ],
+    "tests/TestHarness.pbi": [
+      "tests/run_all.pb"
+    ]
+  },
+  "interfaces": {},
+  "modules": {
+    "BasicAuth": {
+      "declareLine": 15,
+      "declareFile": "src/Middleware/BasicAuth.pbi",
+      "implLine": 20,
+      "implFile": "src/Middleware/BasicAuth.pbi"
+    },
+    "Binding": {
+      "declareLine": 15,
+      "declareFile": "src/Binding.pbi",
+      "implLine": 26,
+      "implFile": "src/Binding.pbi"
+    },
+    "CSRF": {
+      "declareLine": 18,
+      "declareFile": "src/Middleware/CSRF.pbi",
+      "implLine": 25,
+      "implFile": "src/Middleware/CSRF.pbi"
+    },
+    "Cookie": {
+      "declareLine": 8,
+      "declareFile": "src/Middleware/Cookie.pbi",
+      "implLine": 13,
+      "implFile": "src/Middleware/Cookie.pbi"
+    },
+    "Ctx": {
+      "declareLine": 7,
+      "declareFile": "src/Context.pbi",
+      "implLine": 21,
+      "implFile": "src/Context.pbi"
+    },
+    "DB": {
+      "declareLine": 26,
+      "declareFile": "src/DB/SQLite.pbi",
+      "implLine": 44,
+      "implFile": "src/DB/SQLite.pbi"
+    },
+    "Engine": {
+      "declareLine": 8,
+      "declareFile": "src/Engine.pbi",
+      "implLine": 27,
+      "implFile": "src/Engine.pbi"
+    },
+    "Group": {
+      "declareLine": 20,
+      "declareFile": "src/Group.pbi",
+      "implLine": 33,
+      "implFile": "src/Group.pbi"
+    },
+    "Logger": {
+      "declareLine": 13,
+      "declareFile": "src/Middleware/Logger.pbi",
+      "implLine": 17,
+      "implFile": "src/Middleware/Logger.pbi"
+    },
+    "Recovery": {
+      "declareLine": 19,
+      "declareFile": "src/Middleware/Recovery.pbi",
+      "implLine": 23,
+      "implFile": "src/Middleware/Recovery.pbi"
+    },
+    "Rendering": {
+      "declareLine": 9,
+      "declareFile": "src/Rendering.pbi",
+      "implLine": 19,
+      "implFile": "src/Rendering.pbi"
+    },
+    "Router": {
+      "declareLine": 11,
+      "declareFile": "src/Router.pbi",
+      "implLine": 22,
+      "implFile": "src/Router.pbi"
+    },
+    "Session": {
+      "declareLine": 16,
+      "declareFile": "src/Middleware/Session.pbi",
+      "implLine": 25,
+      "implFile": "src/Middleware/Session.pbi"
+    },
+    "Types": {
+      "declareLine": 11,
+      "declareFile": "src/Types.pbi",
+      "implLine": 77,
+      "implFile": "src/Types.pbi"
+    }
+  }
+}

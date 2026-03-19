@@ -392,3 +392,53 @@ Ctx::Set(@ctx, "my" + Chr(9) + "key", "value")
 ; RIGHT — plain alphanumeric or snake_case keys
 Ctx::Set(@ctx, "my_key", "value")
 ```
+
+---
+
+## `Default` is a reserved PureBasic keyword
+
+`Default` is used in `Select/Case/Default` blocks and cannot be used as a
+procedure parameter name.
+
+```purebasic
+; WRONG — compile error: "A variable can't be named the same as a keyword: Default"
+Procedure.s Get(Key.s, Default.s = "")
+
+; RIGHT — use a different parameter name
+Procedure.s Get(Key.s, Fallback.s = "")
+```
+
+---
+
+## `Debug` is a reserved PureBasic keyword
+
+`Debug` is the IDE debugger output statement and cannot be used as a procedure
+name even inside a module.
+
+```purebasic
+; WRONG — compile error: "A procedure can't have the same name as a keyword: Debug"
+Procedure Debug(Msg.s) ...
+
+; RIGHT — use an alternative name
+Procedure Dbg(Msg.s) ...   ; PureSimple's Log module uses Log::Dbg
+```
+
+---
+
+## `Config::GetInt` returns 0 for non-numeric strings
+
+PureBasic's `Val()` returns 0 for non-numeric input. If you need to distinguish
+"key missing" from "key present but zero", use `Config::Has()` first.
+
+```purebasic
+; "TIMEOUT" not set in .env
+Config::GetInt("TIMEOUT", 30)     ; returns 30  ← correct fallback
+Config::GetInt("TIMEOUT")         ; returns 0   ← ambiguous: missing or zero?
+
+; Safe pattern
+If Config::Has("TIMEOUT")
+  timeout = Config::GetInt("TIMEOUT")
+Else
+  timeout = 30   ; explicit default
+EndIf
+```

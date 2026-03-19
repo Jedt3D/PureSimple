@@ -1,0 +1,113 @@
+{
+  "version": "0.1.0",
+  "indexedAt": "2026-03-19T17:21:54Z",
+  "projectHash": "94cf84c9fc0f2665505813a67843673370d4a633a0325597cb6c54e125603cdd",
+  "fileCount": 26,
+  "duration": "6ms",
+  "files": {
+    "examples/hello_world/main.pb": {
+      "mtime": "2026-03-19T14:40:15Z",
+      "size": 533
+    },
+    "src/Binding.pbi": {
+      "mtime": "2026-03-19T16:37:37Z",
+      "size": 6176
+    },
+    "src/Context.pbi": {
+      "mtime": "2026-03-19T17:21:36Z",
+      "size": 5152
+    },
+    "src/DB/SQLite.pbi": {
+      "mtime": "2026-03-19T17:05:20Z",
+      "size": 6369
+    },
+    "src/Engine.pbi": {
+      "mtime": "2026-03-19T16:57:57Z",
+      "size": 4499
+    },
+    "src/Group.pbi": {
+      "mtime": "2026-03-19T16:57:57Z",
+      "size": 4199
+    },
+    "src/Middleware/BasicAuth.pbi": {
+      "mtime": "2026-03-19T17:21:36Z",
+      "size": 2162
+    },
+    "src/Middleware/CSRF.pbi": {
+      "mtime": "2026-03-19T17:21:36Z",
+      "size": 3027
+    },
+    "src/Middleware/Cookie.pbi": {
+      "mtime": "2026-03-19T17:21:36Z",
+      "size": 1838
+    },
+    "src/Middleware/Logger.pbi": {
+      "mtime": "2026-03-19T16:24:43Z",
+      "size": 824
+    },
+    "src/Middleware/Recovery.pbi": {
+      "mtime": "2026-03-19T16:24:43Z",
+      "size": 1467
+    },
+    "src/Middleware/Session.pbi": {
+      "mtime": "2026-03-19T17:21:36Z",
+      "size": 4608
+    },
+    "src/PureSimple.pb": {
+      "mtime": "2026-03-19T17:21:36Z",
+      "size": 1901
+    },
+    "src/Rendering.pbi": {
+      "mtime": "2026-03-19T16:49:49Z",
+      "size": 4692
+    },
+    "src/Router.pbi": {
+      "mtime": "2026-03-19T15:57:34Z",
+      "size": 6448
+    },
+    "src/Types.pbi": {
+      "mtime": "2026-03-19T17:21:36Z",
+      "size": 3311
+    },
+    "tests/P0_Harness_Test.pbi": {
+      "mtime": "2026-03-19T15:05:37Z",
+      "size": 685
+    },
+    "tests/P1_Router_Test.pbi": {
+      "mtime": "2026-03-19T15:57:34Z",
+      "size": 6058
+    },
+    "tests/P2_Middleware_Test.pbi": {
+      "mtime": "2026-03-19T16:24:43Z",
+      "size": 5247
+    },
+    "tests/P3_Binding_Test.pbi": {
+      "mtime": "2026-03-19T16:37:37Z",
+      "size": 4706
+    },
+    "tests/P4_Rendering_Test.pbi": {
+      "mtime": "2026-03-19T16:49:49Z",
+      "size": 3206
+    },
+    "tests/P5_Groups_Test.pbi": {
+      "mtime": "2026-03-19T16:57:57Z",
+      "size": 6953
+    },
+    "tests/P6_SQLite_Test.pbi": {
+      "mtime": "2026-03-19T17:05:20Z",
+      "size": 5893
+    },
+    "tests/P7_Auth_Test.pbi": {
+      "mtime": "2026-03-19T17:21:36Z",
+      "size": 9547
+    },
+    "tests/TestHarness.pbi": {
+      "mtime": "2026-03-19T15:05:37Z",
+      "size": 3740
+    },
+    "tests/run_all.pb": {
+      "mtime": "2026-03-19T17:21:36Z",
+      "size": 1156
+    }
+  }
+}

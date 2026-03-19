@@ -3,7 +3,7 @@
 A lightweight web framework for **PureBasic 6.x**, inspired by Go's Gin and Chi. Compiles to a single native binary with zero external runtime dependencies.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-![Status: P7 Auth](https://img.shields.io/badge/status-P7%20Auth-yellow)
+![Status: P8 Config](https://img.shields.io/badge/status-P8%20Config-yellow)
 
 ---
 
@@ -101,6 +101,42 @@ PureSimple/
     puresimple.service  # systemd unit
     setup-server.sh  # One-time server provisioning
   templates/         # Default Jinja2 HTML templates (404.html, 500.html)
+```
+
+---
+
+## Features (P8)
+
+### Configuration (.env)
+```purebasic
+Config::Load(".env")                        ; load KEY=value file (# comments skipped)
+port = Config::GetInt("PORT", 8080)         ; integer with fallback
+mode = Config::Get("MODE", "debug")         ; string with fallback
+Config::Set("RUNTIME_KEY", "value")         ; set at runtime
+If Config::Has("DB_PATH") : ... : EndIf     ; check presence
+Config::Reset()                             ; clear all (use between tests)
+```
+
+### Leveled Logging
+```purebasic
+Log::SetLevel(Log::#LevelWarn)              ; suppress Debug + Info
+Log::SetOutput("logs/app.log")              ; "" = stdout (default)
+Log::Dbg("verbose info")                    ; [DEBUG]
+Log::Info("Server starting on :8080")       ; [INFO]
+Log::Warn("Retrying connection")            ; [WARN]
+Log::Error("Database connection failed")    ; [ERROR]
+; Output format: [2026-03-20 14:32:01] [INFO] message
+```
+
+### Run Modes
+```purebasic
+Engine::SetMode("release")                  ; "debug" | "release" | "test"
+If Engine::Mode() = "debug" : ... : EndIf
+```
+
+### Project Scaffolding
+```bash
+./scripts/new-project.sh myapp              # creates myapp/ with main.pb, .env, templates/
 ```
 
 ---
