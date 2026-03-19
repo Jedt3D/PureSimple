@@ -42,8 +42,8 @@ All three repos compile into **one binary**. No interpreter, no VM, no shared li
 
 | Repo | Role |
 |------|------|
-| [`PureSimpleHTTPServer`](https://github.com/your-org/PureSimpleHTTPServer) | HTTP/1.1 listener, TLS, compression, static files |
-| [`PureJinja`](https://github.com/your-org/PureJinja) | Jinja2-compatible template engine |
+| [`PureSimpleHTTPServer`](https://github.com/Jedt3D/PureSimpleHTTPServer) | HTTP/1.1 listener, TLS, compression, static files |
+| [`PureJinja`](https://github.com/Jedt3D/PureJinja) | Jinja2-compatible template engine |
 | **`PureSimple`** ← you are here | Router, middleware, context, binding, rendering |
 
 ---
