@@ -154,3 +154,60 @@ msg.s = ~"line1\nline2"
 ```
 
 Supported escapes: `\n`, `\t`, `\r`, `\\`, `\"`, `\a`, `\b`, `\f`.
+
+---
+
+## Module bodies cannot see main-code globals — use `DeclareModule` + `UseModule`
+
+PureBasic module bodies are complete black boxes. Procedures, variables, and
+**structures** defined outside a module are NOT accessible inside a `Module`
+body, even when declared `Global`.
+
+```purebasic
+; WRONG — RequestContext is "global" but Module body can't see it
+Structure RequestContext : ... : EndStructure   ; main-code global
+
+Module Router
+  Procedure.i Match(*Ctx.RequestContext)  ; ERROR: Structure not found
+  EndProcedure
+EndModule
+```
+
+**Solution**: wrap shared types in their own `DeclareModule`/`Module`, then
+`UseModule` inside the consuming modules.
+
+```purebasic
+; Types.pbi
+DeclareModule Types
+  Structure RequestContext : ... : EndStructure
+EndDeclareModule
+Module Types : EndModule   ; no runtime code needed
+
+; Router.pbi
+Module Router
+  UseModule Types   ; imports RequestContext, etc. into this module's scope
+  Procedure.i Match(*Ctx.RequestContext)   ; OK
+  EndProcedure
+EndModule
+
+; Main code — UseModule at program level for test files and entry points
+UseModule Types
+myCtx.RequestContext   ; accessible without Types:: prefix
+```
+
+---
+
+## `Next` is a reserved PureBasic keyword — can't use it as a procedure name
+
+`Next` closes a `For…Next` loop in PureBasic and cannot be redeclared as a
+procedure, even inside a module.
+
+```purebasic
+; WRONG — compiler error: "A procedure can't have the same name as a keyword"
+Procedure Next(*C.RequestContext) ...
+
+; RIGHT — use an alternative name
+Procedure Advance(*C.RequestContext) ...  ; PureSimple uses Ctx::Advance
+```
+
+Other loop-related keywords to avoid: `Break`, `Continue`, `Until`, `Wend`.

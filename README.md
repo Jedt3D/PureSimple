@@ -3,7 +3,7 @@
 A lightweight web framework for **PureBasic 6.x**, inspired by Go's Gin and Chi. Compiles to a single native binary with zero external runtime dependencies.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-![Status: P0 Foundation](https://img.shields.io/badge/status-P0%20Foundation-orange)
+![Status: P1 Router + Context](https://img.shields.io/badge/status-P1%20Router%20%2B%20Context-yellow)
 
 ---
 
@@ -77,7 +77,7 @@ $PUREBASIC_HOME/compilers/pbcompiler src/main.pb -z -o app
 PureSimpleHTTPServer → dispatch callback
   → Router.Match(method, path)  →  handler chain + params
   → combineHandlers(global middleware + group middleware + route handler)
-  → Context.Next() iterates handler chain
+  → Context.Advance() iterates handler chain (Gin-style)
   → Renderers write response (JSON / HTML / File / Redirect)
   → PureSimpleHTTPServer sends response
 ```
@@ -105,12 +105,30 @@ PureSimple/
 
 ---
 
+## Features (P1)
+
+### Router
+- Segment-level trie with `:param` named capture and `*wildcard` catch-all segments
+- Per-method route tables (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`, and `Any`)
+- Priority order: exact match > `:param` > `*wildcard`
+- Route registration: `Engine::GET(pattern, @handler())`
+
+### Context
+- `RequestContext` — per-request struct with method, path, params, query, KV store, handler chain
+- `Ctx::Init` / `Ctx::Dispatch` — initialise and start a request
+- `Ctx::Advance(*C)` — Gin-style handler chain advance (passes control downstream)
+- `Ctx::Abort(*C)` — stop the handler chain; subsequent handlers are skipped
+- `Ctx::Param(*C, "name")` — extract named route params set by the router
+- `Ctx::Set` / `Ctx::Get` — arbitrary KV store for middleware communication
+
+---
+
 ## Phase Roadmap
 
 | Phase | Deliverable | Status |
 |-------|-------------|--------|
 | P0 | Project foundation, test harness, deploy scripts | **done** |
-| P1 | Core router + Context | planned |
+| P1 | Core router + Context | **done** |
 | P2 | Middleware engine (Next, Abort, Logger, Recovery) | planned |
 | P3 | Request binding (Param, Query, JSON, Form, File) | planned |
 | P4 | Response rendering + PureJinja integration | planned |

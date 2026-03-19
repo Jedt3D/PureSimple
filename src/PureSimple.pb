@@ -1,22 +1,23 @@
 ; PureSimple.pb — Framework entry point
-; Include order matters: Types first, then Engine (and future modules).
+; Include order: Types → Router → Context → Engine → (future modules)
 ; All phase modules are added here as they are implemented.
 ;
 ; Integration note:
-;   PureSimpleHTTPServer → https://github.com/your-org/PureSimpleHTTPServer
-;   PureJinja            → https://github.com/your-org/PureJinja
+;   PureSimpleHTTPServer: XIncludeFile "../../PureSimpleHTTPServer/src/HTTPServer.pbi"
+;   PureJinja:            XIncludeFile "../../PureJinja/src/PureJinja.pbi"
 ; Both repos should be cloned alongside this one; their .pbi paths are
 ; referenced relative to the project root once integration lands in P4.
 
 EnableExplicit
 
-XIncludeFile "Types.pbi"
-XIncludeFile "Engine.pbi"
+XIncludeFile "Types.pbi"    ; Structure definitions + PS_HandlerFunc prototype
+UseModule Types             ; import RequestContext, PS_HandlerFunc etc. into global scope
+XIncludeFile "Router.pbi"   ; Segment-level trie router (Insert / Match)
+XIncludeFile "Context.pbi"  ; RequestContext lifecycle: Next, Abort, Param, KV
+XIncludeFile "Engine.pbi"   ; Top-level API: NewApp(), Run(), GET(), POST(), …
 
 ; Future phases will add:
 ;   XIncludeFile "Config.pbi"
-;   XIncludeFile "Router.pbi"
-;   XIncludeFile "Context.pbi"
 ;   XIncludeFile "Middleware/Logger.pbi"
 ;   XIncludeFile "Middleware/Recovery.pbi"
 ;   XIncludeFile "Binding.pbi"

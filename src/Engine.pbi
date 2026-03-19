@@ -1,23 +1,58 @@
-; Engine.pbi — Application lifecycle stubs (NewApp / Run)
-; Full implementation arrives in P1 (Router) and beyond.
+; Engine.pbi — Top-level application API
+; NewApp() and Run() remain stubs until PureSimpleHTTPServer integration (future phase).
+; GET/POST/PUT/PATCH/DELETE/Any delegate to Router::Insert.
 
 EnableExplicit
 
 DeclareModule Engine
   Declare.i NewApp()
   Declare.i Run(Port.i)
+  Declare   GET(Pattern.s, Handler.i)
+  Declare   POST(Pattern.s, Handler.i)
+  Declare   PUT(Pattern.s, Handler.i)
+  Declare   PATCH(Pattern.s, Handler.i)
+  Declare   DELETE(Pattern.s, Handler.i)
+  Declare   Any(Pattern.s, Handler.i)
 EndDeclareModule
 
 Module Engine
-  ; NewApp() — allocate and return a RouterEngine handle.
-  ; Returns #PB_Any handle (stub returns 0 until P1 wires the allocator).
+  ; NewApp() — allocate application engine.
+  ; Stub: returns 0. PureSimpleHTTPServer integration will replace this.
   Procedure.i NewApp()
-    ProcedureReturn 0   ; stub — P1 will allocate RouterEngine here
+    ProcedureReturn 0
   EndProcedure
 
-  ; Run(Port) — start the HTTP listener on the given port.
-  ; Returns #False until PureSimpleHTTPServer integration lands in P1.
+  ; Run(Port) — start HTTP listener.
+  ; Stub: returns #False until PureSimpleHTTPServer integration lands.
   Procedure.i Run(Port.i)
-    ProcedureReturn #False  ; stub — P1 wires PureSimpleHTTPServer
+    ProcedureReturn #False
+  EndProcedure
+
+  Procedure GET(Pattern.s, Handler.i)
+    Router::Insert("GET", Pattern, Handler)
+  EndProcedure
+
+  Procedure POST(Pattern.s, Handler.i)
+    Router::Insert("POST", Pattern, Handler)
+  EndProcedure
+
+  Procedure PUT(Pattern.s, Handler.i)
+    Router::Insert("PUT", Pattern, Handler)
+  EndProcedure
+
+  Procedure PATCH(Pattern.s, Handler.i)
+    Router::Insert("PATCH", Pattern, Handler)
+  EndProcedure
+
+  Procedure DELETE(Pattern.s, Handler.i)
+    Router::Insert("DELETE", Pattern, Handler)
+  EndProcedure
+
+  Procedure Any(Pattern.s, Handler.i)
+    Router::Insert("GET",    Pattern, Handler)
+    Router::Insert("POST",   Pattern, Handler)
+    Router::Insert("PUT",    Pattern, Handler)
+    Router::Insert("PATCH",  Pattern, Handler)
+    Router::Insert("DELETE", Pattern, Handler)
   EndProcedure
 EndModule

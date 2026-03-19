@@ -78,16 +78,16 @@ PureSimpleHTTPServer → dispatch callback
 - **HandlerFunc**: `Procedure(*ctx.RequestContext)` — universal handler and middleware signature
 - **RequestContext**: Per-request struct — holds raw request/response data, params map, query map, KV store, handlers array, handlerIndex, aborted flag. Pre-allocated per thread slot and reset (not reallocated) per request.
 - **Router**: One route table per HTTP method. Radix trie with `:param` named segments and `*wildcard` support.
-- **Middleware chain**: `Next()` increments handlerIndex; `Abort()` sets it to sentinel (array length). `combineHandlers()` merges group + route handlers into one flat array.
+- **Middleware chain**: `Ctx::Advance()` increments handlerIndex and calls the next handler (note: `Next` is a reserved PureBasic keyword); `Ctx::Abort()` sets the aborted flag. `combineHandlers()` merges group + route handlers into one flat array.
 - **RouterGroup**: Sub-router with shared path prefix and middleware. Groups nest: `app.Group('/api').Group('/v1').GET('/users', handler)`.
 
 ### Include File Pattern
 
 All modules are `.pbi` files included via `XIncludeFile` (never `IncludeFile`). Include order in `src/PureSimple.pb`:
-1. `Types.pbi` — all Structure definitions
-2. `Config.pbi` — constants, enumerations
-3. `Router.pbi` — radix trie + route table
-4. `Context.pbi` — RequestContext + Next/Abort
+1. `Types.pbi` — `DeclareModule Types` wrapping `RequestContext`, `PS_HandlerFunc`, `RouterEngine`
+2. `UseModule Types` — at program level so test files and main code see types without `Types::` prefix
+3. `Router.pbi` — segment trie + route table (`Router::Insert`, `Router::Match`)
+4. `Context.pbi` — RequestContext lifecycle (`Ctx::Init`, `Ctx::Advance`, `Ctx::Abort`, `Ctx::Param`, `Ctx::Set`/`Get`)
 5. `Middleware/*.pbi` — Logger, Recovery, Auth, CSRF, Session
 6. `Binding.pbi` — Param, Query, BindJSON, PostForm, FormFile
 7. `Rendering.pbi` — JSON, HTML, File, Redirect
@@ -101,6 +101,8 @@ All modules are `.pbi` files included via `XIncludeFile` (never `IncludeFile`). 
 - **Prefer `XIncludeFile`** over `IncludeFile` to prevent duplicate definition errors.
 - **Use `#PB_Any`** for dynamic IDs and always capture the return value: `id = CreateThing(#PB_Any, ...)`.
 - **Use Modules** (`DeclareModule` / `Module`) for all framework namespaces to avoid identifier conflicts.
+- **Module bodies are isolated**: `Module` bodies cannot see main-code globals (including structures). Wrap shared types in a `DeclareModule`/`Module` (e.g., `Module Types`) and add `UseModule Types` at the top of each consuming module body.
+- **`Next` is a reserved keyword**: PureBasic uses `Next` to close `For…Next` loops. The handler-chain "advance" method is named `Ctx::Advance` in this framework.
 - **File existence**: use `FileSize(path) >= 0` — there is no `FileExists()`.
 - **`Dim a(N)`** creates N+1 elements (indices 0 to N inclusive).
 - **`.i` type** is pointer-sized (4 bytes x86, 8 bytes x64) — use for IDs, handles, loop counters.
