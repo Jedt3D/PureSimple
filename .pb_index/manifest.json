@@ -3,12 +3,28 @@
   "rootDir": "/Users/worajedt/PureBasic_Projects/PureSimple",
   "files": [
     {
+      "path": "examples/blog/main.pb",
+      "type": "source",
+      "sizeBytes": 3317,
+      "modTime": "2026-03-19T17:43:41Z",
+      "lineCount": 106,
+      "sha256": "9710ac8829b38cd623d73bd7db8d512ced2a55b7b1ac0d5359b56c0e25b1ccc2"
+    },
+    {
       "path": "examples/hello_world/main.pb",
       "type": "source",
       "sizeBytes": 1344,
       "modTime": "2026-03-19T17:33:43Z",
       "lineCount": 44,
       "sha256": "e07de757cb1eb2fca884c1b9b31a6ef4d885239ca0fb49a159dd6b18e6ecc0f0"
+    },
+    {
+      "path": "examples/todo/main.pb",
+      "type": "source",
+      "sizeBytes": 3173,
+      "modTime": "2026-03-19T17:43:41Z",
+      "lineCount": 118,
+      "sha256": "26a2d006ba40b1f640731b756b623efa2912fbd9857bd7da30c3fedcd3c343e3"
     },
     {
       "path": "src/Binding.pbi",
@@ -219,6 +235,14 @@
       "sha256": "9affdef86e3a9bd19e6876458edd5047c7321597c6a38a0d9426cba73eb76620"
     },
     {
+      "path": "tests/P9_Examples_Test.pbi",
+      "type": "include",
+      "sizeBytes": 6970,
+      "modTime": "2026-03-19T17:43:41Z",
+      "lineCount": 187,
+      "sha256": "00beefda7a39c707ea3c2a2d69c8cc6818dd8a6b368a45d2d1e93d1214b416b6"
+    },
+    {
       "path": "tests/TestHarness.pbi",
       "type": "include",
       "sizeBytes": 3740,
@@ -229,17 +253,17 @@
     {
       "path": "tests/run_all.pb",
       "type": "source",
-      "sizeBytes": 1152,
-      "modTime": "2026-03-19T17:33:43Z",
-      "lineCount": 37,
-      "sha256": "9ce9e5692eac37294881cd1619c573daf5c36ae0f638fac30c673177ae4a9a32"
+      "sizeBytes": 1188,
+      "modTime": "2026-03-19T17:43:41Z",
+      "lineCount": 38,
+      "sha256": "ad91855529ec280ba993b71ae9da4608b6be14aaa5e25f1e2e4db8bfe170ccb4"
     }
   ],
   "stats": {
-    "totalFiles": 29,
-    "sourceFiles": 3,
-    "includeFiles": 26,
+    "totalFiles": 32,
+    "sourceFiles": 5,
+    "includeFiles": 27,
     "formFiles": 0,
-    "totalLines": 3378
+    "totalLines": 3790
   }
 }

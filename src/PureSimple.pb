@@ -26,3 +26,4 @@ XIncludeFile "Group.pbi"               ; RouterGroup: sub-router with prefix + g
 XIncludeFile "DB/SQLite.pbi"           ; SQLite adapter + migration runner
 XIncludeFile "Config.pbi"             ; .env file loader + key/value config store
 XIncludeFile "Log.pbi"                ; Leveled logger (Debug/Info/Warn/Error, file or stdout)
+XIncludeFile "DB/Connect.pbi"         ; DSN-based multi-driver connection factory (SQLite/Postgres/MySQL)

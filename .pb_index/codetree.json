@@ -1,4 +1,72 @@
 {
+  "examples/blog/main.pb": {
+    "type": "source",
+    "procedures": {
+      "AboutHandler": {
+        "line": 81,
+        "endLine": 84,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "HealthHandler": {
+        "line": 86,
+        "endLine": 88,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "HomeHandler": {
+        "line": 53,
+        "endLine": 62,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "InitPosts": {
+        "line": 31,
+        "endLine": 49,
+        "returnType": "",
+        "params": ""
+      },
+      "PostHandler": {
+        "line": 64,
+        "endLine": 79,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      }
+    },
+    "structures": {
+      "BlogPost": {
+        "line": 21,
+        "endLine": 27,
+        "fields": [
+          "slug.s",
+          "title.s",
+          "author.s",
+          "date.s",
+          "body.s"
+        ],
+        "extends": ""
+      }
+    },
+    "enumerations": {},
+    "constants": {},
+    "macros": {},
+    "interfaces": {},
+    "modules": {},
+    "prototypes": {},
+    "globals": {
+      "Dim _Posts": {
+        "line": 29,
+        "type": ".BlogPost(2)"
+      }
+    },
+    "includes": [
+      {
+        "line": 17,
+        "path": "../../src/PureSimple.pb",
+        "directive": "XIncludeFile"
+      }
+    ]
+  },
   "examples/hello_world/main.pb": {
     "type": "source",
     "procedures": {
@@ -26,6 +94,88 @@
     "includes": [
       {
         "line": 7,
+        "path": "../../src/PureSimple.pb",
+        "directive": "XIncludeFile"
+      }
+    ]
+  },
+  "examples/todo/main.pb": {
+    "type": "source",
+    "procedures": {
+      "AllTodosJSON": {
+        "line": 42,
+        "endLine": 51,
+        "returnType": ".s",
+        "params": ""
+      },
+      "CreateTodo": {
+        "line": 59,
+        "endLine": 73,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "DeleteTodo": {
+        "line": 86,
+        "endLine": 96,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "GetTodo": {
+        "line": 75,
+        "endLine": 84,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "HealthCheck": {
+        "line": 98,
+        "endLine": 100,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "ListTodos": {
+        "line": 55,
+        "endLine": 57,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "TodoJSON": {
+        "line": 32,
+        "endLine": 40,
+        "returnType": ".s",
+        "params": "*T.TodoItem"
+      }
+    },
+    "structures": {
+      "TodoItem": {
+        "line": 21,
+        "endLine": 25,
+        "fields": [
+          "id.i",
+          "title.s",
+          "done.i"
+        ],
+        "extends": ""
+      }
+    },
+    "enumerations": {},
+    "constants": {},
+    "macros": {},
+    "interfaces": {},
+    "modules": {},
+    "prototypes": {},
+    "globals": {
+      "NewList _Todos": {
+        "line": 27,
+        "type": ".TodoItem()"
+      },
+      "_NextID": {
+        "line": 28,
+        "type": ".i"
+      }
+    },
+    "includes": [
+      {
+        "line": 17,
         "path": "../../src/PureSimple.pb",
         "directive": "XIncludeFile"
       }
@@ -1867,6 +2017,74 @@
     "globals": {},
     "includes": []
   },
+  "tests/P9_Examples_Test.pbi": {
+    "type": "include",
+    "procedures": {
+      "P9Blog_HomeHandler": {
+        "line": 39,
+        "endLine": 43,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "P9Blog_PostHandler": {
+        "line": 45,
+        "endLine": 48,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "P9HealthHandler": {
+        "line": 50,
+        "endLine": 52,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "P9Todo_CreateHandler": {
+        "line": 19,
+        "endLine": 28,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "P9Todo_DeleteHandler": {
+        "line": 35,
+        "endLine": 37,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "P9Todo_GetHandler": {
+        "line": 30,
+        "endLine": 33,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "P9Todo_ListHandler": {
+        "line": 15,
+        "endLine": 17,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "P9_Custom404": {
+        "line": 54,
+        "endLine": 56,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "P9_Examples_Tests": {
+        "line": 60,
+        "endLine": 185,
+        "returnType": "",
+        "params": ""
+      }
+    },
+    "structures": {},
+    "enumerations": {},
+    "constants": {},
+    "macros": {},
+    "interfaces": {},
+    "modules": {},
+    "prototypes": {},
+    "globals": {},
+    "includes": []
+  },
   "tests/TestHarness.pbi": {
     "type": "include",
     "procedures": {
@@ -2000,6 +2218,11 @@
       {
         "line": 28,
         "path": "P8_Config_Test.pbi",
+        "directive": "XIncludeFile"
+      },
+      {
+        "line": 29,
+        "path": "P9_Examples_Test.pbi",
         "directive": "XIncludeFile"
       }
     ]

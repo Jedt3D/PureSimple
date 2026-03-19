@@ -3,7 +3,7 @@
 A lightweight web framework for **PureBasic 6.x**, inspired by Go's Gin and Chi. Compiles to a single native binary with zero external runtime dependencies.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-![Status: P9 Docs](https://img.shields.io/badge/status-P9%20Docs-yellow)
+![Status: P10 Multi-DB](https://img.shields.io/badge/status-P10%20Multi--DB-green)
 
 ---
 
@@ -101,6 +101,47 @@ PureSimple/
     puresimple.service  # systemd unit
     setup-server.sh  # One-time server provisioning
   templates/         # Default Jinja2 HTML templates (404.html, 500.html)
+```
+
+---
+
+## Features (P10)
+
+### Multi-Database Abstraction
+
+`DBConnect` provides a unified DSN-based connection factory. All handles are
+fully compatible with the existing `DB::*` procedures.
+
+```purebasic
+; SQLite (file or in-memory)
+db = DBConnect::Open("sqlite::memory:")
+db = DBConnect::Open("sqlite:data/app.db")
+
+; PostgreSQL
+db = DBConnect::Open("postgres://alice:s3cr3t@db.host.io:5432/myapp")
+
+; MySQL / MariaDB
+db = DBConnect::Open("mysql://root:pass@localhost:3306/myapp")
+
+; Config-driven (reads DB_DSN from .env, defaults to sqlite::memory:)
+db = DBConnect::OpenFromConfig()
+
+; All DB::* procedures work with any driver
+DB::Exec(db, "CREATE TABLE ...")
+DB::Migrate(db)   ; migration runner is driver-agnostic
+DB::Close(db)
+```
+
+Driver detection:
+```purebasic
+DBConnect::Driver("sqlite::memory:")                   ; #Driver_SQLite
+DBConnect::Driver("postgres://user@host/db")           ; #Driver_Postgres
+DBConnect::Driver("mysql://user:pass@host/db")         ; #Driver_MySQL
+```
+
+`.env`:
+```
+DB_DSN=postgres://alice:s3cr3t@db.example.com:5432/myapp
 ```
 
 ---
