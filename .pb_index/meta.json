@@ -1,8 +1,8 @@
 {
   "version": "0.1.0",
-  "indexedAt": "2026-03-19T17:43:59Z",
-  "projectHash": "59dc4b4fe0ad434b94be08dcd30244a7a85b2b63aee46e2090ce0b8273ad5b73",
-  "fileCount": 32,
+  "indexedAt": "2026-03-19T18:07:58Z",
+  "projectHash": "5463b6a1ad36b3176c8e910df69ac5053bc531976128afaf4c5fb76f72e0d9a3",
+  "fileCount": 34,
   "duration": "6ms",
   "files": {
     "examples/blog/main.pb": {
@@ -28,6 +28,10 @@
     "src/Context.pbi": {
       "mtime": "2026-03-19T17:21:36Z",
       "size": 5152
+    },
+    "src/DB/Connect.pbi": {
+      "mtime": "2026-03-19T18:07:42Z",
+      "size": 7653
     },
     "src/DB/SQLite.pbi": {
       "mtime": "2026-03-19T17:05:20Z",
@@ -70,8 +74,8 @@
       "size": 4608
     },
     "src/PureSimple.pb": {
-      "mtime": "2026-03-19T17:33:43Z",
-      "size": 2021
+      "mtime": "2026-03-19T18:07:42Z",
+      "size": 2127
     },
     "src/Rendering.pbi": {
       "mtime": "2026-03-19T16:49:49Z",
@@ -88,6 +92,10 @@
     "tests/P0_Harness_Test.pbi": {
       "mtime": "2026-03-19T15:05:37Z",
       "size": 685
+    },
+    "tests/P10_MultiDB_Test.pbi": {
+      "mtime": "2026-03-19T18:07:42Z",
+      "size": 4925
     },
     "tests/P1_Router_Test.pbi": {
       "mtime": "2026-03-19T15:57:34Z",
@@ -130,8 +138,8 @@
       "size": 3740
     },
     "tests/run_all.pb": {
-      "mtime": "2026-03-19T17:43:41Z",
-      "size": 1188
+      "mtime": "2026-03-19T18:07:42Z",
+      "size": 1224
     }
   }
 }

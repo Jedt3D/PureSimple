@@ -1,0 +1,56 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+
+{% block page_actions %}
+<div class="col-auto ms-auto">
+  <a href="/admin/posts/new" class="btn btn-primary">
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+      viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M12 5l0 14"/><path d="M5 12l14 0"/>
+    </svg>
+    New Post
+  </a>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="row row-deck row-cards">
+
+  <div class="col-sm-6 col-lg-3">
+    <div class="card">
+      <div class="card-body">
+        <div class="subheader">Total Posts</div>
+        <div class="h1 mb-3">{{ total_posts }}</div>
+        <div class="text-muted">{{ published_posts }} published</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6 col-lg-3">
+    <div class="card">
+      <div class="card-body">
+        <div class="subheader">Unread Messages</div>
+        <div class="h1 mb-3">{{ unread_count }}</div>
+        <div class="text-muted">in your inbox</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="row mt-4">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header"><h3 class="card-title">Quick Links</h3></div>
+      <div class="card-body">
+        <a href="/admin/posts" class="btn btn-outline-secondary me-2">View all posts</a>
+        <a href="/admin/contacts" class="btn btn-outline-secondary me-2">View contact inbox</a>
+        <a href="/admin/posts/new" class="btn btn-primary">Write a new post</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

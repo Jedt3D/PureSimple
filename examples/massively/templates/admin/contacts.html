@@ -1,0 +1,47 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Contact Inbox{% endblock %}
+{% block page_title %}Contact Inbox{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="table-responsive">
+    <table class="table table-vcenter card-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Message</th>
+          <th>Submitted</th>
+          <th>Status</th>
+          <th class="w-1"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for line in contacts_data.split('\n') %}{% if line %}
+        {% set c = line.split('|') %}
+        <tr{% if c[5] == '0' %} class="bg-blue-lt"{% endif %}>
+          <td>{{ c[1] }}</td>
+          <td><a href="mailto:{{ c[2] }}">{{ c[2] }}</a></td>
+          <td style="max-width:300px;white-space:pre-wrap;">{{ c[3] }}</td>
+          <td class="text-muted">{{ c[4] }}</td>
+          <td>
+            {% if c[5] == '1' %}
+            <span class="badge bg-secondary">Read</span>
+            {% else %}
+            <span class="badge bg-azure">Unread</span>
+            {% endif %}
+          </td>
+          <td>
+            <form method="post" action="/admin/contacts/{{ c[0] }}/delete"
+                  onsubmit="return confirm('Delete this message?');" style="display:inline;">
+              <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% endif %}{% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

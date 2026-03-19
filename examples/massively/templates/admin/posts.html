@@ -1,0 +1,56 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Posts{% endblock %}
+{% block page_title %}Posts{% endblock %}
+
+{% block page_actions %}
+<div class="col-auto ms-auto">
+  <a href="/admin/posts/new" class="btn btn-primary">New Post</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="table-responsive">
+    <table class="table table-vcenter card-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Slug</th>
+          <th>Published</th>
+          <th>Date</th>
+          <th class="w-1"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for line in posts_data.split('\n') %}{% if line %}
+        {% set p = line.split('|') %}
+        <tr>
+          <td>
+            <a href="/post/{{ p[1] }}" target="_blank">{{ p[2] }}</a>
+          </td>
+          <td class="text-muted">{{ p[1] }}</td>
+          <td>
+            {% if p[5] == '1' %}
+            <span class="badge bg-success">Published</span>
+            {% else %}
+            <span class="badge bg-secondary">Draft</span>
+            {% endif %}
+          </td>
+          <td class="text-muted">{{ p[3] }}</td>
+          <td>
+            <div class="btn-list flex-nowrap">
+              <a href="/admin/posts/{{ p[0] }}/edit" class="btn btn-sm btn-outline-secondary">Edit</a>
+              <form method="post" action="/admin/posts/{{ p[0] }}/delete"
+                    onsubmit="return confirm('Delete this post?');" style="display:inline;">
+                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        {% endif %}{% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

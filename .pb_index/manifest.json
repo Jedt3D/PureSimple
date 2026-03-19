@@ -51,6 +51,14 @@
       "sha256": "28ec399ce0285114b891c4ecd70cd5627c67431de8d29426c34cdeeb02cfa3b1"
     },
     {
+      "path": "src/DB/Connect.pbi",
+      "type": "include",
+      "sizeBytes": 7653,
+      "modTime": "2026-03-19T18:07:42Z",
+      "lineCount": 237,
+      "sha256": "14577859c33f45331ac081d6592e5f041c45eae6ab058ec87c60cad3a03acbac"
+    },
+    {
       "path": "src/DB/SQLite.pbi",
       "type": "include",
       "sizeBytes": 6369,
@@ -133,10 +141,10 @@
     {
       "path": "src/PureSimple.pb",
       "type": "source",
-      "sizeBytes": 2021,
-      "modTime": "2026-03-19T17:33:43Z",
-      "lineCount": 28,
-      "sha256": "4fa0317a2acde36f9b8568188ac8962adbe5428ca7ad29958f245708ce6d6a62"
+      "sizeBytes": 2127,
+      "modTime": "2026-03-19T18:07:42Z",
+      "lineCount": 29,
+      "sha256": "e13d66ef73fa07f578bc18d5d54b7c52f080a6787b4679e633b996b22db7c550"
     },
     {
       "path": "src/Rendering.pbi",
@@ -169,6 +177,14 @@
       "modTime": "2026-03-19T15:05:37Z",
       "lineCount": 27,
       "sha256": "5282ee3ea55329e17848d2b0205cbdfca5ab37babfb6ac5ba02d3bc3684ffa7b"
+    },
+    {
+      "path": "tests/P10_MultiDB_Test.pbi",
+      "type": "include",
+      "sizeBytes": 4925,
+      "modTime": "2026-03-19T18:07:42Z",
+      "lineCount": 116,
+      "sha256": "479ccc0810d2b50d456180cd8ee30053fe2cef1b03cd28713f788d2efe4e8c11"
     },
     {
       "path": "tests/P1_Router_Test.pbi",
@@ -253,17 +269,17 @@
     {
       "path": "tests/run_all.pb",
       "type": "source",
-      "sizeBytes": 1188,
-      "modTime": "2026-03-19T17:43:41Z",
-      "lineCount": 38,
-      "sha256": "ad91855529ec280ba993b71ae9da4608b6be14aaa5e25f1e2e4db8bfe170ccb4"
+      "sizeBytes": 1224,
+      "modTime": "2026-03-19T18:07:42Z",
+      "lineCount": 39,
+      "sha256": "f9e8178dd59462b4e002663909cc93c1726d18ba124c0f8a75372e8be23258a4"
     }
   ],
   "stats": {
-    "totalFiles": 32,
+    "totalFiles": 34,
     "sourceFiles": 5,
-    "includeFiles": 27,
+    "includeFiles": 29,
     "formFiles": 0,
-    "totalLines": 3790
+    "totalLines": 4145
   }
 }

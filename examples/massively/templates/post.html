@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} — {{ site_name }}{% endblock %}
+
+{% block content %}
+<!-- Post -->
+<section class="post">
+  <header class="major">
+    <span class="date">{{ date }}</span>
+    <h1>{{ title }}</h1>
+    <p>{{ excerpt }}</p>
+  </header>
+  <div class="image main">
+    <img src="{{ photo_url }}" alt="{{ title }}" />
+  </div>
+  <p style="font-size:0.75em;color:#aaa;">
+    Photo by <a href="{{ photo_link }}" target="_blank" rel="noopener">{{ photo_credit }}</a>
+    — {{ photo_license }}
+  </p>
+
+  {% for para in body.split('\n\n') %}
+  {% if para %}
+  <p>{{ para }}</p>
+  {% endif %}
+  {% endfor %}
+
+  <hr />
+  <p><em>By {{ author }}</em></p>
+</section>
+{% endblock %}

@@ -1,0 +1,29 @@
+# Caddyfile for "Wild & Still"
+# Production: copy to /etc/caddy/Caddyfile and run: systemctl reload caddy
+#
+# Caddy handles:
+#   - TLS via Let's Encrypt (automatic if you set a real domain below)
+#   - Static asset serving from /opt/massively/static/
+#   - Reverse proxy for all dynamic routes to PureSimple on :8080
+#
+# Replace "yourdomain.com" with your actual domain (or use :80 for HTTP-only testing).
+
+yourdomain.com {
+    # Serve static files directly — no PureSimple involvement
+    handle /static/* {
+        root * /opt/massively
+        file_server
+    }
+
+    # Everything else goes to PureSimple
+    handle {
+        reverse_proxy localhost:8080
+    }
+
+    encode gzip
+
+    log {
+        output file /var/log/caddy/massively-access.log
+        format json
+    }
+}

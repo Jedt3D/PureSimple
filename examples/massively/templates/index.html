@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}{{ site_name }} — Stories{% endblock %}
+
+{% block content %}
+<!-- Posts -->
+<section class="posts">
+  {% for line in posts_data.split('\n') %}{% if line %}
+  {% set p = line.split('|') %}
+  <article>
+    <header>
+      <span class="date">{{ p[2] }}</span>
+      <h2><a href="/post/{{ p[0] }}">{{ p[1] }}</a></h2>
+    </header>
+    <a href="/post/{{ p[0] }}" class="image fit">
+      <img src="{{ p[3] }}" alt="{{ p[1] }}" loading="lazy" />
+    </a>
+    <p>{{ p[4] }}</p>
+    <ul class="actions special">
+      <li><a href="/post/{{ p[0] }}" class="button">Read the story</a></li>
+    </ul>
+  </article>
+  {% endif %}{% endfor %}
+</section>
+{% endblock %}

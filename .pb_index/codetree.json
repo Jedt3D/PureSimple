@@ -470,6 +470,126 @@
     },
     "includes": []
   },
+  "src/DB/Connect.pbi": {
+    "type": "include",
+    "procedures": {
+      "ConnStr": {
+        "line": 186,
+        "endLine": 197,
+        "returnType": ".s",
+        "params": "DSN.s"
+      },
+      "Driver": {
+        "line": 169,
+        "endLine": 180,
+        "returnType": ".i",
+        "params": "DSN.s"
+      },
+      "Open": {
+        "line": 201,
+        "endLine": 228,
+        "returnType": ".i",
+        "params": "DSN.s"
+      },
+      "OpenFromConfig": {
+        "line": 232,
+        "endLine": 235,
+        "returnType": ".i",
+        "params": ""
+      },
+      "_AfterScheme": {
+        "line": 74,
+        "endLine": 85,
+        "returnType": ".s",
+        "params": "DSN.s"
+      },
+      "_DBName": {
+        "line": 156,
+        "endLine": 162,
+        "returnType": ".s",
+        "params": "HostPath.s"
+      },
+      "_Host": {
+        "line": 124,
+        "endLine": 137,
+        "returnType": ".s",
+        "params": "HostPath.s"
+      },
+      "_HostPath": {
+        "line": 97,
+        "endLine": 103,
+        "returnType": ".s",
+        "params": "Rest.s"
+      },
+      "_Pass": {
+        "line": 115,
+        "endLine": 121,
+        "returnType": ".s",
+        "params": "UserInfo.s"
+      },
+      "_Port": {
+        "line": 140,
+        "endLine": 153,
+        "returnType": ".s",
+        "params": "HostPath.s"
+      },
+      "_Scheme": {
+        "line": 65,
+        "endLine": 71,
+        "returnType": ".s",
+        "params": "DSN.s"
+      },
+      "_User": {
+        "line": 106,
+        "endLine": 112,
+        "returnType": ".s",
+        "params": "UserInfo.s"
+      },
+      "_UserInfo": {
+        "line": 88,
+        "endLine": 94,
+        "returnType": ".s",
+        "params": "Rest.s"
+      }
+    },
+    "structures": {},
+    "enumerations": {},
+    "constants": {
+      "#Driver_MySQL": {
+        "line": 37,
+        "value": "2"
+      },
+      "#Driver_Postgres": {
+        "line": 36,
+        "value": "1"
+      },
+      "#Driver_SQLite": {
+        "line": 35,
+        "value": "0"
+      },
+      "#Driver_Unknown": {
+        "line": 34,
+        "value": "-1"
+      }
+    },
+    "macros": {},
+    "interfaces": {},
+    "modules": {
+      "DBConnect_declare": {
+        "line": 33,
+        "endLine": 55,
+        "kind": "declare"
+      },
+      "DBConnect_impl": {
+        "line": 57,
+        "endLine": 237,
+        "kind": "impl"
+      }
+    },
+    "prototypes": {},
+    "globals": {},
+    "includes": []
+  },
   "src/DB/SQLite.pbi": {
     "type": "include",
     "procedures": {
@@ -1327,6 +1447,11 @@
         "line": 28,
         "path": "Log.pbi",
         "directive": "XIncludeFile"
+      },
+      {
+        "line": 29,
+        "path": "DB/Connect.pbi",
+        "directive": "XIncludeFile"
       }
     ]
   },
@@ -1588,6 +1713,26 @@
         "directive": "XIncludeFile"
       }
     ]
+  },
+  "tests/P10_MultiDB_Test.pbi": {
+    "type": "include",
+    "procedures": {
+      "P10_MultiDB_Tests": {
+        "line": 7,
+        "endLine": 114,
+        "returnType": "",
+        "params": ""
+      }
+    },
+    "structures": {},
+    "enumerations": {},
+    "constants": {},
+    "macros": {},
+    "interfaces": {},
+    "modules": {},
+    "prototypes": {},
+    "globals": {},
+    "includes": []
   },
   "tests/P1_Router_Test.pbi": {
     "type": "include",
@@ -2223,6 +2368,11 @@
       {
         "line": 29,
         "path": "P9_Examples_Test.pbi",
+        "directive": "XIncludeFile"
+      },
+      {
+        "line": 30,
+        "path": "P10_MultiDB_Test.pbi",
         "directive": "XIncludeFile"
       }
     ]

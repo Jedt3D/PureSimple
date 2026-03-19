@@ -1,0 +1,69 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ form_title }}{% endblock %}
+{% block page_title %}{{ form_title }}{% endblock %}
+
+{% block page_actions %}
+<div class="col-auto ms-auto">
+  <a href="/admin/posts" class="btn btn-outline-secondary">Cancel</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <form method="post" action="{{ form_action }}">
+      <div class="mb-3">
+        <label class="form-label required">Title</label>
+        <input type="text" name="title" class="form-control" value="{{ post_title }}"
+               placeholder="The Heron's Patience" required />
+      </div>
+      <div class="mb-3">
+        <label class="form-label required">Slug</label>
+        <input type="text" name="slug" class="form-control" value="{{ post_slug }}"
+               placeholder="herons-patience" required />
+        <small class="text-muted">URL-safe identifier, e.g. <code>herons-patience</code></small>
+      </div>
+      <div class="mb-3">
+        <label class="form-label required">Excerpt</label>
+        <input type="text" name="excerpt" class="form-control" value="{{ post_excerpt }}"
+               placeholder="A one-sentence teaser" required />
+      </div>
+      <div class="mb-3">
+        <label class="form-label required">Body</label>
+        <textarea name="body" class="form-control" rows="12"
+                  placeholder="Write your essay here. Separate paragraphs with a blank line." required>{{ post_body }}</textarea>
+      </div>
+      <div class="row mb-3">
+        <div class="col">
+          <label class="form-label required">Photo URL</label>
+          <input type="url" name="photo_url" class="form-control" value="{{ post_photo_url }}"
+                 placeholder="https://images.pexels.com/photos/..." required />
+        </div>
+        <div class="col">
+          <label class="form-label required">Photo Credit (photographer)</label>
+          <input type="text" name="photo_credit" class="form-control" value="{{ post_photo_credit }}"
+                 placeholder="Photographer Name" required />
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col">
+          <label class="form-label required">Photo Link (Pexels page)</label>
+          <input type="url" name="photo_link" class="form-control" value="{{ post_photo_link }}"
+                 placeholder="https://www.pexels.com/photo/..." required />
+        </div>
+        <div class="col">
+          <label class="form-label">Published</label>
+          <select name="published" class="form-select">
+            <option value="1"{% if post_published == '1' %} selected{% endif %}>Yes</option>
+            <option value="0"{% if post_published == '0' %} selected{% endif %}>No (draft)</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-footer">
+        <button type="submit" class="btn btn-primary">{{ submit_label }}</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

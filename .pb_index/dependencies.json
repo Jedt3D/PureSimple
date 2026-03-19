@@ -26,7 +26,8 @@
       "src/Group.pbi",
       "src/DB/SQLite.pbi",
       "src/Config.pbi",
-      "src/Log.pbi"
+      "src/Log.pbi",
+      "src/DB/Connect.pbi"
     ],
     "tests/P0_Harness_Test.pbi": [
       "src/Types.pbi"
@@ -43,7 +44,8 @@
       "tests/P6_SQLite_Test.pbi",
       "tests/P7_Auth_Test.pbi",
       "tests/P8_Config_Test.pbi",
-      "tests/P9_Examples_Test.pbi"
+      "tests/P9_Examples_Test.pbi",
+      "tests/P10_MultiDB_Test.pbi"
     ]
   },
   "reverse": {
@@ -57,6 +59,9 @@
       "src/PureSimple.pb"
     ],
     "src/Context.pbi": [
+      "src/PureSimple.pb"
+    ],
+    "src/DB/Connect.pbi": [
       "src/PureSimple.pb"
     ],
     "src/DB/SQLite.pbi": [
@@ -91,8 +96,8 @@
     ],
     "src/PureSimple.pb": [
       "examples/blog/main.pb",
-      "tests/run_all.pb",
       "examples/hello_world/main.pb",
+      "tests/run_all.pb",
       "examples/todo/main.pb"
     ],
     "src/Rendering.pbi": [
@@ -106,6 +111,9 @@
       "tests/P0_Harness_Test.pbi"
     ],
     "tests/P0_Harness_Test.pbi": [
+      "tests/run_all.pb"
+    ],
+    "tests/P10_MultiDB_Test.pbi": [
       "tests/run_all.pb"
     ],
     "tests/P1_Router_Test.pbi": [
@@ -182,6 +190,12 @@
       "declareFile": "src/DB/SQLite.pbi",
       "implLine": 44,
       "implFile": "src/DB/SQLite.pbi"
+    },
+    "DBConnect": {
+      "declareLine": 33,
+      "declareFile": "src/DB/Connect.pbi",
+      "implLine": 57,
+      "implFile": "src/DB/Connect.pbi"
     },
     "Engine": {
       "declareLine": 8,
