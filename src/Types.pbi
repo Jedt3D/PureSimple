@@ -1,53 +1,58 @@
-; Types.pbi — Core structure definitions for PureSimple
-; All framework-wide Structure definitions live here and are included first.
+; Types.pbi — Core type definitions for PureSimple
+;
+; PureBasic module rule: module bodies cannot see main-code globals.
+; Solution: wrap all shared types in DeclareModule Types so that:
+;   - Main-code and tests: access as `RequestContext` (structures are globally
+;     accessible even when defined inside a module)
+;   - Other module bodies: UseModule Types or Types::RequestContext
 
 EnableExplicit
 
-; ------------------------------------------------------------------
-; RequestContext — per-request state (pre-allocated, reset per request)
-; ------------------------------------------------------------------
-Structure RequestContext
-  ; Raw request data (populated by PureSimpleHTTPServer dispatch callback)
-  Method.s            ; "GET", "POST", etc.
-  Path.s              ; URL path, e.g. "/api/users/42"
-  RawQuery.s          ; query string, e.g. "page=1&limit=10"
-  Body.s              ; raw request body (for JSON binding)
-  ClientIP.s          ; remote address
+DeclareModule Types
 
-  ; Response state
-  StatusCode.i        ; HTTP status to send
-  ResponseBody.s      ; response content
-  ContentType.s       ; "application/json", "text/html", etc.
+  ; RequestContext — per-request state (pre-allocated, reset per request)
+  Structure RequestContext
+    ; Raw request data (populated by PureSimpleHTTPServer dispatch callback)
+    Method.s            ; "GET", "POST", etc.
+    Path.s              ; URL path, e.g. "/api/users/42"
+    RawQuery.s          ; query string, e.g. "page=1&limit=10"
+    Body.s              ; raw request body (for JSON binding)
+    ClientIP.s          ; remote address
 
-  ; Routing state
-  HandlerIndex.i      ; current position in the handler chain
-  Aborted.i           ; #True if Abort() was called
+    ; Response state
+    StatusCode.i        ; HTTP status to send
+    ResponseBody.s      ; response content
+    ContentType.s       ; "application/json", "text/html", etc.
 
-  ; Params and query maps (KV lists — phase P1 will wire these properly)
-  ParamKeys.s         ; pipe-delimited param keys   "id|name"
-  ParamVals.s         ; pipe-delimited param values "42|alice"
-  QueryKeys.s         ; pipe-delimited query keys
-  QueryVals.s         ; pipe-delimited query values
+    ; Handler chain state
+    ContextID.i         ; slot index into global handler chain arrays (set by Ctx::Init)
+    HandlerIndex.i      ; current position in the handler chain
+    Aborted.i           ; #True if Abort() was called
 
-  ; General-purpose KV store (Set/Get helpers)
-  StoreKeys.s
-  StoreVals.s
-EndStructure
+    ; Route params and query (Chr(9)-delimited parallel lists)
+    ParamKeys.s
+    ParamVals.s
+    QueryKeys.s
+    QueryVals.s
 
-; ------------------------------------------------------------------
-; RouteEntry — one registered route in the route table
-; ------------------------------------------------------------------
-Structure RouteEntry
-  Method.s            ; HTTP method
-  Pattern.s           ; route pattern, e.g. "/users/:id"
-  ; Handler is stored as a procedure address (.i) — wired in P1
-  HandlerAddr.i
-EndStructure
+    ; General-purpose KV store for middleware communication (Set/Get helpers)
+    StoreKeys.s
+    StoreVals.s
+  EndStructure
 
-; ------------------------------------------------------------------
-; RouterEngine — top-level application object (stub for P0)
-; ------------------------------------------------------------------
-Structure RouterEngine
-  Port.i              ; port to listen on (wired in P1)
-  Running.i           ; #True once Run() is called
-EndStructure
+  ; HandlerFunc — universal handler/middleware procedure signature
+  ; Declare handlers as: Procedure MyHandler(*Ctx.RequestContext)
+  ; Register with:       Engine::GET("/path", @MyHandler())
+  Prototype PS_HandlerFunc(*Ctx.RequestContext)
+
+  ; RouterEngine — top-level application object
+  Structure RouterEngine
+    Port.i              ; port to listen on
+    Running.i           ; #True once Run() is called
+  EndStructure
+
+EndDeclareModule
+
+Module Types
+  ; Types module has no runtime code — it is a pure type library.
+EndModule

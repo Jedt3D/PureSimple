@@ -18,9 +18,7 @@ PrintN("=====================")
 PrintN("")
 
 XIncludeFile "P0_Harness_Test.pbi"
-
-; Future phases:
-;   XIncludeFile "P1_Router_Test.pbi"
+XIncludeFile "P1_Router_Test.pbi"
 ;   XIncludeFile "P2_Middleware_Test.pbi"
 ;   XIncludeFile "P3_Binding_Test.pbi"
 ;   XIncludeFile "P4_Rendering_Test.pbi"
