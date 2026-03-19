@@ -10,7 +10,7 @@ This appendix provides answers to all review questions from Chapters 1 through 2
 
 **Q:** Name the three repositories in the PureSimple ecosystem and explain what each one does.
 
-**A:** The three repositories are **PureSimpleHTTPServer**, **PureSimple**, and **PureJinja**. PureSimpleHTTPServer is the HTTP/1.1 listener that handles low-level socket operations, TLS termination, gzip compression, and static file serving. PureSimple is the web framework layer that provides routing (via a radix trie), middleware chaining, request context management, request binding, response rendering, database integration, sessions, authentication, and configuration. PureJinja is a Jinja2-compatible template engine with 36 built-in filters that compiles templates at C speed. All three repositories compile into a single native binary through PureBasic's `XIncludeFile` inclusion mechanism -- there is no runtime linking, no package manager, and no deployment dependency chain.
+**A:** The three repositories are **PureSimpleHTTPServer**, **PureSimple**, and **PureJinja**. PureSimpleHTTPServer is the HTTP/1.1 listener that handles low-level socket operations, TLS termination, gzip compression, and static file serving. PureSimple is the web framework layer that provides routing (via a radix trie), middleware chaining, request context management, request binding, response rendering, database integration, sessions, authentication, and configuration. PureJinja is a Jinja2-compatible template engine with 37 registered filters (34 unique implementations plus 3 aliases) that compiles templates at C speed. All three repositories compile into a single native binary through PureBasic's `XIncludeFile` inclusion mechanism -- there is no runtime linking, no package manager, and no deployment dependency chain.
 
 ### Question 2
 
@@ -153,15 +153,15 @@ $PUREBASIC_HOME/compilers/pbcompiler my_test.pb -cl -o my_test
 ./my_test
 ```
 
-Expected output (the third assertion fails, but all three run):
+Expected output (passes are silent; only failures are printed):
 
 ```
-=== My First Test Suite ===
-  PASS: Check (line 10)
-  PASS: CheckStr (line 13)
-  FAIL: CheckEqual (line 16) — got 3, expected 4
+  [Suite] My First Test Suite
+  FAIL  CheckEqual @ my_test.pb:18 => 3 <> 4
 
-Results: 2 passed, 1 failed, 3 total
+======================================
+  FAILURES: 1 / 3
+======================================
 ```
 
 ---
@@ -200,6 +200,14 @@ Results: 2 passed, 1 failed, 3 total
 ; Listing E.3 -- Route registration and testing
 EnableExplicit
 XIncludeFile "../../src/PureSimple.pb"
+
+; Declare handlers before taking their addresses
+Declare HomeHandler(*C.RequestContext)
+Declare ListHandler(*C.RequestContext)
+Declare GetHandler(*C.RequestContext)
+Declare CreateHandler(*C.RequestContext)
+Declare DeleteHandler(*C.RequestContext)
+Declare FileHandler(*C.RequestContext)
 
 Engine::GET("/",              @HomeHandler())
 Engine::GET("/users",         @ListHandler())
@@ -758,7 +766,7 @@ Engine::GET("/health", @HealthCheck())
 
 **Q:** What is the Post-Redirect-Get (PRG) pattern and why does the contact form use it?
 
-**A:** PRG is a web development pattern that prevents duplicate form submissions. When a user submits the contact form (POST), the handler processes the data (saves to database), then responds with a 302 redirect to a confirmation page (GET) rather than directly rendering a response. If the user refreshes the confirmation page, the browser repeats the GET request, not the POST. Without PRG, refreshing would resubmit the form, potentially creating duplicate contact messages. PureSimple implements PRG with `Rendering::Redirect(*C, "/contact?sent=1")` after successful form processing.
+**A:** PRG is a web development pattern that prevents duplicate form submissions. When a user submits the contact form (POST), the handler processes the data (saves to database), then responds with a 302 redirect to a confirmation page (GET) rather than directly rendering a response. If the user refreshes the confirmation page, the browser repeats the GET request, not the POST. Without PRG, refreshing would resubmit the form, potentially creating duplicate contact messages. PureSimple implements PRG with `Rendering::Redirect(*C, "/contact/ok")` after successful form processing.
 
 ### Question 3 (Try it)
 
@@ -796,10 +804,9 @@ Handler to display posts by tag:
 ```purebasic
 Procedure TagHandler(*C.RequestContext)
   Protected slug.s = Binding::Param(*C, "slug")
-  Protected db.i = DBConnect::OpenFromConfig()
 
-  DB::BindStr(db, 0, slug)
-  DB::Query(db,
+  DB::BindStr(_db, 0, slug)
+  DB::Query(_db,
     "SELECT p.title, p.slug, p.created_at " +
     "FROM posts p " +
     "JOIN post_tags pt ON p.id = pt.post_id " +
@@ -807,19 +814,17 @@ Procedure TagHandler(*C.RequestContext)
     "WHERE t.slug = ?")
 
   Protected posts.s = ""
-  While DB::NextRow(db)
+  While DB::NextRow(_db)
     If posts <> "" : posts + ~"\n" : EndIf
-    posts + DB::GetStr(db, 0) + "|" +
-            DB::GetStr(db, 1) + "|" +
-            DB::GetStr(db, 2)
+    posts + DB::GetStr(_db, 0) + "|" +
+            DB::GetStr(_db, 1) + "|" +
+            DB::GetStr(_db, 2)
   Wend
-  DB::Done(db)
+  DB::Done(_db)
 
   Ctx::Set(*C, "posts", posts)
   Ctx::Set(*C, "tag", slug)
   Rendering::Render(*C, "tag.html")
-
-  DB::Close(db)
 EndProcedure
 
 Engine::GET("/tag/:slug", @TagHandler())
@@ -833,7 +838,7 @@ Engine::GET("/tag/:slug", @TagHandler())
 
 **Q:** How does `DBConnect::Open` determine which database driver to use?
 
-**A:** `DBConnect::Open` examines the DSN (Data Source Name) prefix to determine the driver. A DSN starting with `sqlite:` activates the SQLite driver and passes the remainder as the file path (or `:memory:` for in-memory). A DSN starting with `postgres://` or `postgresql://` activates the PostgreSQL driver, parses the URL to extract host, port, database name, and credentials, and opens a PostgreSQL connection. A DSN starting with `mysql://` does the same for MySQL. Internally, `DBConnect::Driver(DSN)` returns a driver constant (`#Driver_SQLite`, `#Driver_Postgres`, `#Driver_MySQL`, or `#Driver_Unknown`), and `Open` dispatches to the appropriate PureBasic database function (`UseSQLiteDatabase`, `UsePostgreSQLDatabase`, or `UseMySQLDatabase`). The returned handle is compatible with all `DB::*` procedures, so application code does not need to change when switching databases.
+**A:** `DBConnect::Open` examines the DSN (Data Source Name) prefix to determine the driver. A DSN starting with `sqlite:` activates the SQLite driver and passes the remainder as the file path (or `:memory:` for in-memory). A DSN starting with `postgres://` or `postgresql://` activates the PostgreSQL driver, parses the URL to extract host, port, database name, and credentials, and opens a PostgreSQL connection. A DSN starting with `mysql://` does the same for MySQL. Internally, `DBConnect::Driver(DSN)` returns a driver constant (`#Driver_SQLite`, `#Driver_Postgres`, `#Driver_MySQL`, or `#Driver_Unknown`), and `Open` dispatches to `OpenDatabase()` with the appropriate driver constant (`#PB_Database_SQLite`, `#PB_Database_PostgreSQL`, or `#PB_Database_MySQL`). The returned handle is compatible with all `DB::*` procedures, so application code does not need to change when switching databases.
 
 ### Question 2
 

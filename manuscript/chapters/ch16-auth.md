@@ -88,6 +88,7 @@ If the header is present, the middleware extracts the Base64-encoded portion, de
 Protected encoded.s  = Mid(auth, 7)
 Protected bufSize.i  = Len(encoded) + 4
 Protected *buf       = AllocateMemory(bufSize)
+; (null-pointer check omitted for brevity — see src/Middleware/BasicAuth.pbi)
 
 Protected decodedLen.i  = Base64Decoder(encoded,
                                          *buf, bufSize)
@@ -134,16 +135,51 @@ This is the standard middleware-to-handler communication pattern: the middleware
 
 ---
 
-## 16.3 Password Hashing
+## 16.3 Token-Based Authentication
+
+Basic Auth works well for browser-based admin panels, but API clients -- scripts, mobile apps, other servers -- need a different approach. Token-based authentication lets clients send a pre-shared token in the `Authorization` header instead of a username and password. The server validates the token and identifies the caller without requiring interactive login.
+
+The pattern is straightforward. The client sends a request with the header `Authorization: Bearer <token>`. A middleware checks for this header, extracts the token, and validates it against a stored value. If the token matches, the middleware stores the authenticated user in the context KV store and advances. If not, it aborts with a 401 response.
+
+```purebasic
+; Listing 16.3 -- Token-based auth middleware
+Procedure BearerAuthMW(*C.RequestContext)
+  Protected auth.s = *C\Authorization
+  If Left(auth, 7) <> "Bearer "
+    Ctx::AbortWithError(*C, 401, "Unauthorized")
+    ProcedureReturn
+  EndIf
+
+  Protected token.s = Mid(auth, 8)
+  Protected username.s = ValidateToken(token)
+  If username = ""
+    Ctx::AbortWithError(*C, 401, "Invalid token")
+    ProcedureReturn
+  EndIf
+
+  Ctx::Set(*C, "_auth_user", username)
+  Ctx::Advance(*C)
+EndProcedure
+```
+
+The `ValidateToken` procedure is application-specific. In the simplest case, it compares the token against a value from your `.env` configuration. In a more sophisticated setup, it looks up the token in a database table that maps tokens to users. Either way, the middleware follows the same validate-store-advance pattern as BasicAuth.
+
+Token-based auth is the right choice when the client is another program, not a human with a browser. CI/CD pipelines, mobile apps, and microservice-to-microservice calls all benefit from tokens. For browser-based applications where users log in with a form, session-based auth (covered in section 16.5) is usually the better fit -- browsers handle cookies automatically, while tokens require explicit header management in JavaScript.
+
+---
+
+## 16.4 Password Hashing
 
 The `BasicAuth` module stores credentials in memory as plaintext strings. This is acceptable for simple admin panels where the password is set in code and the application runs in a trusted environment. For user-facing authentication with passwords stored in a database, you must hash them.
+
+Storing passwords in plaintext is the security equivalent of leaving your house keys under the doormat. Except the doormat is on fire and visible from space.
 
 Storing passwords in plaintext is not a "minor risk." It is professional negligence. When (not if) your database leaks, every user's password is exposed. Since most people reuse passwords, you have compromised not just your application but their email, their banking, and their everything else.
 
 PureBasic provides `Fingerprint` for hashing. Combined with SHA-256, it produces a one-way hash that you can store safely:
 
 ```purebasic
-; Listing 16.3 -- Hashing a password with SHA-256
+; Listing 16.4 -- Hashing a password with SHA-256
 EnableExplicit
 
 UseSHA2Fingerprint()
@@ -163,7 +199,7 @@ Define hash.s = HashPassword("my-secret-password")
 To verify a login, hash the submitted password and compare it to the stored hash:
 
 ```purebasic
-; Listing 16.4 -- Verifying a password against a stored hash
+; Listing 16.5 -- Verifying a password against a stored hash
 Procedure.i VerifyPassword(submitted.s,
                            storedHash.s)
   Protected hash.s = HashPassword(submitted)
@@ -176,7 +212,7 @@ EndProcedure
 To add a salt (a random string prepended to the password before hashing), generate a random string when the user registers, store it alongside the hash, and prepend it before hashing:
 
 ```purebasic
-; Listing 16.5 -- Salted password hashing
+; Listing 16.6 -- Salted password hashing
 Procedure.s GenerateSalt()
   Protected i.i, salt.s = ""
   For i = 1 To 4
@@ -197,7 +233,7 @@ Store both the salt and the hash in the database. When verifying, retrieve the s
 
 ---
 
-## 16.4 Session-Based Login Flow
+## 16.5 Session-Based Login Flow
 
 Basic Auth prompts the browser to show a native login dialog. This works for admin panels, but for a public-facing application you want a proper login page with a form. Session-based authentication combines HTML forms, password verification, and sessions.
 
@@ -212,7 +248,7 @@ The flow works like this:
 7. To log out: clear the session data and redirect to the login page
 
 ```purebasic
-; Listing 16.6 -- Login handler with session authentication
+; Listing 16.7 -- Login handler with session authentication
 Procedure LoginPageHandler(*C.RequestContext)
   ; Render the login form (GET /login)
   Rendering::Render(*C, "login.html", 200)
@@ -258,10 +294,12 @@ Procedure LogoutHandler(*C.RequestContext)
 EndProcedure
 ```
 
+The logout handler is the shortest procedure in any web application. It does one thing, does it well, and never argues about it.
+
 The session middleware (from Chapter 15) handles loading and saving the session automatically. The login handler just writes to the session. The dashboard handler checks the session:
 
 ```purebasic
-; Listing 16.7 -- Checking authentication in a handler
+; Listing 16.8 -- Checking authentication in a handler
 Procedure DashboardHandler(*C.RequestContext)
   Protected userId.s = Session::Get(*C, "user_id")
   If userId = ""
@@ -280,12 +318,12 @@ EndProcedure
 
 ---
 
-## 16.5 Scoped Authentication with Route Groups
+## 16.6 Scoped Authentication with Route Groups
 
 Not every route needs authentication. Public pages, the login page itself, and health check endpoints should be accessible without credentials. PureSimple's route groups let you scope authentication middleware to specific URL prefixes.
 
 ```purebasic
-; Listing 16.8 -- Scoping BasicAuth to the admin group
+; Listing 16.9 -- Scoping BasicAuth to the admin group
 ; Public routes -- no auth required
 Engine::GET("/", @IndexHandler())
 Engine::GET("/post/:slug", @PostHandler())
@@ -310,7 +348,7 @@ The `AdminAuthMW` wrapper runs only for routes under `/admin`. A request to `/` 
 For session-based auth, you can write a similar middleware that checks for a session value:
 
 ```purebasic
-; Listing 16.9 -- Session-based auth middleware
+; Listing 16.10 -- Session-based auth middleware
 Procedure RequireLoginMW(*C.RequestContext)
   Protected userId.s = Session::Get(*C, "user_id")
   If userId = ""

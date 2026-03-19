@@ -123,6 +123,22 @@ Procedure.s _UserInfo(Rest.s)
   ProcedureReturn ""
 EndProcedure
 
+Procedure.s _User(UserInfo.s)
+  Protected p.i = FindString(UserInfo, ":")
+  If p > 0
+    ProcedureReturn Left(UserInfo, p - 1)
+  EndIf
+  ProcedureReturn UserInfo
+EndProcedure
+
+Procedure.s _Pass(UserInfo.s)
+  Protected p.i = FindString(UserInfo, ":")
+  If p > 0
+    ProcedureReturn Mid(UserInfo, p + 1)
+  EndIf
+  ProcedureReturn ""
+EndProcedure
+
 Procedure.s _Host(HostPath.s)
   Protected slashPos.i = FindString(HostPath, "/")
   Protected hostPort.s

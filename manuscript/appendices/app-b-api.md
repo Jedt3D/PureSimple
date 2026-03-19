@@ -198,7 +198,7 @@ Lazy-parsed from `*C\RawQuery` on first call. Results cached in `*C\QueryKeys` /
 |---|---|
 | `Binding::PostForm(*C.RequestContext, Field.s)` | Get a form field from `application/x-www-form-urlencoded` body |
 
-Lazy-parsed from `*C\Body` on first call. Results cached in `*C\FormKeys` / `*C\FormVals`.
+Parses `*C\Body` as URL-encoded form data on every call. Results are stored in module-level temporaries, not cached on the `RequestContext`.
 
 ### JSON Body
 

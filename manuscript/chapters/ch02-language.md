@@ -13,6 +13,7 @@ After reading this chapter you will be able to:
 - Define structures, maps, lists, and arrays, and choose the right collection for each task
 - Write procedures with return types and use `Prototype` for function pointers
 - Organise code into modules with `DeclareModule` and `UseModule`
+- Handle runtime errors using return-code patterns and OnErrorGoto recovery
 
 ---
 
@@ -408,7 +409,7 @@ Similarly, PureSimple uses `ReleaseJSON` instead of `FreeJSON` because PureBasic
 
 ## Summary
 
-PureBasic is a typed, compiled language with explicit variable declaration, manual memory management, and a module system that enforces strong encapsulation. Its type system is small but requires attention to the pointer-sized `.i` type. Strings are manipulated through functions rather than methods. Structures, maps, lists, and arrays each serve different purposes, and choosing the right one affects both correctness and performance. Modules isolate implementation details behind `DeclareModule` interfaces, and the `Types` module pattern makes shared structures available across module boundaries. Several common English words are reserved, and the framework renames its APIs to avoid collisions.
+PureBasic is a typed, compiled language with explicit variable declarations, and a module system that enforces strong encapsulation. Its type system is small but requires attention to the pointer-sized `.i` type. Strings are manipulated through functions rather than methods. Structures, maps, lists, and arrays each serve different purposes, and choosing the right one affects both correctness and performance. Modules isolate implementation details behind `DeclareModule` interfaces, and the `Types` module pattern makes shared structures available across module boundaries. Several common English words are reserved, and the framework renames its APIs to avoid collisions.
 
 ## Key Takeaways
 

@@ -11,7 +11,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | Repo | Role | Status |
 |------|------|--------|
 | `PureSimpleHTTPServer` | HTTP/1.1 listener, TLS, compression, static files | Production v1.x |
-| `PureJinja` | Jinja2-compatible template engine (35 filters, 599 tests) | Production v1.4.0 |
+| `PureJinja` | Jinja2-compatible template engine (34 filters + 3 aliases, 599 tests) | Production v1.4.0 |
 | `PureSimple` | Router, middleware, context, binding, rendering | **This repo** v0.x |
 
 Integration pattern: `main.pb` includes PureSimpleHTTPServer and registers PureSimple's dispatch callback as the request handler. PureSimple calls PureJinja's `CreateEnvironment/RenderString/FreeEnvironment` API for HTML rendering. All three compile into one binary.

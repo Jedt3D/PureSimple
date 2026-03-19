@@ -4,6 +4,8 @@
 
 ---
 
+## Learning Objectives
+
 **After reading this chapter you will be able to:**
 
 - Register routes for all HTTP methods using `Engine::GET`, `POST`, `PUT`, `PATCH`, `DELETE`, and `Any`
@@ -21,6 +23,7 @@ A route is a contract between a URL pattern and a handler function. When a reque
 PureSimple's `Engine` module provides convenience functions that map directly to HTTP methods. Each function takes a pattern string and a handler address, then delegates to `Router::Insert` with the appropriate method:
 
 ```purebasic
+EnableExplicit
 ; Listing 5.1 — Registering routes with Engine convenience functions
 Procedure IndexHandler(*C.RequestContext)
   *C\StatusCode   = 200
@@ -59,6 +62,7 @@ EndProcedure
 The `Engine::Any` function registers the same handler for all five standard methods. This is useful for catch-all routes or health check endpoints that should respond to any method:
 
 ```purebasic
+EnableExplicit
 ; Listing 5.2 — Registering a route for all HTTP methods
 Procedure HealthHandler(*C.RequestContext)
   *C\StatusCode   = 200
@@ -78,6 +82,7 @@ Engine::Any("/health", @HealthHandler())
 Static routes like `/posts` and `/about` only get you so far. Real applications need dynamic segments -- the `/42` in `/posts/42` that identifies a specific resource. PureSimple supports this with **named parameters**, denoted by a colon prefix in the route pattern.
 
 ```purebasic
+EnableExplicit
 ; Listing 5.3 — Named parameter extraction
 Procedure UserHandler(*C.RequestContext)
   Protected userId.s = Ctx::Param(*C, "id")
@@ -94,6 +99,7 @@ When a request arrives for `GET /users/42`, the router matches the `:id` segment
 You can use multiple named parameters in a single route:
 
 ```purebasic
+EnableExplicit
 ; Listing 5.4 — Multiple named parameters
 Procedure CommentHandler(*C.RequestContext)
   Protected postId.s    = Ctx::Param(*C, "postId")
@@ -118,6 +124,7 @@ A request to `/posts/7/comments/3` yields `postId = "7"` and `commentId = "3"`. 
 Sometimes you need a route that matches everything under a prefix. A file server that maps `/static/css/style.css` and `/static/js/app.js` to the same handler needs a way to capture the entire remaining path. PureSimple handles this with **wildcard parameters**, denoted by an asterisk prefix:
 
 ```purebasic
+EnableExplicit
 ; Listing 5.5 — Wildcard route capturing the remaining path
 Procedure StaticHandler(*C.RequestContext)
   Protected filePath.s = Ctx::Param(*C, "filepath")
@@ -136,6 +143,7 @@ A request to `/static/css/style.css` sets `filepath` to `"css/style.css"`. A req
 Wildcards are also useful for single-page application (SPA) fallback routes, where the server needs to return the same HTML for any URL under a prefix so the client-side JavaScript router can take over:
 
 ```purebasic
+EnableExplicit
 ; Listing 5.6 — SPA fallback route
 Procedure SpaHandler(*C.RequestContext)
   *C\StatusCode   = 200
@@ -195,6 +203,7 @@ When the router encounters a path segment, it must decide which child node to fo
 Consider these three routes registered on the same method:
 
 ```purebasic
+EnableExplicit
 ; Listing 5.7 — Route priority demonstration
 Engine::GET("/files/readme",    @ReadmeHandler())
 Engine::GET("/files/:name",     @FileByNameHandler())
@@ -246,6 +255,7 @@ The backtracking behavior deserves attention. If the `:param` path leads to a de
 When no route matches, PureSimple returns a default `404 Not Found` plain-text response. When a route exists for the path but not for the requested method (e.g., `DELETE /health` when only `GET /health` is registered), the default response is `405 Method Not Allowed`. Both defaults are functional but ugly. You will want to replace them.
 
 ```purebasic
+EnableExplicit
 ; Listing 5.8 — Custom 404 and 405 handlers
 Procedure My404Handler(*C.RequestContext)
   *C\StatusCode   = 404

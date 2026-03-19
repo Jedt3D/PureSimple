@@ -296,7 +296,7 @@ illustrations, code listings, callout boxes, and end-of-chapter materials.
 3. **The Three-Repo Ecosystem** (3 pp)
    - PureSimpleHTTPServer: what it does, what it doesn't do
    - PureSimple: the router/framework layer
-   - PureJinja: template engine with 36 filters
+   - PureJinja: template engine with 34 filters (37 including aliases)
    - How they compile into one binary
    - *Diagram:* Figure 1.1 — Three-repo dependency graph (MermaidJS)
 

@@ -22,11 +22,14 @@ The PureBasic compiler is a single executable that reads `.pb` source files, res
 
 The compiler lives inside your PureBasic installation:
 
+**Listing 3.1** -- Compiling a console app from the command line
+
 ```bash
-; Listing 3.1 -- Compiling a console app from the command line
 $PUREBASIC_HOME/compilers/pbcompiler main.pb -cl -o myapp
 ./myapp
 ```
+
+> **Tip:** On Windows, use `%PUREBASIC_HOME%\Compilers\pbcompiler.exe` (Command Prompt) or `& "$env:PUREBASIC_HOME\Compilers\pbcompiler.exe"` (PowerShell). The compiler flags are identical across platforms.
 
 The compiler does not have a package manager. It does not need one. It also does not have a `node_modules` folder. You are welcome.
 
@@ -54,7 +57,7 @@ The `-k` flag deserves special mention. It performs a full syntax check without 
 PureBasic provides several compile-time constants that are useful for diagnostics and cross-platform code:
 
 ```purebasic
-; Listing 3.7 -- Using compiler constants for diagnostics
+; Listing 3.2 -- Using compiler constants for diagnostics
 EnableExplicit
 
 PrintN("Compiled with PureBasic")
@@ -93,7 +96,7 @@ Include paths are relative to the file that contains the `XIncludeFile` directiv
 Understanding PureSimple's include tree is essential for navigating the codebase. The framework entry point is `src/PureSimple.pb`, and it includes every module in dependency order:
 
 ```purebasic
-; Listing 3.2 -- PureSimple.pb include chain (annotated)
+; Listing 3.3 -- PureSimple.pb include chain (annotated)
 EnableExplicit
 
 XIncludeFile "Types.pbi"               ; Shared types: RequestContext, PS_HandlerFunc
@@ -125,13 +128,8 @@ graph TD
     PS["PureSimple.pb"] --> T["Types.pbi"]
     PS --> R["Router.pbi"]
     PS --> CX["Context.pbi"]
-    PS --> ML["Middleware/Logger.pbi"]
-    PS --> MR["Middleware/Recovery.pbi"]
+    PS --> MW["Middleware/*.pbi<br/>(Logger, Recovery, Cookie,<br/>Session, BasicAuth, CSRF)"]
     PS --> BI["Binding.pbi"]
-    PS --> MC["Middleware/Cookie.pbi"]
-    PS --> MS["Middleware/Session.pbi"]
-    PS --> MA["Middleware/BasicAuth.pbi"]
-    PS --> MF["Middleware/CSRF.pbi"]
     PS --> PJ["PureJinja.pbi"]
     PS --> RE["Rendering.pbi"]
     PS --> EN["Engine.pbi"]
@@ -145,7 +143,7 @@ graph TD
     style T fill:#f5f5f5,stroke:#333,stroke-width:1px
     style PJ fill:#f5f5f5,stroke:#333,stroke-width:1px
 ```
-*Figure 3.2 -- XIncludeFile resolution tree for PureSimple.pb. The framework entry point includes all modules in dependency order. Types comes first because every other module depends on the RequestContext structure.*
+*Figure 3.1 -- XIncludeFile resolution tree for PureSimple.pb. The framework entry point includes all modules in dependency order. Types comes first because every other module depends on the RequestContext structure.*
 
 When you compile a test file or application, you include `PureSimple.pb`, and the entire framework comes along. The compiler resolves each `XIncludeFile`, compiles the contents, and discards any duplicate includes. Your final binary contains exactly the code it needs.
 
@@ -160,7 +158,7 @@ graph LR
     style C fill:#f5f5f5,stroke:#333,stroke-width:1px
     style D fill:#e8e8e8,stroke:#4A90D9,stroke-width:2px
 ```
-*Figure 3.1 -- Compiler pipeline. PureBasic resolves all includes into a single compilation unit, generates C code, and invokes the system linker to produce a native binary.*
+*Figure 3.2 -- Compiler pipeline. PureBasic resolves all includes into a single compilation unit, generates C code, and invokes the system linker to produce a native binary.*
 
 ## 3.3 The PureBasic IDE and Debugger
 
@@ -191,7 +189,7 @@ However, web servers are long-running console processes. The IDE debugger is des
 PureBasic 6.x includes a built-in testing mechanism through two pre-defined macros: `Assert()` and `AssertString()`. These are part of `pureunit.res`, which is linked into every PureBasic program.
 
 ```purebasic
-; Listing 3.3 -- A PureUnit test file: Assert() and AssertString()
+; Listing 3.4 -- A PureUnit test file: Assert() and AssertString()
 EnableExplicit
 
 ; Numeric assertion -- halts on failure
@@ -220,7 +218,7 @@ PureSimple's test harness is a single file -- `tests/TestHarness.pbi` -- that pr
 The harness defines three assertion macros:
 
 ```purebasic
-; Listing 3.4 -- The PureSimple Check / CheckEqual / CheckStr macros
+; Listing 3.5 -- The PureSimple Check / CheckEqual / CheckStr macros
 ; (from tests/TestHarness.pbi)
 
 ; Check(expr) -- boolean assertion
@@ -272,7 +270,7 @@ All 264 tests pass. Or at least they did when I compiled this page.
 Test suites are organised with `BeginSuite`, which prints a label to group related assertions:
 
 ```purebasic
-; Listing 3.5 -- Writing a test suite
+; Listing 3.6 -- Writing a test suite
 BeginSuite("String utilities")
 
 CheckStr(UCase("hello"), "HELLO")
@@ -299,7 +297,7 @@ PureSimple Test Suite
 PureSimple uses a single entry point for all tests:
 
 ```purebasic
-; Listing 3.6 -- The run_all.pb entry point pattern
+; Listing 3.7 -- The run_all.pb entry point pattern
 ; (from tests/run_all.pb)
 EnableExplicit
 
@@ -394,7 +392,7 @@ Here is a quick reference card for the compiler flags you will use most:
 | Compile test suite | `pbcompiler tests/run_all.pb -cl -o run_all` |
 | Run tests | `./run_all` |
 
-You could also parse compiler flags manually with `Mid()` and `FindString()`. You could also build a house with a spoon. Both are technically possible. The table above is faster.
+You could also trace the include chain by hand using pen and paper. You could also compute pi by counting raindrops. Both are technically possible. The table above is faster.
 
 ---
 

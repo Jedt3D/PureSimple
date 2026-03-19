@@ -1,4 +1,4 @@
-# Chapter 11: PureJinja -- Jinja2 Templates in PureBasic
+# Chapter 11: PureJinja -- Jinja Templates in PureBasic
 
 *The template engine that speaks Python syntax and runs at C speed.*
 
@@ -6,9 +6,9 @@
 
 **After reading this chapter you will be able to:**
 
-- Write Jinja2 templates with variable output, conditionals, and loops
+- Write Jinja templates with variable output, conditionals, and loops
 - Use template inheritance with `{% extends %}` and `{% block %}` to eliminate HTML duplication
-- Apply PureJinja's 36 built-in filters to transform data in templates
+- Apply PureJinja's 34 built-in filters (plus 3 aliases) to transform data in templates
 - Connect handlers to templates through `Rendering::Render` and the context KV store
 - Understand PureJinja's render pipeline: tokenise, parse, and render
 
@@ -18,9 +18,9 @@
 
 In Chapter 9, you saw `Rendering::HTML` sending raw HTML strings from handler code. That works for a health check page or a quick prototype. It does not work for a real application with a consistent layout, a navigation bar, a footer, and twenty pages that share the same chrome. Writing HTML inside PureBasic string concatenations is the programming equivalent of writing a novel on sticky notes -- technically possible, deeply uncomfortable, and impossible to maintain.
 
-A template engine separates your HTML structure from your application logic. The handler prepares the data. The template defines the layout. The engine merges the two at render time. If you have used Jinja2 in Python, Django templates, Go's `html/template`, or Handlebars in JavaScript, the concept is identical. PureJinja happens to be compatible with Jinja2 syntax, which means Python developers can read PureSimple templates without learning anything new. PureBasic developers get a battle-tested template syntax without inventing their own.
+A template engine separates your HTML structure from your application logic. The handler prepares the data. The template defines the layout. The engine merges the two at render time. If you have used Jinja in Python, Django templates, Go's `html/template`, or Handlebars in JavaScript, the concept is identical. PureJinja happens to be compatible with Jinja syntax, which means Python developers can read PureSimple templates without learning anything new. PureBasic developers get a battle-tested template syntax without inventing their own.
 
-PureJinja is a standalone repository (`github.com/Jedt3D/pure_jinja`) that compiles into the same binary as PureSimple. It has 36 built-in filters, 599 tests, and zero runtime dependencies. It tokenises, parses, and renders templates at compiled-code speed. The templates look like Python Jinja2. The execution speed looks like C. That combination is the whole point.
+PureJinja is a standalone repository (`github.com/Jedt3D/pure_jinja`) that compiles into the same binary as PureSimple. It has 34 built-in filters (plus 3 aliases), 599 tests, and zero runtime dependencies. It tokenises, parses, and renders templates at compiled-code speed. The templates look like Python Jinja. The execution speed looks like C. That combination is the whole point.
 
 ---
 
@@ -45,7 +45,7 @@ graph LR
 
 The template file is read from disk by `JinjaEnv::RenderTemplate`, which is called by `Rendering::Render`. The handler's KV store variables are converted to a PureJinja `JinjaVariant` map before rendering. After rendering, the environment and all variant objects are freed. The rendered HTML string is stored in `*C\ResponseBody`.
 
-> **Under the Hood:** PureJinja creates and destroys a `JinjaEnvironment` on every `Rendering::Render` call. The environment holds the template path, the filter registry, and internal parser state. Creating it involves registering all 36 built-in filters (a loop of 36 map insertions). This is fast enough for typical web traffic. For high-throughput scenarios, a cache layer that reuses environments across requests would be a worthwhile optimisation. The framework does not provide one today, but the PureJinja API supports it -- you can create an environment once and render multiple templates through it.
+> **Under the Hood:** PureJinja creates and destroys a `JinjaEnvironment` on every `Rendering::Render` call. The environment holds the template path, the filter registry, and internal parser state. Creating it involves registering all 34 built-in filters (plus 3 aliases) (a loop of 36 map insertions). This is fast enough for typical web traffic. For high-throughput scenarios, a cache layer that reuses environments across requests would be a worthwhile optimisation. The framework does not provide one today, but the PureJinja API supports it -- you can create an environment once and render multiple templates through it.
 
 ---
 
@@ -70,7 +70,7 @@ Procedure HomeHandler(*C.RequestContext)
 EndProcedure
 ```
 
-When PureJinja encounters `{{ site_name }}`, it looks up `"site_name"` in the variables map and emits its string value. If the variable does not exist, PureJinja outputs an empty string. No error, no exception, no crash. Just silence. This is consistent with Jinja2's default behavior in Python, and it means a typo in a variable name produces a blank spot on the page rather than a 500 error. Whether that is a feature or a bug depends on how you feel about silent failures at 2 AM.
+When PureJinja encounters `{{ site_name }}`, it looks up `"site_name"` in the variables map and emits its string value. If the variable does not exist, PureJinja outputs an empty string. No error, no exception, no crash. Just silence. This is consistent with Jinja's default behavior in Python, and it means a typo in a variable name produces a blank spot on the page rather than a 500 error. Whether that is a feature or a bug depends on how you feel about silent failures at 2 AM.
 
 ---
 
@@ -89,7 +89,7 @@ Templates need logic. PureJinja supports `{% if %}`, `{% elif %}`, `{% else %}`,
 {% endif %}
 ```
 
-The `{% if %}` tag evaluates its expression. Non-empty strings and non-zero numbers are truthy. Empty strings, zero, and undefined variables are falsy. This matches Jinja2's truthiness rules.
+The `{% if %}` tag evaluates its expression. Non-empty strings and non-zero numbers are truthy. Empty strings, zero, and undefined variables are falsy. This matches Jinja's truthiness rules.
 
 ### Loops
 
@@ -177,7 +177,7 @@ graph TD
 ```
 *Figure 11.2 -- Template inheritance tree: one base template, multiple child pages*
 
-> **Compare:** This is identical to Jinja2 template inheritance in Python Flask. The syntax is the same: `{% extends %}`, `{% block %}`, `{% endblock %}`. If you have written a Flask application, you can write PureSimple templates with zero new syntax to learn. The mental model transfers directly. The only difference is that the rendering happens inside a compiled PureBasic binary rather than a Python interpreter.
+> **Compare:** This is identical to Jinja template inheritance in Python Flask. The syntax is the same: `{% extends %}`, `{% block %}`, `{% endblock %}`. If you have written a Flask application, you can write PureSimple templates with zero new syntax to learn. The mental model transfers directly. The only difference is that the rendering happens inside a compiled PureBasic binary rather than a Python interpreter.
 
 Change the navigation in `base.html`, and every page that extends it picks up the change. This is the single most important benefit of template inheritance. Without it, adding a menu item means editing every HTML file in your project. With it, you edit one file. Multiply that by the number of pages in your application, and template inheritance pays for itself before lunch.
 
@@ -194,7 +194,7 @@ Filters transform values in the template. They are applied with the pipe charact
 {{ price|round(2) }}
 ```
 
-PureJinja ships with 36 built-in filters (plus aliases). Here is a reference grouped by category:
+PureJinja ships with 34 built-in filters (plus 3 aliases) (plus aliases). Here is a reference grouped by category:
 
 **String filters:**
 `upper`, `lower`, `title`, `capitalize`, `trim`, `replace`, `truncate`, `striptags`, `indent`, `wordwrap`, `center`, `escape` (alias: `e`), `safe`, `urlencode`, `split`
@@ -257,7 +257,7 @@ Comments are stripped during tokenisation. They cost nothing at render time. Use
 
 ## 11.8 Connecting Handlers to Templates
 
-The bridge between PureBasic handler code and Jinja2 templates is `Rendering::Render`, which was introduced in Chapter 9. Here is the complete pattern:
+The bridge between PureBasic handler code and Jinja templates is `Rendering::Render`, which was introduced in Chapter 9. Here is the complete pattern:
 
 ```purebasic
 ; Listing 11.10 -- Full handler-to-template flow
@@ -303,17 +303,17 @@ The variable names in `Ctx::Set` must match the variable names in the template e
 
 This is the price of simplicity. The benefit is that templates are just files -- you can edit them without recompiling, share them with a designer who does not know PureBasic, and test them with sample data in a standalone PureJinja runner. The trade-off is worth it for most applications. For safety-critical rendering where a missing variable is a bug, add handler-side checks before calling `Render`.
 
-Jinja2 templates are not just HTML with holes. They are a small programming language for presentation logic. Keep that logic small. If your template has more `{% if %}` blocks than `<p>` tags, move the logic to the handler. The template's job is to present data, not to compute it. I have seen templates with nested conditional loops that would make a SQL query blush. Do not be that developer.
+Jinja templates are not just HTML with holes. They are a small programming language for presentation logic. Keep that logic small. If your template has more `{% if %}` blocks than `<p>` tags, move the logic to the handler. The template's job is to present data, not to compute it. I have seen templates with nested conditional loops that would make a SQL query blush. Do not be that developer.
 
 ---
 
 ## Summary
 
-PureJinja brings Jinja2-compatible template syntax to PureBasic, running at compiled-code speed. Templates use `{{ variable }}` for output, `{% if %}` / `{% for %}` for logic, `{% extends %}` / `{% block %}` for inheritance, and 36 built-in filters for data transformation. The `Rendering::Render` procedure bridges handlers and templates: the handler sets variables with `Ctx::Set`, and the template reads them by name. PureJinja's render pipeline tokenises, parses, and renders in a single pass through the template file, creating and freeing a `JinjaEnvironment` per request.
+PureJinja brings Jinja-compatible template syntax to PureBasic, running at compiled-code speed. Templates use `{{ variable }}` for output, `{% if %}` / `{% for %}` for logic, `{% extends %}` / `{% block %}` for inheritance, and 34 built-in filters (plus 3 aliases) for data transformation. The `Rendering::Render` procedure bridges handlers and templates: the handler sets variables with `Ctx::Set`, and the template reads them by name. PureJinja's render pipeline tokenises, parses, and renders in a single pass through the template file, creating and freeing a `JinjaEnvironment` per request.
 
 ## Key Takeaways
 
-- PureJinja uses standard Jinja2 syntax. If you know Python's Jinja2 or Flask templates, you already know PureJinja templates.
+- PureJinja uses standard Jinja syntax. If you know Python's Jinja or Flask templates, you already know PureJinja templates.
 - Template inheritance (`{% extends %}` and `{% block %}`) eliminates HTML duplication. Change the base template once, and every child page inherits the change.
 - The `split` filter is essential in PureSimple because the KV store is string-to-string. Encode structured data with delimiters in the handler, and decode it with `split` in the template.
 - Always use the `escape` filter (or `e`) when displaying user-generated content to prevent XSS attacks. Use `safe` only for content you trust completely.

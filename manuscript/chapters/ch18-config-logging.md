@@ -4,6 +4,8 @@
 
 ---
 
+## Learning Objectives
+
 **After reading this chapter you will be able to:**
 
 - Load configuration from `.env` files and retrieve values with type-safe fallbacks
@@ -21,6 +23,8 @@ Every web application needs configuration. Port numbers, database paths, API key
 The twelve-factor app methodology, originally codified by Heroku engineers, offers a cleaner answer: store configuration in the environment. Each deployment gets its own `.env` file. The code reads from it. The binary stays the same everywhere. This is the pattern PureSimple follows.
 
 PureSimple's configuration system lives in two modules. `Config` handles key-value storage and `.env` file parsing. `Log` provides levelled logging with configurable output. Together, they give you the operational visibility you need without coupling your code to a specific deployment environment.
+
+---
 
 ## 18.2 The Config Module
 
@@ -133,6 +137,8 @@ Config::Reset()   ; clean slate for the next suite
 
 > **Compare:** Go developers typically use `os.Setenv` and `os.Getenv`, or a library like Viper that supports YAML, TOML, JSON, environment variables, and remote config servers. PureSimple's `Config` module is closer to `godotenv` -- it does one thing (read `.env` files) and does it well. If you need hierarchical config with inheritance and hot-reloading, you are building a different kind of application than PureSimple targets.
 
+---
+
 ## 18.3 Run Modes
 
 PureSimple supports three run modes: `"debug"`, `"release"`, and `"test"`. The default is `"debug"`. You set the mode with `Engine::SetMode` and read it with `Engine::Mode`.
@@ -166,6 +172,8 @@ Engine::SetMode(Config::Get("PURESIMPLE_MODE", "debug"))
 ```
 
 > **Tip:** Keep mode handling simple. Three modes are enough. "debug" for development, "release" for production, "test" for automated tests. If you find yourself adding modes like "staging-with-extra-logging-on-tuesdays", step back and use log levels instead.
+
+---
 
 ## 18.4 The Log Module
 
@@ -228,6 +236,8 @@ The file output implementation appends to an existing file (using `OpenFile` and
 
 > **Under the Hood:** The `_Write` helper procedure checks `FileSize(_Output) >= 0` to decide between `OpenFile` (append) and `CreateFile` (new file). This is the same `FileSize` pattern used throughout PureBasic for file existence checks. The file handle is obtained with `#PB_Any` to avoid ID conflicts.
 
+PureSimple does not include built-in log rotation. On Linux, use `logrotate` to manage log file sizes. The `Log` module's open-write-close-per-line pattern means `logrotate` can safely rotate the file at any time without coordination with the running application. On Windows, a similar approach can be achieved with PowerShell scheduled tasks or third-party tools.
+
 ### What to Log at Each Level
 
 Choosing the right log level is more art than science, but here are practical guidelines:
@@ -239,9 +249,11 @@ Choosing the right log level is more art than science, but here are practical gu
 | **WARN** | Something unexpected but not fatal | "Slow query (1.2s)", "Missing optional config key" |
 | **ERROR** | Something broke and needs attention | "Database connection failed", "Template not found" |
 
-In production, set the level to `#LevelInfo` or `#LevelWarn`. In development, set it to `#LevelDebug`. In tests, set it to `#LevelError` to keep test output clean -- or redirect to a temporary file and assert on its contents, as the P8 test suite does.
+In production, set the level to `#LevelInfo` or `#LevelWarn`. In development, set it to `#LevelDebug`. In tests, set it to `#LevelError` to keep test output clean -- or redirect to a temporary file and assert on its contents, as the test suite for this chapter does.
 
 > **Warning:** Do not log sensitive data. Passwords, API keys, session tokens, and credit card numbers have no business appearing in log files. If you need to log a request body for debugging, redact sensitive fields first.
+
+---
 
 ## 18.5 Putting Config and Log Together
 
@@ -282,9 +294,11 @@ Log::Info("Database: " + dbPath)
 
 This pattern follows the twelve-factor principle: the binary is the same everywhere; only the `.env` file changes between environments. Your development `.env` has `MODE=debug` and `PORT=3000`. Your production `.env` has `MODE=release` and `PORT=8080`. The binary does not care. It reads what it is given and behaves accordingly.
 
+---
+
 ## 18.6 Testing Configuration
 
-The P8 test suite demonstrates a thorough approach to testing the Config module. It loads a known `.env` file, verifies parsed values, tests fallback defaults, exercises runtime overrides, and confirms that `Reset` actually clears the store.
+The configuration test suite demonstrates a thorough approach to testing the Config module. It loads a known `.env` file, verifies parsed values, tests fallback defaults, exercises runtime overrides, and confirms that `Reset` actually clears the store.
 
 ```purebasic
 ; Listing 18.12 -- From tests/P8_Config_Test.pbi: key assertions
@@ -321,12 +335,16 @@ The test also verifies that `Config::Load` returns `#False` for a nonexistent fi
 
 Configuration and logging are the operational backbone of any web application. PureSimple's `Config` module provides a lightweight `.env` file parser with typed accessors and runtime overrides. The `Log` module offers four severity levels with output to stdout or file. Together with `Engine::SetMode`, they give you environment-specific behaviour without recompiling your binary. The pattern is simple: load config first, set the mode, configure logging, then start the application.
 
+---
+
 ## Key Takeaways
 
 - **Load once, read everywhere.** Call `Config::Load` at startup; use `Config::Get` and `Config::GetInt` with fallback defaults throughout your application.
 - **Never commit `.env` files.** Use `.env.example` with placeholder values and keep real secrets on the server.
 - **Log at the right level.** DEBUG for development verbosity, INFO for normal operations, WARN for recoverable problems, ERROR for things that need immediate attention.
 - **Reset between tests.** Call `Config::Reset()` and restore `Log::SetLevel` / `Log::SetOutput` to defaults between test suites to prevent state leakage.
+
+---
 
 ## Review Questions
 

@@ -35,7 +35,7 @@ In PureSimple, cookies are managed by the `Cookie` module. It has exactly two pr
 ```purebasic
 ; From src/Middleware/Cookie.pbi
 Cookie::Get(*C, Name.s)   ; → returns cookie value
-Cookie::Set(*C, Name.s, Value.s, Path.s, MaxAge.i)
+Cookie::Set(*C, Name.s, Value.s, Path.s = "/", MaxAge.i = 0)
 ```
 
 ### Reading Cookies
@@ -97,7 +97,7 @@ graph LR
     style A fill:#4A90D9,color:#fff
     style B fill:#4A90D9,color:#fff
 ```
-*Figure 15.2 -- Cookie read/write flow: the browser sends cookies with every request; the server reads them and optionally sets new ones in the response*
+*Figure 15.1 -- Cookie read/write flow: the browser sends cookies with every request; the server reads them and optionally sets new ones in the response*
 
 ---
 
@@ -127,7 +127,7 @@ graph TD
     style A fill:#4A90D9,color:#fff
     style K fill:#4A90D9,color:#fff
 ```
-*Figure 15.1 -- Session lifecycle: the middleware loads or creates a session before the handler runs, then saves it after the handler returns*
+*Figure 15.2 -- Session lifecycle: the middleware loads or creates a session before the handler runs, then saves it after the handler returns*
 
 ### Enabling Sessions
 

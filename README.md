@@ -24,7 +24,7 @@ A lightweight web framework for **PureBasic 6.x**, inspired by Go's Gin and Chi.
 ┌─────────▼──────┐  ┌──────────▼────────────────────┐
 │PureSimple      │  │PureJinja                      │
 │HTTPServer      │  │Jinja2-compatible templates    │
-│HTTP/1.1, TLS,  │  │36 filters · 599+ tests        │
+│HTTP/1.1, TLS,  │  │34 filters + 3 aliases · 599+   │
 │compression,    │  │v1.4.1                         │
 │static files    │  └───────────────────────────────┘
 │v1.x            │

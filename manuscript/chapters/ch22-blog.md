@@ -188,7 +188,7 @@ EndProcedure
 
 The KV store passes data to PureJinja templates as strings. There is no native way to pass a list of objects. The workaround: serialize the data as a multi-line string where each line represents one row, and pipe characters separate the fields. The template then uses PureJinja's `split` filter to reconstruct the structure.
 
-Each line follows the format: `slug|title|published_at|photo_url|excerpt|published`. The `Chr(10)` at the end of each line is a newline character, separating rows. PureJinja splits on `\n` to get lines, then splits each line on `|` to get fields.
+Each line follows the format: `id|slug|title|published_at|photo_url|excerpt|published`. The `Chr(10)` at the end of each line is a newline character, separating rows. PureJinja splits on `\n` to get lines, then splits each line on `|` to get fields.
 
 This is not elegant. It is not how you would design a data transfer mechanism if you were starting from scratch. It is how you solve the problem when your template engine operates on strings and your context store is a flat key-value map. And it works. It has worked in production since the blog launched. Sometimes the pragmatic solution is the right solution.
 
@@ -275,7 +275,7 @@ Procedure InitDB()
 EndProcedure
 ```
 
-The migration numbering is significant. Migrations 1-3 create the schema. Migrations 4-5 seed the site settings. Migrations 6-10 seed the five blog posts. Each migration runs exactly once, tracked by a `_migrations` table that the `DB::Migrate` function maintains automatically. If you add migration 11 and recompile, only migration 11 runs. The first ten are skipped.
+The migration numbering is significant. Migrations 1-3 create the schema. Migrations 4-5 seed the site settings. Migrations 6-10 seed the five blog posts. Each migration runs exactly once, tracked by a `puresimple_migrations` table that the `DB::Migrate` function maintains automatically. If you add migration 11 and recompile, only migration 11 runs. The first ten are skipped.
 
 This is idempotent deployment. You can run `DB::Migrate` a hundred times and the database will always end up in the same state. This matters when you deploy with `scripts/deploy.sh`, which runs the app fresh every time. The migration runner checks what has already been applied and only runs what is new.
 
@@ -306,9 +306,9 @@ Procedure _BasicAuthMW(*C.RequestContext)
 EndProcedure
 ```
 
-These wrappers exist because PureBasic cannot take the address of a module-scoped procedure with the `@` operator when `EnableExplicit` is active at the program level. `@Logger::Middleware()` produces a compiler error. The workaround: write a local procedure that calls the module procedure, and take the address of the local procedure instead. Three lines per middleware. Not elegant, but reliable.
+These wrappers exist because PureBasic cannot resolve `@Module::Proc()` in `Global` variable initialisers -- the address evaluates to zero. At program level (outside a `Global` declaration), it works fine. The massively example uses thin wrapper procedures as a defensive pattern. Three lines per middleware. Not elegant, but reliable.
 
-> **PureBasic Gotcha:** You cannot write `Engine::Use(@Logger::Middleware())` directly. The `@` operator requires a procedure name without a module prefix at the call site. The thin-wrapper pattern shown here is the standard workaround used throughout the PureSimple examples.
+> **PureBasic Gotcha:** You cannot write `Global handler = @Logger::Middleware()` -- the address evaluates to zero in a `Global` initialiser. At program level the `@` operator works with module-qualified names, but the thin-wrapper pattern shown here avoids the edge case entirely and is the standard workaround used throughout the PureSimple examples.
 
 ---
 
@@ -363,7 +363,7 @@ The template that receives this data is equally concise:
 {% endblock %}
 ```
 
-This is the pipe-delimited pattern in action. The `posts_data` variable is a single string. PureJinja's `split('\n')` breaks it into lines. The `{% if line %}` guard skips empty lines (the last line has a trailing newline). Each line is split on `|` into an array `p`, and the fields are accessed by index: `p[0]` is the slug, `p[1]` is the title, `p[2]` is the publication date, `p[3]` is the photo URL, and `p[4]` is the excerpt.
+This is the pipe-delimited pattern in action. The `posts_data` variable is a single string. PureJinja's `split('\n')` breaks it into lines. The `{% if line %}` guard skips empty lines (the last line has a trailing newline). Each line is split on `|` into an array `p`, and the fields are accessed by index: `p[0]` is the id, `p[1]` is the slug, `p[2]` is the title, `p[3]` is the publication date, `p[4]` is the photo URL, and `p[5]` is the excerpt.
 
 The template extends `base.html` (Chapter 11's inheritance pattern), which provides the navigation, header, and footer. The `{% block content %}` override fills in the main area with the post grid. This is how template inheritance keeps you from repeating the `<head>`, `<nav>`, and `<footer>` on every page.
 

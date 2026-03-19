@@ -46,7 +46,7 @@ When you register multiple middleware with `Engine::Use`, PureSimple adds them t
 Consider three middleware functions (A, B, C) and a route handler:
 
 ```mermaid
-graph LR
+graph
     subgraph "Handler Chain"
         A_in["A (before)"] --> B_in["B (before)"]
         B_in --> C_in["C (before)"]

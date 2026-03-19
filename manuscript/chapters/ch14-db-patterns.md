@@ -108,6 +108,8 @@ Module PostRepo
 EndModule
 ```
 
+> **Under the Hood:** `String` is a built-in PureBasic structure with a single `\s` field. Using `*title.String` passes a string by reference -- access the value with `*title\s`. This avoids copying large strings between procedures.
+
 The handler code becomes readable:
 
 ```purebasic

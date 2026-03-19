@@ -113,15 +113,47 @@ Procedure HomeHandler(*C.RequestContext)
 EndProcedure
 ```
 
-The handler encodes each post as a tab-separated line (`slug<TAB>title<TAB>date`) and separates posts with newlines. This delimited format is the bridge between PureBasic's typed structures and PureJinja's string-based variable system. The template unpacks it using `split`:
+The handler encodes each post as a tab-separated line (`slug<TAB>title<TAB>date`) and separates posts with newlines. This delimited format is the bridge between PureBasic's typed structures and PureJinja's string-based variable system.
+
+Before we look at the page templates, let us define a base template. All three HTML pages in this application share the same navigation bar, document structure, and footer. Rather than duplicating that boilerplate in every template, we use PureJinja's template inheritance: a base template defines the shared skeleton, and each page template extends it with page-specific content.
 
 ```html
-<!-- Listing 12.4 -- index.html with post loop -->
+<!-- Listing 12.4 -- base.html: shared layout with blocks -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}{{ site_name }}{% endblock %}</title>
+</head>
+<body>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+  </nav>
+
+  {% block content %}{% endblock %}
+
+  <footer>
+    <p>&copy; {{ site_name }}</p>
+  </footer>
+</body>
+</html>
+```
+
+The `{% block title %}` and `{% block content %}` tags are extension points. Child templates override these blocks while inheriting everything else -- the `<!DOCTYPE>`, the `<nav>`, the `<footer>`. If a child template does not override a block, the base template's default content is used. For the title block, the default is the site name. For the content block, the default is empty.
+
+This is the same inheritance model used by Django, Jinja2, and Twig. If you have used any of those, the pattern is familiar. If you have not, the rule is simple: `{% extends %}` says "start with this template," and `{% block %}` says "replace this section."
+
+Now the index template extends the base and provides its own content:
+
+```html
+<!-- Listing 12.5 -- index.html with template inheritance -->
+{% extends "base.html" %}
+
+{% block title %}Home — {{ site_name }}{% endblock %}
+
+{% block content %}
 <h1>{{ site_name }}</h1>
-<nav>
-  <a href="/">Home</a>
-  <a href="/about">About</a>
-</nav>
 
 {% for line in posts.split('\n') %}
   {% if line %}
@@ -141,9 +173,12 @@ The handler encodes each post as a tab-separated line (`slug<TAB>title<TAB>date`
     </article>
   {% endif %}
 {% endfor %}
+{% endblock %}
 ```
 
-The `{% for line in posts.split('\n') %}` loop iterates over each line. The `{% if line %}` guard skips empty lines (the trailing newline after the last post produces an empty final element). Inside the loop, `{% set parts = line.split('\t') %}` splits each line into its tab-separated fields: `parts[0]` is the slug, `parts[1]` is the title, and `parts[2]` is the date.
+The `{% extends "base.html" %}` directive tells PureJinja to start with the base template and fill in the blocks. The `{% block title %}` overrides the page title. The `{% block content %}` provides the page body. The navigation and footer come from `base.html` automatically -- if you change the nav links in the base template, every page picks up the change.
+
+Inside the content block, the `{% for line in posts.split('\n') %}` loop iterates over each line. The `{% if line %}` guard skips empty lines (the trailing newline after the last post produces an empty final element). Inside the loop, `{% set parts = line.split('\t') %}` splits each line into its tab-separated fields: `parts[0]` is the slug, `parts[1]` is the title, and `parts[2]` is the date.
 
 This pattern -- encode in the handler, decode in the template -- appears throughout PureSimple applications. It is not elegant, but it is effective. The handler has access to typed structures and database queries. The template has access to string operations and HTML. The delimited string is the handshake between the two worlds.
 
@@ -156,7 +191,7 @@ This pattern -- encode in the handler, decode in the template -- appears through
 The post detail handler extracts a slug from the URL, finds the matching post, and renders it:
 
 ```purebasic
-; Listing 12.5 -- Post detail handler
+; Listing 12.6 -- Post detail handler
 Procedure PostHandler(*C.RequestContext)
   Protected slug.s = Binding::Param(*C, "slug")
   Protected i.i
@@ -183,26 +218,19 @@ The handler loops through the posts array looking for a matching slug. When it f
 Unlike the home page handler, which packs multiple posts into a single delimited string, the detail handler sets each field as a separate KV store entry. This is the simpler approach when you are displaying a single item with a fixed set of fields. The template reads each variable directly:
 
 ```html
-<!-- Listing 12.6 -- post.html template -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>{{ title }} — {{ site_name }}</title>
-</head>
-<body>
-  <nav>
-    <a href="/">Home</a>
-    <a href="/about">About</a>
-  </nav>
+<!-- Listing 12.7 -- post.html with template inheritance -->
+{% extends "base.html" %}
+
+{% block title %}{{ title }} — {{ site_name }}{% endblock %}
+
+{% block content %}
   <h1>{{ title }}</h1>
   <p class="meta">By {{ author }} on {{ date }}</p>
   <p class="body">{{ body }}</p>
-</body>
-</html>
+{% endblock %}
 ```
 
-Clean, readable, and free of parsing logic. For single-item pages, one variable per field is always the right choice. Save the `split` gymnastics for list pages where you need to pass multiple records.
+Clean, readable, and free of parsing logic. The navigation and document structure come from `base.html`. The post template only defines what is unique to this page: the title and the article content. For single-item pages, one variable per field is always the right choice. Save the `split` gymnastics for list pages where you need to pass multiple records.
 
 ---
 
@@ -211,7 +239,7 @@ Clean, readable, and free of parsing logic. For single-item pages, one variable 
 Not every page needs dynamic data. The about page handler sets only the site name and renders a template with mostly static content:
 
 ```purebasic
-; Listing 12.7 -- About page handler
+; Listing 12.8 -- About page handler
 Procedure AboutHandler(*C.RequestContext)
   Ctx::Set(*C, "site_name",
            Config::Get("SITE_NAME", "PureSimple Blog"))
@@ -223,7 +251,12 @@ EndProcedure
 The template is plain HTML with one variable substitution:
 
 ```html
-<!-- Listing 12.8 -- about.html template -->
+<!-- Listing 12.9 -- about.html with template inheritance -->
+{% extends "base.html" %}
+
+{% block title %}About — {{ site_name }}{% endblock %}
+
+{% block content %}
 <h1>About {{ site_name }}</h1>
 <p>
   This blog is built with <strong>PureSimple</strong>,
@@ -235,20 +268,70 @@ The template is plain HTML with one variable substitution:
   Jinja2-compatible template engine written
   entirely in PureBasic.
 </p>
+{% endblock %}
 ```
 
-Even static pages benefit from template rendering. The site name comes from configuration, so it can change without recompiling. If this page eventually extends a base template with shared navigation, the handler code does not change at all -- only the template file gets the `{% extends %}` directive.
+Even static pages benefit from template inheritance. The about page inherits the navigation and footer from `base.html` and only defines its own title and content. The site name comes from configuration, so it can change without recompiling. The handler code does not need to know anything about the base template -- it sets the same variables regardless of whether the template uses inheritance or not.
 
 ---
 
-## 12.6 Error Pages: 404 and 500
+## 12.6 Flash Messages
+
+Web applications frequently need to show a one-time message after a redirect. The user submits a form, the handler processes it and redirects to another page, and that page displays "Post created!" or "Settings saved." The message appears once and disappears on the next page load. These are called flash messages.
+
+The challenge is that a redirect is two separate requests. The handler that processes the form is one request. The page that displays the confirmation is a different request. The message must survive the redirect but not persist beyond it. Sessions solve this neatly.
+
+The pattern is straightforward. Before redirecting, store the message in the session under a known key:
+
+```purebasic
+; Listing 12.10 -- Setting a flash message before redirect
+Procedure CreatePostHandler(*C.RequestContext)
+  ; ... process form data, insert into database ...
+  Session::Set(*C, "_flash", "Post created!")
+  Rendering::Redirect(*C, "/", 302)
+EndProcedure
+```
+
+In the handler that renders the destination page, retrieve the flash message, pass it to the template, and then clear it so it does not appear again:
+
+```purebasic
+; Listing 12.11 -- Reading and clearing a flash message
+Procedure HomeHandler(*C.RequestContext)
+  Protected flash.s = Session::Get(*C, "_flash")
+  If flash <> ""
+    Ctx::Set(*C, "flash", flash)
+    Session::Set(*C, "_flash", "")  ; clear after reading
+  EndIf
+  ; ... prepare other template data ...
+  Rendering::Render(*C, "index.html",
+                    "examples/blog/templates/")
+EndProcedure
+```
+
+The template checks for the flash variable and renders it when present:
+
+```html
+{% if flash %}
+<div class="alert">{{ flash }}</div>
+{% endif %}
+```
+
+The `_flash` key is a convention, not a framework feature. You can use any key name you like. The underscore prefix signals that it is a framework-level concern rather than application data, matching the `_psid` and `_auth_user` conventions used elsewhere in PureSimple.
+
+This pattern works because sessions persist across requests. The first request writes the message. The redirect triggers a second request. The second request reads the message, passes it to the template, and clears it. Any subsequent request finds the `_flash` key empty and renders no message.
+
+> **Note:** Sessions are covered in depth in Chapter 15. For now, all you need to know is that `Session::Set` stores a value that persists across requests for the same user, and `Session::Get` retrieves it. The session middleware must be registered before any handlers that use flash messages.
+
+---
+
+## 12.7 Error Pages: 404 and 500
 
 Every application needs error pages. The default PureSimple error pages live in `templates/404.html` and `templates/500.html` and are rendered by the framework when no route matches (404) or when a handler crashes (500).
 
 The 404 template uses a `{{ request.path }}` variable to show the user which URL they tried:
 
 ```html
-<!-- Listing 12.9 -- The default 404.html template -->
+<!-- Listing 12.12 -- The default 404.html template -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -268,10 +351,22 @@ The 404 template uses a `{{ request.path }}` variable to show the user which URL
 </html>
 ```
 
+The `{{ request.path }}` variable does not appear by magic. The framework's 404 handler sets it before rendering the template:
+
+```purebasic
+; Listing 12.13 -- The 404 handler that sets request.path
+Procedure HandleNotFound(*C.RequestContext)
+  Ctx::Set(*C, "request.path", SafeVal(*C\Path))
+  Rendering::Render(*C, "404.html", "templates/")
+EndProcedure
+```
+
+The `SafeVal` call HTML-escapes the path to prevent cross-site scripting -- without it, an attacker could craft a URL containing `<script>` tags that would execute in the user's browser when the 404 page renders.
+
 The 500 template includes a conditional debug section:
 
 ```html
-<!-- Listing 12.10 -- The default 500.html template -->
+<!-- Listing 12.14 -- The default 500.html template -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -298,12 +393,12 @@ Custom error pages should match your application's visual design. A 404 page tha
 
 ---
 
-## 12.7 Bootstrapping the Application
+## 12.8 Bootstrapping the Application
 
 The bootstrap section at the bottom of `main.pb` ties everything together:
 
 ```purebasic
-; Listing 12.11 -- Application bootstrap
+; Listing 12.15 -- Application bootstrap
 InitPosts()
 Config::Load(".env")
 Protected port.i = Config::GetInt("PORT", 8080)
@@ -327,7 +422,7 @@ The sequence is: initialise data, load configuration, set the run mode, register
 The `HealthHandler` returns a JSON response rather than HTML:
 
 ```purebasic
-; Listing 12.12 -- Health check handler
+; Listing 12.16 -- Health check handler
 Procedure HealthHandler(*C.RequestContext)
   Rendering::JSON(*C, ~"{\"status\":\"ok\"}")
 EndProcedure
@@ -337,12 +432,12 @@ Every production application needs a health check. Load balancers, monitoring sy
 
 ---
 
-## 12.8 Running the Application
+## 12.9 Running the Application
 
 Compile and run:
 
 ```bash
-# Listing 12.13 -- Compiling and running the blog
+# Listing 12.17 -- Compiling and running the blog
 $PUREBASIC_HOME/compilers/pbcompiler \
   examples/blog/main.pb -cl -o blog
 

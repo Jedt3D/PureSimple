@@ -14,6 +14,8 @@
 
 ---
 
+> **Note:** This chapter focuses on Linux server deployment with systemd and Caddy. Windows deployment follows the same compile-and-run pattern -- the binary runs directly, and any reverse proxy (IIS, nginx for Windows, or Caddy for Windows) can front it.
+
 ## 19.1 The Single-Binary Advantage (Revisited)
 
 We talked about the single-binary advantage in Chapter 1. Now it is time to cash that cheque. Deploying a PureSimple application means copying one file to a server and running it. There is no `npm install`. There is no `pip install -r requirements.txt`. There is no container image to pull from a registry, no runtime to install, no dependency graph to resolve. One file. `chmod +x`. Done.
@@ -90,16 +92,16 @@ journalctl -u puresimple -f  # follow live logs
 ```
 
 ```mermaid
-%% Figure 19.2 -- systemd lifecycle
+%% Figure 19.1 -- systemd lifecycle
 graph TD
     A["systemctl start"] --> B["ExecStart: /opt/puresimple/app"]
     B --> C{"Process running"}
     C -->|"Exit 0"| D["Stopped"]
     C -->|"Crash (non-zero exit)"| E["Restart=on-failure"]
     E -->|"Wait RestartSec=5"| B
-    F["systemctl stop"] --> D
-    G["systemctl restart"] --> F
-    F --> A
+    F["systemctl stop"] --> G["SIGTERM → process"]
+    G --> D
+    H["systemctl restart"] --> F
 ```
 
 > **Warning:** If you change the `.service` file after installation, you must run `systemctl daemon-reload` before the changes take effect. systemd caches unit files aggressively. Forgetting `daemon-reload` is the deployment equivalent of wondering why your changes are not showing up, then realising you saved the file but never recompiled. We have all been there.
@@ -128,7 +130,7 @@ Replace `yourdomain.com` with your actual domain. Caddy will automatically obtai
 `reverse_proxy localhost:8080` forwards all incoming requests to your PureSimple application. `encode gzip` compresses responses. The `log` block writes access logs to `/var/log/caddy/access.log`.
 
 ```mermaid
-%% Figure 19.3 -- Caddy reverse proxy architecture
+%% Figure 19.2 -- Caddy reverse proxy architecture
 graph LR
     A["Browser"] -->|"HTTPS :443"| B["Caddy"]
     B -->|"HTTP :8080"| C["PureSimple app"]
@@ -146,7 +148,7 @@ The architecture is straightforward. The browser connects to Caddy over HTTPS on
 The deploy script automates the entire process of getting code from your repository onto the production server. It runs from your local machine, connects to the server over SSH, and executes six steps. If any step fails, the script aborts. If the health check fails after deployment, it triggers an automatic rollback.
 
 ```mermaid
-%% Figure 19.1 -- Deploy pipeline
+%% Figure 19.3 -- Deploy pipeline
 graph TD
     A["1. git pull origin main"] --> B["2. Compile app_new"]
     B --> C["3. Run test suite"]
@@ -333,7 +335,7 @@ The health check is a simple handler that returns 200 OK with a plain text body.
 ```purebasic
 ; Listing 19.15 -- Health check handler
 Procedure HealthHandler(*C.RequestContext)
-  Rendering::Text(*C, 200, "OK")
+  Rendering::JSON(*C, ~"{\"status\":\"ok\"}")
 EndProcedure
 
 Engine::GET("/health", @HealthHandler())

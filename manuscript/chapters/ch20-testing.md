@@ -384,6 +384,30 @@ P8_Config_Tests()
 
 > **Warning:** Do not skip tests to make the suite pass faster. If a test is slow, make it faster (use `:memory:` instead of file-based SQLite). If a test is flaky, fix the root cause (usually shared mutable state). Skipping tests is technical debt with compound interest. You think you are saving time now. You are borrowing it from a future debugging session.
 
+## 20.11 Testing Middleware Chains
+
+Unit tests for individual handlers are valuable, but many bugs hide in the interaction between middleware. Does MiddlewareA run before MiddlewareB? Does the handler see the values that the middleware set? Testing the full chain without starting an HTTP server gives you confidence that your middleware ordering is correct.
+
+The pattern is straightforward: construct a `RequestContext` manually, add handlers with `Ctx::AddHandler`, and call `Ctx::Dispatch` to run the chain. Each middleware calls `Ctx::Advance` to pass control to the next handler, and you verify the final state of the context.
+
+```purebasic
+; Listing 20.13 -- Testing a middleware chain
+BeginSuite("Middleware chain ordering")
+
+Ctx::Init(@testCtx, "GET", "/test")
+Ctx::AddHandler(@testCtx, @MiddlewareA())
+Ctx::AddHandler(@testCtx, @MiddlewareB())
+Ctx::AddHandler(@testCtx, @TestHandler())
+Ctx::Dispatch(@testCtx)
+
+CheckStr(Ctx::Get(@testCtx, "order"), "A-B-handler")
+CheckEqual(testCtx\StatusCode, 200)
+```
+
+Each middleware in this example appends its name to the `"order"` key in the context's key-value store. After dispatch, the test verifies that all three ran in the expected order. This pattern is valuable because it tests the middleware chain's behaviour without any HTTP overhead -- no socket, no parsing, no serialisation. If the ordering is wrong, the `CheckStr` assertion fails with a clear message showing the actual execution order versus the expected one.
+
+This technique is especially useful when debugging middleware that depends on other middleware. If your auth middleware expects a session to be loaded, you can add both the session middleware and the auth middleware to a test chain and verify they cooperate correctly, all within a single test procedure.
+
 ---
 
 ## Summary

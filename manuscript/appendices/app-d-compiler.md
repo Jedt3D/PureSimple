@@ -35,7 +35,7 @@ These are the flags used throughout this book. Every PureSimple developer should
 ## D.2 All Flags Reference
 
 | Flag | Description | Notes |
-|---|---|---|---|
+|---|---|---|
 | `-cl` | Console application | Enables `OpenConsole()`, `PrintN()`, stdin/stdout. Without this flag, output goes to the GUI debug window instead of the terminal. |
 | `-o <path>` | Output file path | Name or full path for the resulting binary. On Linux/macOS, the binary has no extension by default. |
 | `-z` | C optimiser | Passes optimisation flags to the underlying C compiler. Increases compile time but produces measurably faster code. |
@@ -191,7 +191,33 @@ When module A includes `Types.pbi` and module B also includes `Types.pbi`, using
 
 ---
 
-## D.6 Quick Reference Card
+## D.6 Windows Compiler Usage
+
+On Windows, PureBasic installs to `C:\Program Files\PureBasic` by default. The compiler flags are identical to macOS and Linux. Only the path and output extension differ.
+
+```
+# Windows (Command Prompt)
+"C:\Program Files\PureBasic\Compilers\pbcompiler.exe" main.pb -cl -o app.exe
+
+# Windows (PowerShell)
+& "C:\Program Files\PureBasic\Compilers\pbcompiler.exe" main.pb -cl -o app.exe
+```
+
+You can set `PUREBASIC_HOME` to simplify repeated commands:
+
+```
+# Command Prompt
+set PUREBASIC_HOME=C:\Program Files\PureBasic
+"%PUREBASIC_HOME%\Compilers\pbcompiler.exe" main.pb -cl -o app.exe
+
+# PowerShell
+$env:PUREBASIC_HOME = "C:\Program Files\PureBasic"
+& "$env:PUREBASIC_HOME\Compilers\pbcompiler.exe" main.pb -cl -o app.exe
+```
+
+---
+
+## D.7 Quick Reference Card
 
 Copy this to a sticky note on your monitor.
 

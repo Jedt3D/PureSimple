@@ -179,7 +179,7 @@ Two conditions must be true: the session must contain a token (it is not empty),
 
 ### Registering the Middleware
 
-The CSRF middleware must run *after* the session middleware (because it reads from the session) and *before* your handlers:
+The session middleware from Chapter 15 must run before the CSRF middleware. The CSRF middleware must run *after* the session middleware (because it reads from the session) and *before* your handlers:
 
 ```purebasic
 ; Listing 17.3 -- Registering CSRF middleware in the

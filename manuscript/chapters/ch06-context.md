@@ -4,6 +4,8 @@
 
 ---
 
+## Learning Objectives
+
 **After reading this chapter you will be able to:**
 
 - Identify every field on the `RequestContext` structure and explain its purpose
@@ -166,6 +168,7 @@ The logic is clean. If the context is not aborted and there are more handlers to
 The middleware pattern emerges from this design. A middleware function does some work before `Advance`, calls `Advance` to let the rest of the chain run, then does some work after `Advance` returns:
 
 ```purebasic
+EnableExplicit
 ; Listing 6.4 — Middleware pattern using Advance
 Procedure TimingMiddleware(*C.RequestContext)
   Protected t0.i = ElapsedMilliseconds()
@@ -219,6 +222,7 @@ When `Aborted` is set to `#True`, `Advance` checks this flag before calling the 
 Here is a practical example -- an authentication guard:
 
 ```purebasic
+EnableExplicit
 ; Listing 6.6 — Authentication middleware using Abort
 Procedure AuthGuard(*C.RequestContext)
   If *C\Authorization = ""
@@ -241,6 +245,7 @@ Notice the `ProcedureReturn` after `AbortWithError`. This is a habit worth build
 Middleware and handlers often need to share data. An authentication middleware might validate a token and want to pass the user ID to the route handler. A logging middleware might generate a request ID and want other middleware to include it in their output. The context's KV store provides this channel.
 
 ```purebasic
+EnableExplicit
 ; Listing 6.7 — Using the KV store for middleware
 ; communication
 Procedure RequestIDMiddleware(*C.RequestContext)
@@ -274,7 +279,7 @@ EndProcedure
 
 ```mermaid
 graph LR
-    MW1["Auth Middleware"] -->|"Set('userId', '42')"| KV["KV Store<br/>StoreKeys: userId⇥<br/>StoreVals: 42⇥"]
+    MW1["Auth Middleware"] -->|"Set('userId', '42')"| KV["KV Store<br/>StoreKeys: userIdTAB<br/>StoreVals: 42TAB"]
     KV -->|"Get('userId')"| Handler["Route Handler"]
     MW1 -->|"Advance"| Handler
     style KV fill:#4A90D9,color:#fff
@@ -321,6 +326,7 @@ This is the entire request lifecycle. There are no events, no callbacks, no prom
 Route parameters set by the router during matching are extracted with `Ctx::Param`:
 
 ```purebasic
+EnableExplicit
 ; Listing 6.9 — Extracting route parameters
 Procedure ShowUser(*C.RequestContext)
   Protected userId.s = Ctx::Param(*C, "id")

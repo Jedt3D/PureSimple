@@ -62,6 +62,8 @@ I once spent twenty minutes debugging a handler that silently produced empty pag
 
 Under the hood, `DB::Open` calls PureBasic's `OpenDatabase(#PB_Any, Path, "", "")`. The two empty strings are the username and password parameters -- unused by SQLite but required by the function signature. `DB::Close` calls `CloseDatabase`. The wrapper adds no overhead; the compiler inlines these one-line procedures.
 
+> **PureBasic Gotcha:** PureBasic requires `UseSQLiteDatabase()` to be called before any SQLite operations. In PureSimple, this is handled automatically -- `src/DB/SQLite.pbi` calls it at module level. If you write standalone SQLite code outside the framework, add `UseSQLiteDatabase()` before your first `DB::Open` call.
+
 ---
 
 ## 13.3 Executing Statements
@@ -144,6 +146,8 @@ EndIf
 ```
 
 `DB::Query` returns `#True` if the query executed successfully (even if it returns zero rows). `DB::NextRow` advances to the next row and returns `#True` if one is available. When there are no more rows, it returns `#False` and you fall out of the `While` loop. `DB::Done` frees the internal result set -- call it when you are finished, whether you read all rows or not.
+
+> **Tip:** PureBasic's `Protected` is scoped to the procedure, not the block. Declaring `Protected` inside a `While` loop does not re-allocate -- it is equivalent to declaring it at the top of the procedure. We place it near first use for readability.
 
 > **PureBasic Gotcha:** The method is called `DB::NextRow`, not `DB::Next`. PureBasic reserves `Next` for `For...Next` loops. Every time you reach for `Next` and the compiler complains, remember: PureBasic has strong opinions about `For...Next`, and it will not negotiate.
 

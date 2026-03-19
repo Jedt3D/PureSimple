@@ -18,8 +18,9 @@
 
 Every building project starts with a foundation, and every PureSimple project starts with a scaffold. The framework ships with a shell script that creates a ready-to-compile project in one command. No generators that pull half the internet. No YAML configuration files. A bash script that writes a `main.pb`, a `.env`, a `.gitignore`, and a starter template.
 
+Listing 21.1 -- Scaffolding a new project
+
 ```bash
-; Listing 21.1 -- Scaffolding a new project
 ./scripts/new-project.sh todo
 ```
 
@@ -245,9 +246,9 @@ Logger and Recovery middleware run on every request, in that order. Logger recor
 
 The API is running. Time to test it. `curl` is the universal API testing tool -- it ships with every macOS and Linux system, and it prints exactly what the server sends.
 
-```bash
-; Listing 21.9 -- Testing the to-do API with curl
+Listing 21.9 -- Testing the to-do API with curl
 
+```bash
 # Health check
 curl http://localhost:8080/health
 # {"status":"ok"}

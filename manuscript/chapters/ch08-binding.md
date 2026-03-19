@@ -183,7 +183,7 @@ Procedure ReleaseJSON(*C.RequestContext)
   If *C\JSONHandle <> 0
     FreeJSON(*C\JSONHandle)    ; <- calls PureBasic's built-in
     *C\JSONHandle = 0
-  EndProcedure
+  EndIf
 EndProcedure
 ```
 

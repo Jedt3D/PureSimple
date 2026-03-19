@@ -44,6 +44,15 @@ The table below maps the concepts you already know to their PureBasic equivalent
 | **Print to stdout** | `PrintN("text")` | `fmt.Println("text")` | `print("text")` | `printf("text\n")` |
 | **Compilation** | `pbcompiler file.pb` | `go build file.go` | Interpreted | `gcc file.c` |
 
+**Compiler paths by platform:**
+
+| Platform | `PUREBASIC_HOME` | Compiler path |
+|---|---|---|
+| macOS | `/Applications/PureBasic.app/Contents/Resources` | `$PUREBASIC_HOME/compilers/pbcompiler` |
+| Linux | `/usr/local/purebasic` (typical) | `$PUREBASIC_HOME/compilers/pbcompiler` |
+| Windows (CMD) | `C:\Program Files\PureBasic` | `"%PUREBASIC_HOME%\Compilers\pbcompiler.exe"` |
+| Windows (PowerShell) | `C:\Program Files\PureBasic` | `& "$env:PUREBASIC_HOME\Compilers\pbcompiler.exe"` |
+
 ---
 
 ## A.2 Standard Library Cheat Sheet
@@ -160,7 +169,7 @@ These are the mistakes that trip up every PureBasic newcomer. The "PureBasic Got
 | 8 | **`FreeJSON` is a built-in** | Define your own `FreeJSON` procedure in a module | Name collision or shadowing | PureSimple uses `ReleaseJSON` to avoid the conflict. |
 | 9 | **Escape strings need `~` prefix** | `"\n"` produces a newline | Produces a literal backslash followed by `n` | Write `~"\n"` for escape sequences. Only `~`-prefixed strings interpret `\n`, `\t`, etc. |
 | 10 | **`@Proc()` needs parentheses** | `@MyHandler` gets the address | Compiler error or wrong address | Always write `@MyHandler()` with empty parentheses. |
-| 11 | **`@Module::Proc()` at program level** | Take address of a module procedure in a `Global` initializer | Fails because module procedure addresses are not resolvable at global scope | Wrap in a local procedure: `Procedure GetAddr() : ProcedureReturn @Module::Proc() : EndProcedure`. |
+| 11 | **`@Module::Proc()` in `Global` initialisers** | Take address of a module procedure in a `Global` variable initialiser | Evaluates to 0 because module procedure addresses are not resolved during `Global` initialisation. It works fine in program-level calls (e.g., `Engine::Use(@Logger::Middleware())`). | Wrap in a plain procedure and use its address instead: `Procedure GetAddr() : ProcedureReturn @Module::Proc() : EndProcedure` then `Global handler.i = GetAddr()`. |
 | 12 | **Fixed-size struct arrays differ from `Dim`** | `arr.i[32]` in a `Structure` creates 32+1 elements | Creates exactly 32 elements (indices 0 through 31) | Remember: `Dim a(N)` = N+1 elements; `arr.type[N]` in a struct = exactly N elements. The two use opposite conventions. |
 
 ---

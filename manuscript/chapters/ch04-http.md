@@ -4,7 +4,9 @@
 
 ---
 
-**After reading this chapter you will be able to:**
+## Learning Objectives
+
+After reading this chapter you will be able to:
 
 - Describe the HTTP request/response cycle and identify each component of a request and a response
 - Break a URL into its constituent parts: scheme, host, port, path, query string, and fragment

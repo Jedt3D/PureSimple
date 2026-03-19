@@ -266,7 +266,7 @@ it, readers can compile, test, and debug any code in the PureSimple repository.
 - Template syntax: `{{ variable }}`, `{% if %}`, `{% for %}`, filters
 - `Rendering::Render` and the KV store as template context
 - Template inheritance with `{% extends %}` and `{% block %}`
-- The 36 built-in filters (upper, lower, default, join, split, length, ...)
+- The 34 built-in filters (plus 3 aliases) (upper, lower, default, join, split, length, ...)
 - Custom template directories and `SetTemplatePath`
 - Escaping HTML and the `safe` filter
 
@@ -551,7 +551,7 @@ it, readers can compile, test, and debug any code in the PureSimple repository.
 - Handler signature reference
 
 ### Appendix C: PureJinja Filter Reference
-- All 36 built-in filters with one-line descriptions and examples
+- All 34 built-in filters (plus 3 aliases) with one-line descriptions and examples
 - Grouped by category: String, Number, List, Object, Encoding, Special
 
 ### Appendix D: Compiler Flags Reference
