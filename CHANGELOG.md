@@ -10,6 +10,56 @@ Versioning follows `v0.{phase}.0` during the pre-1.0 development phases.
 
 ---
 
+## [0.9.0] — 2026-03-20 · P9: Documentation, Example Apps, Book Outline
+
+### Added
+- `docs/api/index.md` — API overview, quick-start snippet, request lifecycle diagram,
+  handler signature reference
+- `docs/api/engine.md` — Engine module: route registration, middleware, error handlers,
+  run modes, lifecycle
+- `docs/api/router.md` — Router module: Insert/Match, pattern syntax, priority rules
+- `docs/api/context.md` — Context module: lifecycle, Abort variants, route params,
+  KV store, RequestContext field reference
+- `docs/api/binding.md` — Binding module: Param, Query, PostForm, JSON body
+- `docs/api/rendering.md` — Rendering module: JSON, HTML, Text, Status, Redirect,
+  File, template rendering
+- `docs/api/group.md` — Group module: Init, Use, SubGroup, CombineHandlers, dispatch
+- `docs/api/middleware.md` — All six middleware: Logger, Recovery, Cookie, Session,
+  BasicAuth, CSRF
+- `docs/api/db.md` — DB/SQLite module: Open/Close, Exec, Query, NextRow, column
+  accessors, parameter binding, migration runner
+- `docs/api/config.md` — Config module: Load, Get/GetInt, Set, Has, Reset, common
+  pattern
+- `docs/api/log.md` — Log module: levels, SetLevel/SetOutput, Dbg/Info/Warn/Error,
+  output format, file append behaviour
+- `docs/book-outline.md` — 22-chapter book outline: *Native Web: Building Fast,
+  Dependency-Free Web Applications with PureBasic*; covers foundations, framework
+  internals, templates, data, security/auth, config/ops, and two complete projects
+- `examples/todo/main.pb` — JSON REST API example: `GET/POST /todos`,
+  `GET/DELETE /todos/:id`, `GET /health`; uses Logger + Recovery middleware,
+  Config for port, in-memory list store
+- `examples/blog/main.pb` — HTML blog example: home, post detail, about, health
+  routes; uses Logger + Recovery middleware, PureJinja templates, Config, Log
+- `examples/blog/templates/index.html` — home page (iterates post list)
+- `examples/blog/templates/post.html` — single post page
+- `examples/blog/templates/about.html` — about page
+- `tests/P9_Examples_Test.pbi` — 23 assertions: Todo CRUD lifecycle, Blog home +
+  post param, health check, Config+Log integration, custom 404 pattern
+
+### Changed
+- `tests/run_all.pb` — enabled `P9_Examples_Test.pbi`
+- `docs/api/context.md` — corrects `Ctx::Init` signature to `(*C, Method.s, Path.s)`
+  (the summary incorrectly showed a `ContextID` parameter — actual signature sets
+  `ContextID` internally via `_SlotSeq`)
+
+### Notes
+- `Ctx::Init` signature is `Init(*C.RequestContext, Method.s, Path.s)` — it auto-
+  assigns `ContextID` from an internal slot counter, not as a caller parameter
+- Example apps call `Engine::Run(port)` which is still a stub; a real HTTP listener
+  is wired in via PureSimpleHTTPServer (future integration phase)
+
+---
+
 ## [0.8.0] — 2026-03-20 · P8: Logging, .env Config, Run Modes, Scaffold
 
 ### Added

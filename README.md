@@ -3,7 +3,7 @@
 A lightweight web framework for **PureBasic 6.x**, inspired by Go's Gin and Chi. Compiles to a single native binary with zero external runtime dependencies.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-![Status: P8 Config](https://img.shields.io/badge/status-P8%20Config-yellow)
+![Status: P9 Docs](https://img.shields.io/badge/status-P9%20Docs-yellow)
 
 ---
 
@@ -102,6 +102,22 @@ PureSimple/
     setup-server.sh  # One-time server provisioning
   templates/         # Default Jinja2 HTML templates (404.html, 500.html)
 ```
+
+---
+
+## Documentation
+
+Full API reference is in [`docs/api/`](docs/api/index.md).
+
+Book outline: [`docs/book-outline.md`](docs/book-outline.md) — *Native Web: Building Fast, Dependency-Free Web Applications with PureBasic* (22 chapters).
+
+## Example Apps
+
+| Example | Description |
+|---------|-------------|
+| [`examples/hello_world/`](examples/hello_world/main.pb) | Minimal bootstrap: Config, Log, SetMode, route registration |
+| [`examples/todo/`](examples/todo/main.pb) | JSON REST API — CRUD with in-memory list store |
+| [`examples/blog/`](examples/blog/main.pb) | HTML blog — PureJinja templates, Logger, Config |
 
 ---
 

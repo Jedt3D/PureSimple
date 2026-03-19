@@ -1,17 +1,21 @@
 {
   "version": "0.1.0",
-  "indexedAt": "2026-03-19T17:21:54Z",
-  "projectHash": "94cf84c9fc0f2665505813a67843673370d4a633a0325597cb6c54e125603cdd",
-  "fileCount": 26,
+  "indexedAt": "2026-03-19T17:33:59Z",
+  "projectHash": "458622bc9c7a88752e43bb81604948f173379b0cd8fea9092e564c9eaf15729e",
+  "fileCount": 29,
   "duration": "6ms",
   "files": {
     "examples/hello_world/main.pb": {
-      "mtime": "2026-03-19T14:40:15Z",
-      "size": 533
+      "mtime": "2026-03-19T17:33:43Z",
+      "size": 1344
     },
     "src/Binding.pbi": {
       "mtime": "2026-03-19T16:37:37Z",
       "size": 6176
+    },
+    "src/Config.pbi": {
+      "mtime": "2026-03-19T17:33:43Z",
+      "size": 3400
     },
     "src/Context.pbi": {
       "mtime": "2026-03-19T17:21:36Z",
@@ -22,12 +26,16 @@
       "size": 6369
     },
     "src/Engine.pbi": {
-      "mtime": "2026-03-19T16:57:57Z",
-      "size": 4499
+      "mtime": "2026-03-19T17:33:43Z",
+      "size": 4843
     },
     "src/Group.pbi": {
       "mtime": "2026-03-19T16:57:57Z",
       "size": 4199
+    },
+    "src/Log.pbi": {
+      "mtime": "2026-03-19T17:33:43Z",
+      "size": 2921
     },
     "src/Middleware/BasicAuth.pbi": {
       "mtime": "2026-03-19T17:21:36Z",
@@ -54,8 +62,8 @@
       "size": 4608
     },
     "src/PureSimple.pb": {
-      "mtime": "2026-03-19T17:21:36Z",
-      "size": 1901
+      "mtime": "2026-03-19T17:33:43Z",
+      "size": 2021
     },
     "src/Rendering.pbi": {
       "mtime": "2026-03-19T16:49:49Z",
@@ -101,13 +109,17 @@
       "mtime": "2026-03-19T17:21:36Z",
       "size": 9547
     },
+    "tests/P8_Config_Test.pbi": {
+      "mtime": "2026-03-19T17:33:43Z",
+      "size": 4204
+    },
     "tests/TestHarness.pbi": {
       "mtime": "2026-03-19T15:05:37Z",
       "size": 3740
     },
     "tests/run_all.pb": {
-      "mtime": "2026-03-19T17:21:36Z",
-      "size": 1156
+      "mtime": "2026-03-19T17:33:43Z",
+      "size": 1152
     }
   }
 }

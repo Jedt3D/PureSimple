@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ site_name }}</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 720px; margin: 4vh auto; padding: 0 1.5rem; color: #222; }
+    h1   { font-size: 2rem; margin-bottom: 0.25rem; }
+    nav  { margin-bottom: 2rem; }
+    nav a { margin-right: 1rem; color: #0057b7; text-decoration: none; }
+    article { border-bottom: 1px solid #eee; padding: 1rem 0; }
+    .date { color: #888; font-size: 0.9rem; }
+    a.read-more { color: #0057b7; }
+  </style>
+</head>
+<body>
+  <h1>{{ site_name }}</h1>
+  <nav><a href="/">Home</a><a href="/about">About</a></nav>
+
+  {% for line in posts.split('\n') %}
+    {% if line %}
+      {% set parts = line.split('\t') %}
+      <article>
+        <h2><a class="read-more" href="/post/{{ parts[0] }}">{{ parts[1] }}</a></h2>
+        <p class="date">{{ parts[2] }}</p>
+        <p><a class="read-more" href="/post/{{ parts[0] }}">Read more →</a></p>
+      </article>
+    {% endif %}
+  {% endfor %}
+</body>
+</html>

@@ -18,7 +18,9 @@
       "src/Rendering.pbi",
       "src/Engine.pbi",
       "src/Group.pbi",
-      "src/DB/SQLite.pbi"
+      "src/DB/SQLite.pbi",
+      "src/Config.pbi",
+      "src/Log.pbi"
     ],
     "tests/P0_Harness_Test.pbi": [
       "src/Types.pbi"
@@ -33,7 +35,8 @@
       "tests/P4_Rendering_Test.pbi",
       "tests/P5_Groups_Test.pbi",
       "tests/P6_SQLite_Test.pbi",
-      "tests/P7_Auth_Test.pbi"
+      "tests/P7_Auth_Test.pbi",
+      "tests/P8_Config_Test.pbi"
     ]
   },
   "reverse": {
@@ -41,6 +44,9 @@
       "src/PureSimple.pb"
     ],
     "src/Binding.pbi": [
+      "src/PureSimple.pb"
+    ],
+    "src/Config.pbi": [
       "src/PureSimple.pb"
     ],
     "src/Context.pbi": [
@@ -53,6 +59,9 @@
       "src/PureSimple.pb"
     ],
     "src/Group.pbi": [
+      "src/PureSimple.pb"
+    ],
+    "src/Log.pbi": [
       "src/PureSimple.pb"
     ],
     "src/Middleware/BasicAuth.pbi": [
@@ -111,6 +120,9 @@
     "tests/P7_Auth_Test.pbi": [
       "tests/run_all.pb"
     ],
+    "tests/P8_Config_Test.pbi": [
+      "tests/run_all.pb"
+    ],
     "tests/TestHarness.pbi": [
       "tests/run_all.pb"
     ]
@@ -135,6 +147,12 @@
       "implLine": 25,
       "implFile": "src/Middleware/CSRF.pbi"
     },
+    "Config": {
+      "declareLine": 20,
+      "declareFile": "src/Config.pbi",
+      "implLine": 29,
+      "implFile": "src/Config.pbi"
+    },
     "Cookie": {
       "declareLine": 8,
       "declareFile": "src/Middleware/Cookie.pbi",
@@ -156,7 +174,7 @@
     "Engine": {
       "declareLine": 8,
       "declareFile": "src/Engine.pbi",
-      "implLine": 27,
+      "implLine": 29,
       "implFile": "src/Engine.pbi"
     },
     "Group": {
@@ -164,6 +182,12 @@
       "declareFile": "src/Group.pbi",
       "implLine": 33,
       "implFile": "src/Group.pbi"
+    },
+    "Log": {
+      "declareLine": 24,
+      "declareFile": "src/Log.pbi",
+      "implLine": 38,
+      "implFile": "src/Log.pbi"
     },
     "Logger": {
       "declareLine": 13,
