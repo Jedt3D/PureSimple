@@ -274,3 +274,32 @@ EndModule
 
 Any module procedure whose name matches a PureBasic built-in will shadow it
 within that module body. Choose distinct names (e.g. `ReleaseJSON`, `CloseDB`).
+
+---
+
+## `JinjaEnv::RenderString` vs `JinjaEnv::RenderTemplate`
+
+Both are valid PureJinja high-level API entry points:
+
+- `RenderString(*env, templateStr.s, vars())` — render from an inline string
+- `RenderTemplate(*env, fileName.s, vars())` — load from disk and render
+
+`RenderTemplate` requires `SetTemplatePath(*env, "templates/")` first.
+Both handle Tokenize → Parse → Render internally. Use `RenderTemplate` for
+file-based templates in production; use `RenderString` for unit tests.
+
+---
+
+## `Ctx::Set` KV store keys must not contain `Chr(9)` (tab)
+
+The KV store uses `Chr(9)` as a field delimiter. Keys or values containing
+a tab character will corrupt the store. Use only printable characters in
+template variable names and string values passed via `Ctx::Set`.
+
+```purebasic
+; WRONG — tab in key corrupts the KV store
+Ctx::Set(@ctx, "my" + Chr(9) + "key", "value")
+
+; RIGHT — plain alphanumeric or snake_case keys
+Ctx::Set(@ctx, "my_key", "value")
+```

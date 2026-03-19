@@ -23,6 +23,7 @@ DeclareModule Types
     StatusCode.i        ; HTTP status to send
     ResponseBody.s      ; response content
     ContentType.s       ; "application/json", "text/html", etc.
+    Location.s          ; redirect URL (set by Rendering::Redirect, used by HTTP server)
 
     ; Handler chain state
     ContextID.i         ; slot index into global handler chain arrays (set by Ctx::Init)

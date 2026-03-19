@@ -58,6 +58,7 @@ Module Ctx
     *C\StatusCode   = 200
     *C\ResponseBody = ""
     *C\ContentType  = "text/plain"
+    *C\Location     = ""
     *C\ParamKeys    = ""
     *C\ParamVals    = ""
     *C\QueryKeys    = ""
