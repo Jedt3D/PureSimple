@@ -250,3 +250,27 @@ Protected *p.MyStruct = 0
 Recovery middleware using `OnErrorGoto` works on Linux and Windows where PureBasic
 intercepts these signals. On macOS arm64, only PureBasic-specific runtime errors
 (array bounds with `-d`, etc.) are reliably catchable.
+
+---
+
+## Module procedure name must not shadow a PureBasic built-in
+
+```purebasic
+; WRONG — inside Module Binding, FreeJSON(*C) shadows the built-in FreeJSON(json.i)
+; Calls to FreeJSON(someInteger) inside the module become ambiguous/recursive
+Module Binding
+  Procedure FreeJSON(*C.RequestContext)   ; shadows built-in FreeJSON!
+    FreeJSON(*C\JSONHandle)               ; calls itself, NOT the built-in
+  EndProcedure
+EndModule
+
+; RIGHT — use a distinct name
+Module Binding
+  Procedure ReleaseJSON(*C.RequestContext)
+    FreeJSON(*C\JSONHandle)               ; unambiguously calls PB built-in
+  EndProcedure
+EndModule
+```
+
+Any module procedure whose name matches a PureBasic built-in will shadow it
+within that module body. Choose distinct names (e.g. `ReleaseJSON`, `CloseDB`).

@@ -16,10 +16,10 @@ XIncludeFile "Router.pbi"              ; Segment-level trie router (Insert / Mat
 XIncludeFile "Context.pbi"             ; RequestContext lifecycle: Advance, Abort, Param, KV
 XIncludeFile "Middleware/Logger.pbi"   ; Logger middleware: method/path/status/elapsed
 XIncludeFile "Middleware/Recovery.pbi" ; Recovery middleware: OnError -> 500 response
+XIncludeFile "Binding.pbi"             ; Request binding: Param, Query, PostForm, JSON
 XIncludeFile "Engine.pbi"              ; Top-level API: NewApp(), Run(), GET(), POST(), Use(), …
 
 ; Future phases will add:
 ;   XIncludeFile "Config.pbi"
-;   XIncludeFile "Binding.pbi"
 ;   XIncludeFile "Rendering.pbi"
 ;   XIncludeFile "DB/SQLite.pbi"

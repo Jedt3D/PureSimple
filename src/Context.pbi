@@ -67,6 +67,7 @@ Module Ctx
     *C\ContextID    = slot
     *C\HandlerIndex = 0
     *C\Aborted      = #False
+    *C\JSONHandle   = 0
     _HandlerCount(slot) = 0
   EndProcedure
 
