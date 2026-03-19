@@ -18,6 +18,7 @@ XIncludeFile "Binding.pbi"             ; Request binding: Param, Query, PostForm
 XIncludeFile "../../pure_jinja/PureJinja.pbi" ; PureJinja template engine (Jinja2-compatible)
 XIncludeFile "Rendering.pbi"           ; Response rendering: JSON, HTML, Text, Redirect, File, Render
 XIncludeFile "Engine.pbi"              ; Top-level API: NewApp(), Run(), GET(), POST(), Use(), …
+XIncludeFile "Group.pbi"               ; RouterGroup: sub-router with prefix + group middleware
 
 ; Future phases will add:
 ;   XIncludeFile "Config.pbi"

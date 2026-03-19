@@ -14,6 +14,8 @@ DeclareModule Ctx
   Declare     Advance(*C.RequestContext)   ; calls the next handler (Gin-style Next)
   Declare     Abort(*C.RequestContext)
   Declare.i   IsAborted(*C.RequestContext)
+  Declare     AbortWithStatus(*C.RequestContext, StatusCode.i)
+  Declare     AbortWithError(*C.RequestContext, StatusCode.i, Message.s)
 EndDeclareModule
 
 Module Ctx
@@ -127,6 +129,20 @@ Module Ctx
 
   Procedure.i IsAborted(*C.RequestContext)
     ProcedureReturn *C\Aborted
+  EndProcedure
+
+  ; Abort the handler chain and set the HTTP status code.
+  Procedure AbortWithStatus(*C.RequestContext, StatusCode.i)
+    *C\Aborted    = #True
+    *C\StatusCode = StatusCode
+  EndProcedure
+
+  ; Abort the handler chain, set status, and write a plain-text error body.
+  Procedure AbortWithError(*C.RequestContext, StatusCode.i, Message.s)
+    *C\Aborted      = #True
+    *C\StatusCode   = StatusCode
+    *C\ResponseBody = Message
+    *C\ContentType  = "text/plain"
   EndProcedure
 
 EndModule

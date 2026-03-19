@@ -16,7 +16,12 @@ DeclareModule Engine
   Declare   Any(Pattern.s, Handler.i)
   Declare   Use(Handler.i)
   Declare   CombineHandlers(*C.RequestContext, RouteHandler.i)
+  Declare   AppendGlobalMiddleware(*C.RequestContext)
   Declare   ResetMiddleware()
+  Declare   SetNotFoundHandler(Handler.i)
+  Declare   HandleNotFound(*C.RequestContext)
+  Declare   SetMethodNotAllowedHandler(Handler.i)
+  Declare   HandleMethodNotAllowed(*C.RequestContext)
 EndDeclareModule
 
 Module Engine
@@ -24,7 +29,9 @@ Module Engine
 
   #_MAX_MW = 32
   Global Dim _MW.i(#_MAX_MW)
-  Global _MWCount.i = 0
+  Global _MWCount.i           = 0
+  Global _NotFoundHandler.i   = 0
+  Global _MethodNotAllowed.i  = 0
 
   ; NewApp() — allocate application engine.
   ; Stub: returns 0. PureSimpleHTTPServer integration will replace this.
@@ -84,9 +91,56 @@ Module Engine
     Ctx::AddHandler(*C, RouteHandler)
   EndProcedure
 
+  ; Append all global middleware to *C's handler chain (without adding a route handler).
+  ; Called by Group::CombineHandlers before adding group + route handlers.
+  Procedure AppendGlobalMiddleware(*C.RequestContext)
+    Protected i.i
+    For i = 0 To _MWCount - 1
+      Ctx::AddHandler(*C, _MW(i))
+    Next i
+  EndProcedure
+
   ; Clear all registered global middleware (used between tests).
   Procedure ResetMiddleware()
-    _MWCount = 0
+    _MWCount            = 0
+    _NotFoundHandler    = 0
+    _MethodNotAllowed   = 0
+  EndProcedure
+
+  ; Register a custom 404 Not Found handler.
+  Procedure SetNotFoundHandler(Handler.i)
+    _NotFoundHandler = Handler
+  EndProcedure
+
+  ; Invoke the registered 404 handler, or write a default 404 response.
+  Procedure HandleNotFound(*C.RequestContext)
+    Protected fn.PS_HandlerFunc
+    If _NotFoundHandler <> 0
+      fn = _NotFoundHandler
+      fn(*C)
+    Else
+      *C\StatusCode   = 404
+      *C\ResponseBody = "404 Not Found"
+      *C\ContentType  = "text/plain"
+    EndIf
+  EndProcedure
+
+  ; Register a custom 405 Method Not Allowed handler.
+  Procedure SetMethodNotAllowedHandler(Handler.i)
+    _MethodNotAllowed = Handler
+  EndProcedure
+
+  ; Invoke the registered 405 handler, or write a default 405 response.
+  Procedure HandleMethodNotAllowed(*C.RequestContext)
+    Protected fn.PS_HandlerFunc
+    If _MethodNotAllowed <> 0
+      fn = _MethodNotAllowed
+      fn(*C)
+    Else
+      *C\StatusCode   = 405
+      *C\ResponseBody = "405 Method Not Allowed"
+      *C\ContentType  = "text/plain"
+    EndIf
   EndProcedure
 
 EndModule

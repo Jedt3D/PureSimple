@@ -3,7 +3,7 @@
 A lightweight web framework for **PureBasic 6.x**, inspired by Go's Gin and Chi. Compiles to a single native binary with zero external runtime dependencies.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-![Status: P4 Response Rendering](https://img.shields.io/badge/status-P4%20Response%20Rendering-yellow)
+![Status: P5 Route Groups](https://img.shields.io/badge/status-P5%20Route%20Groups-yellow)
 
 ---
 
@@ -105,6 +105,25 @@ PureSimple/
 
 ---
 
+## Features (P5)
+
+### Route Groups
+- `Group::Init(@g, "/api")` — create a group with a path prefix
+- `Group::Use(@g, @AuthMW())` — attach group-level middleware
+- `Group::GET/POST/PUT/PATCH/DELETE/Any(@g, "/users", @handler)` — register routes as `prefix + pattern`
+- `Group::SubGroup(@parent, @child, "/v1")` — nested groups; child inherits parent prefix and middleware
+- `Group::CombineHandlers(@g, @ctx, @routeHandler)` — full chain: global MW + group MW + route
+
+### Structured Error Handling
+- `Ctx::AbortWithStatus(@ctx, 403)` — abort the chain and set the status code
+- `Ctx::AbortWithError(@ctx, 422, "message")` — abort with status + plain-text body
+- `Engine::SetNotFoundHandler(@handler)` — register a custom 404 handler
+- `Engine::HandleNotFound(@ctx)` — invoke custom handler or default "404 Not Found"
+- `Engine::SetMethodNotAllowedHandler(@handler)` — register a custom 405 handler
+- `Engine::HandleMethodNotAllowed(@ctx)` — invoke custom handler or default "405 Method Not Allowed"
+
+---
+
 ## Features (P4)
 
 ### Response Rendering
@@ -171,7 +190,7 @@ PureSimple/
 | P2 | Middleware engine (Next, Abort, Logger, Recovery) | **done** |
 | P3 | Request binding (Param, Query, JSON, Form, File) | **done** |
 | P4 | Response rendering + PureJinja integration | **done** |
-| P5 | Route groups + structured error handling | planned |
+| P5 | Route groups + structured error handling | **done** |
 | P6 | SQLite3 integration + migrations | planned |
 | P7 | Sessions, cookies, BasicAuth, CSRF | planned |
 | P8 | Logging, .env config, run modes, scaffold | planned |
