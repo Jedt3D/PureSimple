@@ -10,6 +10,50 @@ Versioning follows `v0.{phase}.0` during the pre-1.0 development phases.
 
 ---
 
+## [0.8.0] — 2026-03-20 · P8: Logging, .env Config, Run Modes, Scaffold
+
+### Added
+- `src/Config.pbi` — `Config` module for `.env` file loading + runtime key/value store:
+  - `Config::Load(path)` — parse a `.env` file; skip `#` comment lines and blank lines;
+    split on first `=`; overwrite existing keys on re-load; returns `#True` on success
+  - `Config::Get(key, [fallback])` — return string value or fallback (default `""`)
+  - `Config::GetInt(key, [fallback])` — return integer value via `Val()`; fallback default 0
+  - `Config::Set(key, val)` — set or overwrite a config value at runtime
+  - `Config::Has(key)` — return `#True` if key is present in the store
+  - `Config::Reset()` — clear all config values (used between tests)
+- `src/Log.pbi` — `Log` module with leveled structured logging:
+  - Constants: `#LevelDebug=0`, `#LevelInfo=1`, `#LevelWarn=2`, `#LevelError=3`
+  - `Log::SetLevel(level)` — suppress messages below this level (default `#LevelInfo`)
+  - `Log::SetOutput(filename)` — `""` = stdout; any other path = append to file
+  - `Log::Dbg(msg)` / `Log::Info(msg)` / `Log::Warn(msg)` / `Log::Error(msg)` —
+    emit `[YYYY-MM-DD HH:MM:SS] [LEVEL] message` lines
+  - File output creates the file if absent, appends if it exists (open + seek to `Lof`)
+- `Engine::SetMode(mode)` / `Engine::Mode()` — get/set run mode string (`"debug"` default);
+  used by middleware and application code to enable/disable verbose behaviour
+- `scripts/new-project.sh` — scaffold a new PureSimple application:
+  generates `main.pb`, `.env`, `.env.example`, `.gitignore`, `templates/index.html`,
+  `static/` directory; resolves PureSimple path relative to the new project
+- `tests/test.env` — fixture `.env` file used by the P8 test suite
+- `tests/P8_Config_Test.pbi` — 25 assertions across 7 suites: Load, Get defaults,
+  GetInt, Set runtime override, Has, Reset, Engine mode, and Log compile/output check
+
+### Changed
+- `src/PureSimple.pb` — added `Config.pbi` and `Log.pbi` includes (after DB/SQLite)
+- `src/Engine.pbi` — added `SetMode`/`Mode` to `DeclareModule Engine` and `Module Engine`
+- `examples/hello_world/main.pb` — updated to demonstrate `Config::Load`, `Log::Info`,
+  `Engine::SetMode`, route registration, and the `Run()` stub
+- `tests/run_all.pb` — enabled `P8_Config_Test.pbi`
+
+### Notes
+- `Default` is a reserved PureBasic keyword (used in `Select/Case/Default`); renamed
+  parameter to `Fallback` in `Config::Get` and `Config::GetInt`
+- `Debug` is a reserved PureBasic keyword (IDE debug output statement); renamed to
+  `Log::Dbg` for the debug-level procedure
+- `Config::GetInt` uses PureBasic's `Val()` which returns 0 for non-numeric strings —
+  use `Config::Has()` first if you need to distinguish "missing" from "zero"
+
+---
+
 ## [0.7.0] — 2026-03-20 · P7: Sessions, Cookies, BasicAuth, CSRF
 
 ### Added

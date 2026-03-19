@@ -1,0 +1,1784 @@
+{
+  "examples/hello_world/main.pb": {
+    "type": "source",
+    "procedures": {},
+    "structures": {},
+    "enumerations": {},
+    "constants": {},
+    "macros": {},
+    "interfaces": {},
+    "modules": {},
+    "prototypes": {},
+    "globals": {},
+    "includes": [
+      {
+        "line": 10,
+        "path": "../../src/PureSimple.pb",
+        "directive": "XIncludeFile"
+      }
+    ]
+  },
+  "src/Binding.pbi": {
+    "type": "include",
+    "procedures": {
+      "BindJSON": {
+        "line": 125,
+        "endLine": 134,
+        "returnType": ".i",
+        "params": "*C.RequestContext"
+      },
+      "JSONBool": {
+        "line": 160,
+        "endLine": 168,
+        "returnType": ".i",
+        "params": "*C.RequestContext, Key.s"
+      },
+      "JSONInteger": {
+        "line": 148,
+        "endLine": 156,
+        "returnType": ".i",
+        "params": "*C.RequestContext, Key.s"
+      },
+      "JSONString": {
+        "line": 137,
+        "endLine": 145,
+        "returnType": ".s",
+        "params": "*C.RequestContext, Key.s"
+      },
+      "Param": {
+        "line": 103,
+        "endLine": 105,
+        "returnType": ".s",
+        "params": "*C.RequestContext, Name.s"
+      },
+      "PostForm": {
+        "line": 116,
+        "endLine": 121,
+        "returnType": ".s",
+        "params": "*C.RequestContext, Field.s"
+      },
+      "Query": {
+        "line": 108,
+        "endLine": 113,
+        "returnType": ".s",
+        "params": "*C.RequestContext, Name.s"
+      },
+      "ReleaseJSON": {
+        "line": 172,
+        "endLine": 177,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "_LookupKV": {
+        "line": 56,
+        "endLine": 66,
+        "returnType": ".s",
+        "params": "Keys.s, Vals.s, Name.s"
+      },
+      "_ParseURLEncoded": {
+        "line": 73,
+        "endLine": 97,
+        "returnType": "",
+        "params": "encoded.s, *C.RequestContext, SetQuery.i"
+      },
+      "_URLDecode": {
+        "line": 36,
+        "endLine": 51,
+        "returnType": ".s",
+        "params": "s.s"
+      }
+    },
+    "structures": {},
+    "enumerations": {},
+    "constants": {},
+    "macros": {},
+    "interfaces": {},
+    "modules": {
+      "Binding_declare": {
+        "line": 15,
+        "endLine": 24,
+        "kind": "declare"
+      },
+      "Binding_impl": {
+        "line": 26,
+        "endLine": 179,
+        "kind": "impl"
+      }
+    },
+    "prototypes": {},
+    "globals": {
+      "_TmpKeys": {
+        "line": 30,
+        "type": ".s"
+      },
+      "_TmpVals": {
+        "line": 31,
+        "type": ".s"
+      }
+    },
+    "includes": []
+  },
+  "src/Context.pbi": {
+    "type": "include",
+    "procedures": {
+      "Abort": {
+        "line": 132,
+        "endLine": 134,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "AbortWithError": {
+        "line": 147,
+        "endLine": 152,
+        "returnType": "",
+        "params": "*C.RequestContext, StatusCode.i, Message.s"
+      },
+      "AbortWithStatus": {
+        "line": 141,
+        "endLine": 144,
+        "returnType": "",
+        "params": "*C.RequestContext, StatusCode.i"
+      },
+      "AddHandler": {
+        "line": 100,
+        "endLine": 107,
+        "returnType": "",
+        "params": "*C.RequestContext, Handler.i"
+      },
+      "Advance": {
+        "line": 112,
+        "endLine": 122,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "Dispatch": {
+        "line": 125,
+        "endLine": 129,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "Get": {
+        "line": 95,
+        "endLine": 97,
+        "returnType": ".s",
+        "params": "*C.RequestContext, Key.s"
+      },
+      "Init": {
+        "line": 52,
+        "endLine": 81,
+        "returnType": "",
+        "params": "*C.RequestContext, Method.s, Path.s"
+      },
+      "IsAborted": {
+        "line": 136,
+        "endLine": 138,
+        "returnType": ".i",
+        "params": "*C.RequestContext"
+      },
+      "Param": {
+        "line": 84,
+        "endLine": 86,
+        "returnType": ".s",
+        "params": "*C.RequestContext, Name.s"
+      },
+      "Set": {
+        "line": 89,
+        "endLine": 92,
+        "returnType": "",
+        "params": "*C.RequestContext, Key.s, Val.s"
+      },
+      "_LookupTab": {
+        "line": 35,
+        "endLine": 45,
+        "returnType": ".s",
+        "params": "Keys.s, Vals.s, Name.s"
+      }
+    },
+    "structures": {},
+    "enumerations": {},
+    "constants": {
+      "#_MAX_CTX": {
+        "line": 24,
+        "value": "32"
+      },
+      "#_MAX_HAND": {
+        "line": 25,
+        "value": "64"
+      }
+    },
+    "macros": {},
+    "interfaces": {},
+    "modules": {
+      "Ctx_declare": {
+        "line": 7,
+        "endLine": 19,
+        "kind": "declare"
+      },
+      "Ctx_impl": {
+        "line": 21,
+        "endLine": 154,
+        "kind": "impl"
+      }
+    },
+    "prototypes": {},
+    "globals": {
+      "#_MAX_HAND)": {
+        "line": 28,
+        "type": ""
+      },
+      "Dim _HandlerCount": {
+        "line": 29,
+        "type": ".i(#_MAX_CTX)"
+      },
+      "Dim _Handlers": {
+        "line": 28,
+        "type": ".i(#_MAX_CTX"
+      },
+      "_SlotSeq": {
+        "line": 30,
+        "type": ".i"
+      }
+    },
+    "includes": []
+  },
+  "src/DB/SQLite.pbi": {
+    "type": "include",
+    "procedures": {
+      "AddMigration": {
+        "line": 140,
+        "endLine": 146,
+        "returnType": "",
+        "params": "Version.i, SQL.s"
+      },
+      "BindInt": {
+        "line": 121,
+        "endLine": 123,
+        "returnType": "",
+        "params": "Handle.i, Idx.i, Val.i"
+      },
+      "BindStr": {
+        "line": 117,
+        "endLine": 119,
+        "returnType": "",
+        "params": "Handle.i, Idx.i, Val.s"
+      },
+      "Close": {
+        "line": 63,
+        "endLine": 65,
+        "returnType": "",
+        "params": "Handle.i"
+      },
+      "Done": {
+        "line": 93,
+        "endLine": 95,
+        "returnType": "",
+        "params": "Handle.i"
+      },
+      "Error": {
+        "line": 130,
+        "endLine": 132,
+        "returnType": ".s",
+        "params": "Handle.i"
+      },
+      "Exec": {
+        "line": 73,
+        "endLine": 75,
+        "returnType": ".i",
+        "params": "Handle.i, SQL.s"
+      },
+      "GetFloat": {
+        "line": 109,
+        "endLine": 111,
+        "returnType": ".d",
+        "params": "Handle.i, Col.i"
+      },
+      "GetInt": {
+        "line": 105,
+        "endLine": 107,
+        "returnType": ".i",
+        "params": "Handle.i, Col.i"
+      },
+      "GetStr": {
+        "line": 101,
+        "endLine": 103,
+        "returnType": ".s",
+        "params": "Handle.i, Col.i"
+      },
+      "Migrate": {
+        "line": 152,
+        "endLine": 194,
+        "returnType": ".i",
+        "params": "Handle.i"
+      },
+      "NextRow": {
+        "line": 88,
+        "endLine": 90,
+        "returnType": ".i",
+        "params": "Handle.i"
+      },
+      "Open": {
+        "line": 58,
+        "endLine": 60,
+        "returnType": ".i",
+        "params": "Path.s"
+      },
+      "Query": {
+        "line": 83,
+        "endLine": 85,
+        "returnType": ".i",
+        "params": "Handle.i, SQL.s"
+      },
+      "ResetMigrations": {
+        "line": 197,
+        "endLine": 199,
+        "returnType": "",
+        "params": ""
+      }
+    },
+    "structures": {},
+    "enumerations": {},
+    "constants": {
+      "#_MAX_MIG": {
+        "line": 47,
+        "value": "64"
+      }
+    },
+    "macros": {},
+    "interfaces": {},
+    "modules": {
+      "DB_declare": {
+        "line": 26,
+        "endLine": 42,
+        "kind": "declare"
+      },
+      "DB_impl": {
+        "line": 44,
+        "endLine": 201,
+        "kind": "impl"
+      }
+    },
+    "prototypes": {},
+    "globals": {
+      "Dim _MigSQL": {
+        "line": 49,
+        "type": ".s(#_MAX_MIG)"
+      },
+      "Dim _MigVer": {
+        "line": 48,
+        "type": ".i(#_MAX_MIG)"
+      },
+      "_MigCount": {
+        "line": 50,
+        "type": ".i"
+      }
+    },
+    "includes": []
+  },
+  "src/Engine.pbi": {
+    "type": "include",
+    "procedures": {
+      "Any": {
+        "line": 68,
+        "endLine": 74,
+        "returnType": "",
+        "params": "Pattern.s, Handler.i"
+      },
+      "AppendGlobalMiddleware": {
+        "line": 96,
+        "endLine": 101,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "CombineHandlers": {
+        "line": 86,
+        "endLine": 92,
+        "returnType": "",
+        "params": "*C.RequestContext, RouteHandler.i"
+      },
+      "DELETE": {
+        "line": 64,
+        "endLine": 66,
+        "returnType": "",
+        "params": "Pattern.s, Handler.i"
+      },
+      "GET": {
+        "line": 48,
+        "endLine": 50,
+        "returnType": "",
+        "params": "Pattern.s, Handler.i"
+      },
+      "HandleMethodNotAllowed": {
+        "line": 134,
+        "endLine": 144,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "HandleNotFound": {
+        "line": 116,
+        "endLine": 126,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "NewApp": {
+        "line": 38,
+        "endLine": 40,
+        "returnType": ".i",
+        "params": ""
+      },
+      "PATCH": {
+        "line": 60,
+        "endLine": 62,
+        "returnType": "",
+        "params": "Pattern.s, Handler.i"
+      },
+      "POST": {
+        "line": 52,
+        "endLine": 54,
+        "returnType": "",
+        "params": "Pattern.s, Handler.i"
+      },
+      "PUT": {
+        "line": 56,
+        "endLine": 58,
+        "returnType": "",
+        "params": "Pattern.s, Handler.i"
+      },
+      "ResetMiddleware": {
+        "line": 104,
+        "endLine": 108,
+        "returnType": "",
+        "params": ""
+      },
+      "Run": {
+        "line": 44,
+        "endLine": 46,
+        "returnType": ".i",
+        "params": "Port.i"
+      },
+      "SetMethodNotAllowedHandler": {
+        "line": 129,
+        "endLine": 131,
+        "returnType": "",
+        "params": "Handler.i"
+      },
+      "SetNotFoundHandler": {
+        "line": 111,
+        "endLine": 113,
+        "returnType": "",
+        "params": "Handler.i"
+      },
+      "Use": {
+        "line": 77,
+        "endLine": 82,
+        "returnType": "",
+        "params": "Handler.i"
+      }
+    },
+    "structures": {},
+    "enumerations": {},
+    "constants": {
+      "#_MAX_MW": {
+        "line": 30,
+        "value": "32"
+      }
+    },
+    "macros": {},
+    "interfaces": {},
+    "modules": {
+      "Engine_declare": {
+        "line": 8,
+        "endLine": 25,
+        "kind": "declare"
+      },
+      "Engine_impl": {
+        "line": 27,
+        "endLine": 146,
+        "kind": "impl"
+      }
+    },
+    "prototypes": {},
+    "globals": {
+      "Dim _MW": {
+        "line": 31,
+        "type": ".i(#_MAX_MW)"
+      },
+      "_MWCount": {
+        "line": 32,
+        "type": ".i"
+      },
+      "_MethodNotAllowed": {
+        "line": 34,
+        "type": ".i"
+      },
+      "_NotFoundHandler": {
+        "line": 33,
+        "type": ".i"
+      }
+    },
+    "includes": []
+  },
+  "src/Group.pbi": {
+    "type": "include",
+    "procedures": {
+      "Any": {
+        "line": 77,
+        "endLine": 84,
+        "returnType": "",
+        "params": "*G.PS_RouterGroup, Pattern.s, Handler.i"
+      },
+      "CombineHandlers": {
+        "line": 102,
+        "endLine": 109,
+        "returnType": "",
+        "params": "*G.PS_RouterGroup, *C.RequestContext, RouteHandler.i"
+      },
+      "DELETE": {
+        "line": 73,
+        "endLine": 75,
+        "returnType": "",
+        "params": "*G.PS_RouterGroup, Pattern.s, Handler.i"
+      },
+      "GET": {
+        "line": 57,
+        "endLine": 59,
+        "returnType": "",
+        "params": "*G.PS_RouterGroup, Pattern.s, Handler.i"
+      },
+      "Init": {
+        "line": 39,
+        "endLine": 42,
+        "returnType": "",
+        "params": "*G.PS_RouterGroup, Prefix.s"
+      },
+      "PATCH": {
+        "line": 69,
+        "endLine": 71,
+        "returnType": "",
+        "params": "*G.PS_RouterGroup, Pattern.s, Handler.i"
+      },
+      "POST": {
+        "line": 61,
+        "endLine": 63,
+        "returnType": "",
+        "params": "*G.PS_RouterGroup, Pattern.s, Handler.i"
+      },
+      "PUT": {
+        "line": 65,
+        "endLine": 67,
+        "returnType": "",
+        "params": "*G.PS_RouterGroup, Pattern.s, Handler.i"
+      },
+      "SubGroup": {
+        "line": 89,
+        "endLine": 96,
+        "returnType": "",
+        "params": "*Parent.PS_RouterGroup, *Child.PS_RouterGroup, SubPrefix.s"
+      },
+      "Use": {
+        "line": 47,
+        "endLine": 52,
+        "returnType": "",
+        "params": "*G.PS_RouterGroup, Handler.i"
+      }
+    },
+    "structures": {},
+    "enumerations": {},
+    "constants": {},
+    "macros": {},
+    "interfaces": {},
+    "modules": {
+      "Group_declare": {
+        "line": 20,
+        "endLine": 31,
+        "kind": "declare"
+      },
+      "Group_impl": {
+        "line": 33,
+        "endLine": 111,
+        "kind": "impl"
+      }
+    },
+    "prototypes": {},
+    "globals": {},
+    "includes": []
+  },
+  "src/Middleware/BasicAuth.pbi": {
+    "type": "include",
+    "procedures": {
+      "Middleware": {
+        "line": 33,
+        "endLine": 73,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "SetCredentials": {
+        "line": 27,
+        "endLine": 30,
+        "returnType": "",
+        "params": "User.s, Pass.s"
+      }
+    },
+    "structures": {},
+    "enumerations": {},
+    "constants": {},
+    "macros": {},
+    "interfaces": {},
+    "modules": {
+      "BasicAuth_declare": {
+        "line": 15,
+        "endLine": 18,
+        "kind": "declare"
+      },
+      "BasicAuth_impl": {
+        "line": 20,
+        "endLine": 75,
+        "kind": "impl"
+      }
+    },
+    "prototypes": {},
+    "globals": {
+      "_Pass": {
+        "line": 24,
+        "type": ".s"
+      },
+      "_User": {
+        "line": 23,
+        "type": ".s"
+      }
+    },
+    "includes": []
+  },
+  "src/Middleware/CSRF.pbi": {
+    "type": "include",
+    "procedures": {
+      "GenerateToken": {
+        "line": 34,
+        "endLine": 40,
+        "returnType": ".s",
+        "params": ""
+      },
+      "Middleware": {
+        "line": 66,
+        "endLine": 83,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "SetToken": {
+        "line": 46,
+        "endLine": 50,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "ValidateToken": {
+        "line": 56,
+        "endLine": 59,
+        "returnType": ".i",
+        "params": "*C.RequestContext, Token.s"
+      }
+    },
+    "structures": {},
+    "enumerations": {},
+    "constants": {
+      "#_FORM_FIELD": {
+        "line": 29,
+        "value": "\"_csrf\""
+      },
+      "#_SESSION_KEY": {
+        "line": 28,
+        "value": "\"_csrf_token\""
+      }
+    },
+    "macros": {},
+    "interfaces": {},
+    "modules": {
+      "CSRF_declare": {
+        "line": 18,
+        "endLine": 23,
+        "kind": "declare"
+      },
+      "CSRF_impl": {
+        "line": 25,
+        "endLine": 85,
+        "kind": "impl"
+      }
+    },
+    "prototypes": {},
+    "globals": {},
+    "includes": []
+  },
+  "src/Middleware/Cookie.pbi": {
+    "type": "include",
+    "procedures": {
+      "Get": {
+        "line": 21,
+        "endLine": 34,
+        "returnType": ".s",
+        "params": "*C.RequestContext, Name.s"
+      },
+      "Set": {
+        "line": 41,
+        "endLine": 50,
+        "returnType": "",
+        "params": "*C.RequestContext, Name.s, Value.s, Path.s = \"/\", MaxAge.i = 0"
+      }
+    },
+    "structures": {},
+    "enumerations": {},
+    "constants": {},
+    "macros": {},
+    "interfaces": {},
+    "modules": {
+      "Cookie_declare": {
+        "line": 8,
+        "endLine": 11,
+        "kind": "declare"
+      },
+      "Cookie_impl": {
+        "line": 13,
+        "endLine": 52,
+        "kind": "impl"
+      }
+    },
+    "prototypes": {},
+    "globals": {},
+    "includes": []
+  },
+  "src/Middleware/Logger.pbi": {
+    "type": "include",
+    "procedures": {
+      "Middleware": {
+        "line": 20,
+        "endLine": 30,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      }
+    },
+    "structures": {},
+    "enumerations": {},
+    "constants": {},
+    "macros": {},
+    "interfaces": {},
+    "modules": {
+      "Logger_declare": {
+        "line": 13,
+        "endLine": 15,
+        "kind": "declare"
+      },
+      "Logger_impl": {
+        "line": 17,
+        "endLine": 32,
+        "kind": "impl"
+      }
+    },
+    "prototypes": {},
+    "globals": {},
+    "includes": []
+  },
+  "src/Middleware/Recovery.pbi": {
+    "type": "include",
+    "procedures": {
+      "Middleware": {
+        "line": 28,
+        "endLine": 50,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      }
+    },
+    "structures": {},
+    "enumerations": {},
+    "constants": {},
+    "macros": {},
+    "interfaces": {},
+    "modules": {
+      "Recovery_declare": {
+        "line": 19,
+        "endLine": 21,
+        "kind": "declare"
+      },
+      "Recovery_impl": {
+        "line": 23,
+        "endLine": 52,
+        "kind": "impl"
+      }
+    },
+    "prototypes": {},
+    "globals": {
+      "_CtxPtr": {
+        "line": 26,
+        "type": ".i"
+      }
+    },
+    "includes": []
+  },
+  "src/Middleware/Session.pbi": {
+    "type": "include",
+    "procedures": {
+      "ClearStore": {
+        "line": 128,
+        "endLine": 130,
+        "returnType": "",
+        "params": ""
+      },
+      "Get": {
+        "line": 95,
+        "endLine": 97,
+        "returnType": ".s",
+        "params": "*C.RequestContext, Key.s"
+      },
+      "ID": {
+        "line": 111,
+        "endLine": 113,
+        "returnType": ".s",
+        "params": "*C.RequestContext"
+      },
+      "Middleware": {
+        "line": 61,
+        "endLine": 89,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "Save": {
+        "line": 119,
+        "endLine": 123,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "Set": {
+        "line": 103,
+        "endLine": 106,
+        "returnType": "",
+        "params": "*C.RequestContext, Key.s, Val.s"
+      },
+      "_GenerateID": {
+        "line": 38,
+        "endLine": 44,
+        "returnType": ".s",
+        "params": ""
+      },
+      "_LookupLast": {
+        "line": 48,
+        "endLine": 56,
+        "returnType": ".s",
+        "params": "Keys.s, Vals.s, Key.s"
+      }
+    },
+    "structures": {},
+    "enumerations": {},
+    "constants": {
+      "#_COOKIE_NAME": {
+        "line": 28,
+        "value": "\"_psid\""
+      }
+    },
+    "macros": {},
+    "interfaces": {},
+    "modules": {
+      "Session_declare": {
+        "line": 16,
+        "endLine": 23,
+        "kind": "declare"
+      },
+      "Session_impl": {
+        "line": 25,
+        "endLine": 132,
+        "kind": "impl"
+      }
+    },
+    "prototypes": {},
+    "globals": {
+      "NewMap _Store": {
+        "line": 31,
+        "type": ".s()"
+      }
+    },
+    "includes": []
+  },
+  "src/PureSimple.pb": {
+    "type": "source",
+    "procedures": {},
+    "structures": {},
+    "enumerations": {},
+    "constants": {},
+    "macros": {},
+    "interfaces": {},
+    "modules": {},
+    "prototypes": {},
+    "globals": {},
+    "includes": [
+      {
+        "line": 11,
+        "path": "Types.pbi",
+        "directive": "XIncludeFile"
+      },
+      {
+        "line": 13,
+        "path": "Router.pbi",
+        "directive": "XIncludeFile"
+      },
+      {
+        "line": 14,
+        "path": "Context.pbi",
+        "directive": "XIncludeFile"
+      },
+      {
+        "line": 15,
+        "path": "Middleware/Logger.pbi",
+        "directive": "XIncludeFile"
+      },
+      {
+        "line": 16,
+        "path": "Middleware/Recovery.pbi",
+        "directive": "XIncludeFile"
+      },
+      {
+        "line": 17,
+        "path": "Binding.pbi",
+        "directive": "XIncludeFile"
+      },
+      {
+        "line": 18,
+        "path": "Middleware/Cookie.pbi",
+        "directive": "XIncludeFile"
+      },
+      {
+        "line": 19,
+        "path": "Middleware/Session.pbi",
+        "directive": "XIncludeFile"
+      },
+      {
+        "line": 20,
+        "path": "Middleware/BasicAuth.pbi",
+        "directive": "XIncludeFile"
+      },
+      {
+        "line": 21,
+        "path": "Middleware/CSRF.pbi",
+        "directive": "XIncludeFile"
+      },
+      {
+        "line": 22,
+        "path": "../../pure_jinja/PureJinja.pbi",
+        "directive": "XIncludeFile"
+      },
+      {
+        "line": 23,
+        "path": "Rendering.pbi",
+        "directive": "XIncludeFile"
+      },
+      {
+        "line": 24,
+        "path": "Engine.pbi",
+        "directive": "XIncludeFile"
+      },
+      {
+        "line": 25,
+        "path": "Group.pbi",
+        "directive": "XIncludeFile"
+      },
+      {
+        "line": 26,
+        "path": "DB/SQLite.pbi",
+        "directive": "XIncludeFile"
+      }
+    ]
+  },
+  "src/Rendering.pbi": {
+    "type": "include",
+    "procedures": {
+      "File": {
+        "line": 69,
+        "endLine": 91,
+        "returnType": "",
+        "params": "*C.RequestContext, FilePath.s"
+      },
+      "HTML": {
+        "line": 34,
+        "endLine": 38,
+        "returnType": "",
+        "params": "*C.RequestContext, Body.s, StatusCode.i = 200"
+      },
+      "JSON": {
+        "line": 25,
+        "endLine": 29,
+        "returnType": "",
+        "params": "*C.RequestContext, Body.s, StatusCode.i = 200"
+      },
+      "Redirect": {
+        "line": 59,
+        "endLine": 64,
+        "returnType": "",
+        "params": "*C.RequestContext, URL.s, StatusCode.i = 302"
+      },
+      "Render": {
+        "line": 98,
+        "endLine": 123,
+        "returnType": "",
+        "params": "*C.RequestContext, TemplateName.s, TemplatesDir.s = \"templates/\""
+      },
+      "Status": {
+        "line": 52,
+        "endLine": 54,
+        "returnType": "",
+        "params": "*C.RequestContext, StatusCode.i"
+      },
+      "Text": {
+        "line": 43,
+        "endLine": 47,
+        "returnType": "",
+        "params": "*C.RequestContext, Body.s, StatusCode.i = 200"
+      }
+    },
+    "structures": {},
+    "enumerations": {},
+    "constants": {},
+    "macros": {},
+    "interfaces": {},
+    "modules": {
+      "Rendering_declare": {
+        "line": 9,
+        "endLine": 17,
+        "kind": "declare"
+      },
+      "Rendering_impl": {
+        "line": 19,
+        "endLine": 125,
+        "kind": "impl"
+      }
+    },
+    "prototypes": {},
+    "globals": {},
+    "includes": []
+  },
+  "src/Router.pbi": {
+    "type": "include",
+    "procedures": {
+      "Insert": {
+        "line": 155,
+        "endLine": 193,
+        "returnType": "",
+        "params": "Method.s, Pattern.s, Handler.i"
+      },
+      "Match": {
+        "line": 195,
+        "endLine": 212,
+        "returnType": ".i",
+        "params": "Method.s, Path.s, *Ctx.RequestContext"
+      },
+      "_Alloc": {
+        "line": 41,
+        "endLine": 50,
+        "returnType": ".i",
+        "params": "Seg.s"
+      },
+      "_Link": {
+        "line": 52,
+        "endLine": 63,
+        "returnType": "",
+        "params": "Parent.i, Child.i"
+      },
+      "_Match": {
+        "line": 90,
+        "endLine": 149,
+        "returnType": ".i",
+        "params": "NodeIdx.i, Array Segs.s(1), Depth.i, Total.i, CtxPtr.i"
+      },
+      "_Split": {
+        "line": 67,
+        "endLine": 82,
+        "returnType": ".i",
+        "params": "Path.s, Array Out.s(1)"
+      }
+    },
+    "structures": {},
+    "enumerations": {},
+    "constants": {
+      "#_MAX": {
+        "line": 28,
+        "value": "512"
+      }
+    },
+    "macros": {},
+    "interfaces": {},
+    "modules": {
+      "Router_declare": {
+        "line": 11,
+        "endLine": 20,
+        "kind": "declare"
+      },
+      "Router_impl": {
+        "line": 22,
+        "endLine": 214,
+        "kind": "impl"
+      }
+    },
+    "prototypes": {},
+    "globals": {
+      "Dim _Child": {
+        "line": 32,
+        "type": ".i(#_MAX)"
+      },
+      "Dim _Handler": {
+        "line": 31,
+        "type": ".i(#_MAX)"
+      },
+      "Dim _Seg": {
+        "line": 30,
+        "type": ".s(#_MAX)"
+      },
+      "Dim _Sibling": {
+        "line": 33,
+        "type": ".i(#_MAX)"
+      },
+      "NewMap _Root": {
+        "line": 35,
+        "type": ".i()"
+      },
+      "_Cnt": {
+        "line": 34,
+        "type": ".i"
+      }
+    },
+    "includes": []
+  },
+  "src/Types.pbi": {
+    "type": "include",
+    "procedures": {},
+    "structures": {
+      "PS_RouterGroup": {
+        "line": 69,
+        "endLine": 73,
+        "fields": [
+          "Prefix.s",
+          "MW.i[32]",
+          "MWCount.i"
+        ],
+        "extends": ""
+      },
+      "RequestContext": {
+        "line": 14,
+        "endLine": 53,
+        "fields": [
+          "Method.s",
+          "Path.s",
+          "RawQuery.s",
+          "Body.s",
+          "ClientIP.s",
+          "StatusCode.i",
+          "ResponseBody.s",
+          "ContentType.s",
+          "Location.s",
+          "ContextID.i",
+          "HandlerIndex.i",
+          "Aborted.i",
+          "ParamKeys.s",
+          "ParamVals.s",
+          "QueryKeys.s",
+          "QueryVals.s",
+          "StoreKeys.s",
+          "StoreVals.s",
+          "JSONHandle.i",
+          "Cookie.s",
+          "SetCookies.s",
+          "Authorization.s",
+          "SessionID.s",
+          "SessionKeys.s",
+          "SessionVals.s"
+        ],
+        "extends": ""
+      },
+      "RouterEngine": {
+        "line": 61,
+        "endLine": 64,
+        "fields": [
+          "Port.i",
+          "Running.i"
+        ],
+        "extends": ""
+      }
+    },
+    "enumerations": {},
+    "constants": {},
+    "macros": {},
+    "interfaces": {},
+    "modules": {
+      "Types_declare": {
+        "line": 11,
+        "endLine": 75,
+        "kind": "declare"
+      },
+      "Types_impl": {
+        "line": 77,
+        "endLine": 79,
+        "kind": "impl"
+      }
+    },
+    "prototypes": {
+      "PS_HandlerFunc": {
+        "line": 58,
+        "returnType": "",
+        "params": "*Ctx.RequestContext"
+      }
+    },
+    "globals": {},
+    "includes": []
+  },
+  "tests/P0_Harness_Test.pbi": {
+    "type": "include",
+    "procedures": {},
+    "structures": {},
+    "enumerations": {},
+    "constants": {},
+    "macros": {},
+    "interfaces": {},
+    "modules": {},
+    "prototypes": {},
+    "globals": {},
+    "includes": [
+      {
+        "line": 5,
+        "path": "../src/Types.pbi",
+        "directive": "XIncludeFile"
+      }
+    ]
+  },
+  "tests/P1_Router_Test.pbi": {
+    "type": "include",
+    "procedures": {
+      "P1_ExactHandler": {
+        "line": 20,
+        "endLine": 20,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "P1_FileHandler": {
+        "line": 19,
+        "endLine": 19,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "P1_H1": {
+        "line": 24,
+        "endLine": 27,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "P1_H2": {
+        "line": 29,
+        "endLine": 32,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "P1_H3": {
+        "line": 34,
+        "endLine": 37,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "P1_HAbort": {
+        "line": 39,
+        "endLine": 42,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "P1_HelloHandler": {
+        "line": 17,
+        "endLine": 17,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "P1_ParamHandler": {
+        "line": 21,
+        "endLine": 21,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "P1_UserHandler": {
+        "line": 18,
+        "endLine": 18,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      }
+    },
+    "structures": {},
+    "enumerations": {},
+    "constants": {},
+    "macros": {},
+    "interfaces": {},
+    "modules": {},
+    "prototypes": {},
+    "globals": {
+      "P1_ctx": {
+        "line": 56,
+        "type": ".RequestContext"
+      },
+      "P1_ctx2": {
+        "line": 57,
+        "type": ".RequestContext"
+      },
+      "P1_h": {
+        "line": 58,
+        "type": ".i"
+      },
+      "_P1_h1": {
+        "line": 7,
+        "type": ".i"
+      },
+      "_P1_h2": {
+        "line": 8,
+        "type": ".i"
+      },
+      "_P1_h3": {
+        "line": 9,
+        "type": ".i"
+      },
+      "_P1_ha": {
+        "line": 10,
+        "type": ".i"
+      }
+    },
+    "includes": []
+  },
+  "tests/P2_Middleware_Test.pbi": {
+    "type": "include",
+    "procedures": {
+      "P2_Explicit500": {
+        "line": 141,
+        "endLine": 144,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "P2_LoggerMW": {
+        "line": 55,
+        "endLine": 57,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "P2_MW_A": {
+        "line": 36,
+        "endLine": 40,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "P2_MW_B": {
+        "line": 42,
+        "endLine": 46,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "P2_MW_Route": {
+        "line": 48,
+        "endLine": 50,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "P2_RecoveryMW": {
+        "line": 59,
+        "endLine": 61,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "P2_RouteHandler": {
+        "line": 30,
+        "endLine": 33,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "P2_TrackingMW": {
+        "line": 23,
+        "endLine": 27,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      }
+    },
+    "structures": {},
+    "enumerations": {},
+    "constants": {},
+    "macros": {},
+    "interfaces": {},
+    "modules": {},
+    "prototypes": {},
+    "globals": {
+      "P2_ctx": {
+        "line": 66,
+        "type": ".RequestContext"
+      },
+      "_P2_after": {
+        "line": 14,
+        "type": ".i"
+      },
+      "_P2_mw1": {
+        "line": 13,
+        "type": ".i"
+      },
+      "_P2_route": {
+        "line": 15,
+        "type": ".i"
+      },
+      "_P2_seq": {
+        "line": 16,
+        "type": ".s"
+      }
+    },
+    "includes": []
+  },
+  "tests/P3_Binding_Test.pbi": {
+    "type": "include",
+    "procedures": {},
+    "structures": {},
+    "enumerations": {},
+    "constants": {},
+    "macros": {},
+    "interfaces": {},
+    "modules": {},
+    "prototypes": {},
+    "globals": {
+      "P3_bad": {
+        "line": 107,
+        "type": ".i"
+      },
+      "P3_ctx": {
+        "line": 3,
+        "type": ".RequestContext"
+      },
+      "P3_empty": {
+        "line": 119,
+        "type": ".i"
+      },
+      "P3_jsonHandle": {
+        "line": 76,
+        "type": ".i"
+      }
+    },
+    "includes": []
+  },
+  "tests/P4_Rendering_Test.pbi": {
+    "type": "include",
+    "procedures": {},
+    "structures": {},
+    "enumerations": {},
+    "constants": {},
+    "macros": {},
+    "interfaces": {},
+    "modules": {},
+    "prototypes": {},
+    "globals": {
+      "P4_ctx": {
+        "line": 3,
+        "type": ".RequestContext"
+      }
+    },
+    "includes": []
+  },
+  "tests/P5_Groups_Test.pbi": {
+    "type": "include",
+    "procedures": {
+      "P5_MW_A": {
+        "line": 8,
+        "endLine": 12,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "P5_MW_B": {
+        "line": 14,
+        "endLine": 18,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "P5_MethodNotAllowedHandler": {
+        "line": 30,
+        "endLine": 34,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "P5_NotFoundHandler": {
+        "line": 24,
+        "endLine": 28,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "P5_RouteHandler": {
+        "line": 20,
+        "endLine": 22,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      }
+    },
+    "structures": {},
+    "enumerations": {},
+    "constants": {},
+    "macros": {},
+    "interfaces": {},
+    "modules": {},
+    "prototypes": {},
+    "globals": {
+      "\"/api\"": {
+        "line": 76,
+        "type": ""
+      },
+      "\"/api/users\"": {
+        "line": 70,
+        "type": ""
+      },
+      "\"/api/v1/items\"": {
+        "line": 96,
+        "type": ""
+      },
+      "@P5_ctx)": {
+        "line": 96,
+        "type": ""
+      },
+      "P5_ctx": {
+        "line": 3,
+        "type": ".RequestContext"
+      },
+      "P5_g": {
+        "line": 4,
+        "type": ".PS_RouterGroup"
+      },
+      "P5_g2": {
+        "line": 5,
+        "type": ".PS_RouterGroup"
+      },
+      "P5_h": {
+        "line": 70,
+        "type": ".i"
+      },
+      "P5_miss": {
+        "line": 76,
+        "type": ".i"
+      },
+      "P5_nested": {
+        "line": 96,
+        "type": ".i"
+      }
+    },
+    "includes": []
+  },
+  "tests/P6_SQLite_Test.pbi": {
+    "type": "include",
+    "procedures": {},
+    "structures": {},
+    "enumerations": {},
+    "constants": {},
+    "macros": {},
+    "interfaces": {},
+    "modules": {},
+    "prototypes": {},
+    "globals": {
+      "P6_db": {
+        "line": 3,
+        "type": ".i"
+      },
+      "P6_db2": {
+        "line": 4,
+        "type": ".i"
+      }
+    },
+    "includes": []
+  },
+  "tests/P7_Auth_Test.pbi": {
+    "type": "include",
+    "procedures": {
+      "P7_BasicAuthMW": {
+        "line": 20,
+        "endLine": 22,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "P7_CSRFMw": {
+        "line": 23,
+        "endLine": 25,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "P7_EncodeB64": {
+        "line": 6,
+        "endLine": 14,
+        "returnType": ".s",
+        "params": "plain.s"
+      },
+      "P7_SessionMW": {
+        "line": 17,
+        "endLine": 19,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      },
+      "P7_SetBodyHandler": {
+        "line": 26,
+        "endLine": 28,
+        "returnType": "",
+        "params": "*C.RequestContext"
+      }
+    },
+    "structures": {},
+    "enumerations": {},
+    "constants": {},
+    "macros": {},
+    "interfaces": {},
+    "modules": {},
+    "prototypes": {},
+    "globals": {
+      "\"_csrf_token\")": {
+        "line": 189,
+        "type": ""
+      },
+      "P7_csrf": {
+        "line": 189,
+        "type": ".s"
+      },
+      "P7_csrf2": {
+        "line": 221,
+        "type": ".s"
+      },
+      "P7_ctx": {
+        "line": 3,
+        "type": ".RequestContext"
+      },
+      "P7_sid": {
+        "line": 103,
+        "type": ".s"
+      },
+      "P7_tok1": {
+        "line": 172,
+        "type": ".s"
+      },
+      "P7_tok2": {
+        "line": 173,
+        "type": ".s"
+      }
+    },
+    "includes": []
+  },
+  "tests/TestHarness.pbi": {
+    "type": "include",
+    "procedures": {
+      "PrintResults": {
+        "line": 89,
+        "endLine": 100,
+        "returnType": ".i",
+        "params": ""
+      },
+      "_PS_CheckEqual": {
+        "line": 37,
+        "endLine": 44,
+        "returnType": "",
+        "params": "a.i, b.i, file.s, line.i"
+      },
+      "_PS_CheckStr": {
+        "line": 46,
+        "endLine": 53,
+        "returnType": "",
+        "params": "a.s, b.s, file.s, line.i"
+      },
+      "_PS_CheckTrue": {
+        "line": 28,
+        "endLine": 35,
+        "returnType": "",
+        "params": "result.i, file.s, line.i"
+      }
+    },
+    "structures": {},
+    "enumerations": {},
+    "constants": {},
+    "macros": {
+      "BeginSuite": {
+        "line": 58,
+        "endLine": 60,
+        "params": "name"
+      },
+      "Check": {
+        "line": 66,
+        "endLine": 68,
+        "params": "expr"
+      },
+      "CheckEqual": {
+        "line": 74,
+        "endLine": 76,
+        "params": "a, b"
+      },
+      "CheckStr": {
+        "line": 81,
+        "endLine": 83,
+        "params": "a, b"
+      }
+    },
+    "interfaces": {},
+    "modules": {},
+    "prototypes": {},
+    "globals": {
+      "_PS_FailCount": {
+        "line": 21,
+        "type": ".i"
+      },
+      "_PS_PassCount": {
+        "line": 20,
+        "type": ".i"
+      }
+    },
+    "includes": []
+  },
+  "tests/run_all.pb": {
+    "type": "source",
+    "procedures": {},
+    "structures": {},
+    "enumerations": {},
+    "constants": {},
+    "macros": {},
+    "interfaces": {},
+    "modules": {},
+    "prototypes": {},
+    "globals": {},
+    "includes": [
+      {
+        "line": 8,
+        "path": "../src/PureSimple.pb",
+        "directive": "XIncludeFile"
+      },
+      {
+        "line": 11,
+        "path": "TestHarness.pbi",
+        "directive": "XIncludeFile"
+      },
+      {
+        "line": 20,
+        "path": "P0_Harness_Test.pbi",
+        "directive": "XIncludeFile"
+      },
+      {
+        "line": 21,
+        "path": "P1_Router_Test.pbi",
+        "directive": "XIncludeFile"
+      },
+      {
+        "line": 22,
+        "path": "P2_Middleware_Test.pbi",
+        "directive": "XIncludeFile"
+      },
+      {
+        "line": 23,
+        "path": "P3_Binding_Test.pbi",
+        "directive": "XIncludeFile"
+      },
+      {
+        "line": 24,
+        "path": "P4_Rendering_Test.pbi",
+        "directive": "XIncludeFile"
+      },
+      {
+        "line": 25,
+        "path": "P5_Groups_Test.pbi",
+        "directive": "XIncludeFile"
+      },
+      {
+        "line": 26,
+        "path": "P6_SQLite_Test.pbi",
+        "directive": "XIncludeFile"
+      },
+      {
+        "line": 27,
+        "path": "P7_Auth_Test.pbi",
+        "directive": "XIncludeFile"
+      }
+    ]
+  }
+}

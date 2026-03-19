@@ -24,6 +24,5 @@ XIncludeFile "Rendering.pbi"           ; Response rendering: JSON, HTML, Text, R
 XIncludeFile "Engine.pbi"              ; Top-level API: NewApp(), Run(), GET(), POST(), Use(), …
 XIncludeFile "Group.pbi"               ; RouterGroup: sub-router with prefix + group middleware
 XIncludeFile "DB/SQLite.pbi"           ; SQLite adapter + migration runner
-
-; Future phases will add:
-;   XIncludeFile "Config.pbi"
+XIncludeFile "Config.pbi"             ; .env file loader + key/value config store
+XIncludeFile "Log.pbi"                ; Leveled logger (Debug/Info/Warn/Error, file or stdout)
