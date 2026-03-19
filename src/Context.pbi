@@ -71,6 +71,12 @@ Module Ctx
     *C\HandlerIndex = 0
     *C\Aborted      = #False
     *C\JSONHandle   = 0
+    *C\Cookie       = ""
+    *C\SetCookies   = ""
+    *C\Authorization = ""
+    *C\SessionID    = ""
+    *C\SessionKeys  = ""
+    *C\SessionVals  = ""
     _HandlerCount(slot) = 0
   EndProcedure
 

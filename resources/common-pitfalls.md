@@ -319,6 +319,38 @@ This applies to any PureBasic context, not just database code. `Next` closes
 
 ---
 
+## `data` is a reserved PureBasic keyword
+
+```purebasic
+; WRONG — compile error: "A variable can't be named the same as a keyword: data"
+Protected data.s = ReadValue()
+
+; RIGHT — use a descriptive name
+Protected sessData.s = ReadValue()
+Protected rowData.s  = ReadValue()
+```
+
+The keyword `Data` is used for the `DataSection`/`Data` statements. Avoid naming any variable `data` (case-insensitive in PureBasic keywords).
+
+---
+
+## `Base64Encoder` and `Base64Decoder` have asymmetric signatures
+
+```purebasic
+; Encoder: takes a memory buffer, RETURNS a string
+Protected encoded.s = Base64Encoder(*buffer, byteCount)
+
+; Decoder: takes a string, WRITES to a memory buffer, returns byte count
+Protected *buf       = AllocateMemory(maxSize)
+Protected byteCount.i = Base64Decoder(encoded$, *buf, maxSize)
+Protected decoded.s   = PeekS(*buf, byteCount, #PB_Ascii)
+FreeMemory(*buf)
+```
+
+They are not inverses of each other in terms of API shape.
+
+---
+
 ## SQLite column and binding indices are 0-based
 
 ```purebasic
