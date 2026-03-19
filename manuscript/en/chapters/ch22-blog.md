@@ -1,5 +1,7 @@
 # Chapter 22: Building a Blog -- Wild & Still
 
+![Chapter 22 opening illustration](../../illustrations/ch22-cover.svg)
+
 *596 lines of PureBasic. One binary. A production blog.*
 
 ---

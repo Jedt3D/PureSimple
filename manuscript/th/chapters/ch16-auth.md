@@ -1,5 +1,7 @@
 # บทที่ 16: Authentication
 
+![Chapter 16 opening illustration](../../illustrations/ch16-cover.svg)
+
 *ตรวจสอบว่าคนที่ยืนอยู่หน้าประตูเป็นคนที่อ้างตัวจริงหรือไม่*
 
 ---

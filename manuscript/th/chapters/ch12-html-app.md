@@ -1,5 +1,7 @@
 # บทที่ 12: การสร้างแอปพลิเคชัน HTML
 
+![Chapter 12 opening illustration](../../illustrations/ch12-cover.svg)
+
 *จาก directory ว่างเปล่าสู่หน้าเว็บที่ render ได้ในการนั่งทำงานครั้งเดียว*
 
 ---

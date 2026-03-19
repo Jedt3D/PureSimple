@@ -1,5 +1,7 @@
 # บทที่ 2: ภาษา PureBasic
 
+![Chapter 2 opening illustration](../../illustrations/ch02-cover.svg)
+
 *ทุกสิ่งที่คุณต้องรู้เพื่ออ่าน framework code และเขียน handler*
 
 ---

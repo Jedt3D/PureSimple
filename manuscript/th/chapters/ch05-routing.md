@@ -1,5 +1,7 @@
 # บทที่ 5: Routing
 
+![Chapter 5 opening illustration](../../illustrations/ch05-cover.svg)
+
 *สอนให้เซิร์ฟเวอร์รู้ว่า handler ไหนรับผิดชอบ URL ไหน*
 
 ---

@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="380" viewBox="0 0 800 380">
+  <!-- Background -->
+  <rect width="800" height="380" fill="#FFFEF0" rx="8"/>
+  <!-- Outer border -->
+  <rect x="2" y="2" width="796" height="376" fill="none" stroke="#1a1a1a" stroke-width="4" rx="6"/>
+  <!-- Top title banner -->
+  <rect x="2" y="4" width="796" height="60" fill="#1a1a1a" rx="6"/>
+  <rect x="2" y="40" width="796" height="24" fill="#1a1a1a"/>
+  <text x="400" y="42" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="22" fill="#FFE000" text-anchor="middle" dominant-baseline="middle">Chapter 5: Routing</text>
+
+  <!-- Single wide panel -->
+  <rect x="4" y="64" width="792" height="264" fill="#FFFEF0"/>
+
+  <!-- ===== Three incoming route arrows from left ===== -->
+  <!-- Route 1: GET / -->
+  <text x="38" y="148" font-family="Courier New, monospace" font-size="13" fill="#4A90D9" font-weight="bold">GET /</text>
+  <line x1="88" y1="144" x2="268" y2="170" stroke="#4A90D9" stroke-width="2.5" stroke-dasharray="7,3"/>
+  <polygon points="264,165 280,172 263,178" fill="#4A90D9"/>
+
+  <!-- Route 2: POST /users -->
+  <text x="18" y="200" font-family="Courier New, monospace" font-size="13" fill="#E74C3C" font-weight="bold">POST /users</text>
+  <line x1="130" y1="196" x2="268" y2="196" stroke="#E74C3C" stroke-width="2.5" stroke-dasharray="7,3"/>
+  <polygon points="264,190 282,196 264,202" fill="#E74C3C"/>
+
+  <!-- Route 3: DELETE /posts/:id -->
+  <text x="14" y="252" font-family="Courier New, monospace" font-size="12" fill="#8E44AD" font-weight="bold">DELETE /posts/:id</text>
+  <line x1="162" y1="248" x2="268" y2="222" stroke="#8E44AD" stroke-width="2.5" stroke-dasharray="7,3"/>
+  <polygon points="265,216 282,222 263,228" fill="#8E44AD"/>
+
+  <!-- ===== Traffic cop character in center ===== -->
+  <!-- Cop body -->
+  <rect x="286" y="182" width="28" height="48" fill="#27AE60" stroke="#1a1a1a" stroke-width="2" rx="4"/>
+  <!-- Belt / badge line -->
+  <rect x="286" y="196" width="28" height="5" fill="#1a1a1a"/>
+  <rect x="294" y="184" width="10" height="8" fill="#FFE000" stroke="#1a1a1a" stroke-width="1" rx="1"/>
+  <!-- Head -->
+  <circle cx="300" cy="170" r="20" fill="#F39C12" stroke="#1a1a1a" stroke-width="2"/>
+  <!-- Hat (police cap) -->
+  <rect x="282" y="152" width="36" height="10" fill="#1a1a1a" rx="2"/>
+  <rect x="278" y="158" width="44" height="6" fill="#1a1a1a" rx="1"/>
+  <!-- Hat badge -->
+  <polygon points="300,154 304,159 296,159" fill="#FFE000"/>
+  <!-- Eyes -->
+  <circle cx="294" cy="170" r="3.5" fill="#1a1a1a"/>
+  <circle cx="306" cy="170" r="3.5" fill="#1a1a1a"/>
+  <!-- Determined expression -->
+  <line x1="293" y1="179" x2="307" y2="179" stroke="#1a1a1a" stroke-width="1.5"/>
+  <!-- Directing arms -->
+  <!-- Right arm pointing upper right -->
+  <line x1="314" y1="192" x2="344" y2="172" stroke="#1a1a1a" stroke-width="2.5"/>
+  <line x1="344" y1="172" x2="354" y2="165" stroke="#1a1a1a" stroke-width="2.5"/>
+  <!-- Left arm pointing lower right -->
+  <line x1="286" y1="192" x2="256" y2="200" stroke="#1a1a1a" stroke-width="2"/>
+  <!-- Legs -->
+  <line x1="294" y1="230" x2="290" y2="260" stroke="#1a1a1a" stroke-width="2.5"/>
+  <line x1="306" y1="230" x2="310" y2="260" stroke="#1a1a1a" stroke-width="2.5"/>
+  <!-- Boots -->
+  <rect x="282" y="258" width="16" height="8" fill="#1a1a1a" rx="2"/>
+  <rect x="306" y="258" width="16" height="8" fill="#1a1a1a" rx="2"/>
+
+  <!-- ===== Three branching roads to handler boxes (right) ===== -->
+  <!-- Road 1: to IndexHandler (top right) -->
+  <line x1="330" y1="170" x2="450" y2="140" stroke="#4A90D9" stroke-width="2.5"/>
+  <polygon points="446,133 464,138 447,146" fill="#4A90D9"/>
+  <!-- Handler box 1 -->
+  <rect x="466" y="112" width="132" height="42" fill="#4A90D9" stroke="#1a1a1a" stroke-width="2" rx="5"/>
+  <text x="532" y="130" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle" font-weight="bold">IndexHandler</text>
+  <text x="532" y="146" font-family="Courier New, monospace" font-size="10" fill="#D0E8FF" text-anchor="middle">GET /</text>
+
+  <!-- Road 2: to CreateUser (middle right) -->
+  <line x1="330" y1="196" x2="462" y2="196" stroke="#E74C3C" stroke-width="2.5"/>
+  <polygon points="458,190 476,196 458,202" fill="#E74C3C"/>
+  <!-- Handler box 2 -->
+  <rect x="478" y="174" width="132" height="42" fill="#E74C3C" stroke="#1a1a1a" stroke-width="2" rx="5"/>
+  <text x="544" y="192" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle" font-weight="bold">CreateUser</text>
+  <text x="544" y="208" font-family="Courier New, monospace" font-size="10" fill="#FFCCCC" text-anchor="middle">POST /users</text>
+
+  <!-- Road 3: to DeletePost (lower right) -->
+  <line x1="330" y1="220" x2="450" y2="252" stroke="#8E44AD" stroke-width="2.5"/>
+  <polygon points="447,244 462,256 444,260" fill="#8E44AD"/>
+  <!-- Handler box 3 -->
+  <rect x="464" y="238" width="132" height="44" fill="#8E44AD" stroke="#1a1a1a" stroke-width="2" rx="5"/>
+  <text x="530" y="256" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle" font-weight="bold">DeletePost</text>
+  <text x="530" y="272" font-family="Courier New, monospace" font-size="9" fill="#DFC5FF" text-anchor="middle">DELETE /posts/:id</text>
+
+  <!-- ===== Router engine box in center-right ===== -->
+  <rect x="340" y="130" width="110" height="126" fill="#F0F0F0" stroke="#888" stroke-width="1.5" rx="4"/>
+  <text x="395" y="155" font-family="Arial, sans-serif" font-size="11" fill="#555" text-anchor="middle">Router</text>
+  <text x="395" y="172" font-family="Arial, sans-serif" font-size="10" fill="#888" text-anchor="middle">trie match</text>
+  <!-- Trie hint lines -->
+  <line x1="370" y1="185" x2="395" y2="200" stroke="#888" stroke-width="1"/>
+  <line x1="420" y1="185" x2="395" y2="200" stroke="#888" stroke-width="1"/>
+  <line x1="370" y1="185" x2="358" y2="215" stroke="#888" stroke-width="1"/>
+  <line x1="370" y1="185" x2="380" y2="215" stroke="#888" stroke-width="1"/>
+  <line x1="420" y1="185" x2="410" y2="215" stroke="#888" stroke-width="1"/>
+  <line x1="420" y1="185" x2="432" y2="215" stroke="#888" stroke-width="1"/>
+  <circle cx="395" cy="182" r="4" fill="#4A90D9" stroke="#1a1a1a" stroke-width="1"/>
+  <circle cx="370" cy="198" r="3" fill="#E74C3C" stroke="#1a1a1a" stroke-width="1"/>
+  <circle cx="420" cy="198" r="3" fill="#8E44AD" stroke="#1a1a1a" stroke-width="1"/>
+  <circle cx="358" cy="218" r="3" fill="#27AE60" stroke="#1a1a1a" stroke-width="1"/>
+  <circle cx="380" cy="218" r="3" fill="#27AE60" stroke="#1a1a1a" stroke-width="1"/>
+  <circle cx="410" cy="218" r="3" fill="#27AE60" stroke="#1a1a1a" stroke-width="1"/>
+  <circle cx="432" cy="218" r="3" fill="#27AE60" stroke="#1a1a1a" stroke-width="1"/>
+  <text x="395" y="244" font-family="Arial, sans-serif" font-size="10" fill="#888" text-anchor="middle">→ handler</text>
+
+  <!-- Speech bubble from cop -->
+  <rect x="618" y="100" width="158" height="48" fill="white" stroke="#1a1a1a" stroke-width="2" rx="8"/>
+  <!-- No tail needed, just floating -->
+  <text x="697" y="119" font-family="Arial, sans-serif" font-size="12" fill="#1a1a1a" text-anchor="middle">URL matched!</text>
+  <text x="697" y="138" font-family="Arial, sans-serif" font-size="12" fill="#27AE60" text-anchor="middle" font-weight="bold">Dispatching... ✓</text>
+
+  <!-- Bottom caption bar -->
+  <rect x="2" y="330" width="796" height="46" fill="#1a1a1a" rx="6"/>
+  <rect x="2" y="330" width="796" height="10" fill="#1a1a1a"/>
+  <text x="400" y="358" font-family="Arial, sans-serif" font-size="15" fill="white" text-anchor="middle">The router maps URLs to handler procedures.</text>
+</svg>

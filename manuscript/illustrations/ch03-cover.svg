@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="380" viewBox="0 0 800 380">
+  <!-- Background -->
+  <rect width="800" height="380" fill="#FFFEF0" rx="8"/>
+  <!-- Outer border -->
+  <rect x="2" y="2" width="796" height="376" fill="none" stroke="#1a1a1a" stroke-width="4" rx="6"/>
+  <!-- Top title banner -->
+  <rect x="2" y="4" width="796" height="60" fill="#1a1a1a" rx="6"/>
+  <rect x="2" y="40" width="796" height="24" fill="#1a1a1a"/>
+  <text x="400" y="42" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="22" fill="#FFE000" text-anchor="middle" dominant-baseline="middle">Chapter 3: The PureBasic Toolchain</text>
+
+  <!-- Panel divider -->
+  <line x1="400" y1="64" x2="400" y2="330" stroke="#1a1a1a" stroke-width="3"/>
+
+  <!-- ===== LEFT PANEL: Terminal screen ===== -->
+  <rect x="4" y="64" width="394" height="264" fill="#FFFEF0"/>
+
+  <!-- Terminal window outer -->
+  <rect x="30" y="85" width="340" height="220" fill="#1a1a2e" stroke="#1a1a1a" stroke-width="3" rx="8"/>
+  <!-- Terminal title bar -->
+  <rect x="30" y="85" width="340" height="28" fill="#2d2d44" stroke="none" rx="8"/>
+  <rect x="30" y="99" width="340" height="14" fill="#2d2d44"/>
+  <!-- Window buttons -->
+  <circle cx="52" cy="99" r="6" fill="#E74C3C"/>
+  <circle cx="70" cy="99" r="6" fill="#F39C12"/>
+  <circle cx="88" cy="99" r="6" fill="#27AE60"/>
+  <!-- Terminal title -->
+  <text x="200" y="103" font-family="Arial, sans-serif" font-size="12" fill="#888" text-anchor="middle">Terminal</text>
+
+  <!-- Terminal content -->
+  <!-- Prompt line -->
+  <text x="48" y="140" font-family="Courier New, monospace" font-size="13" fill="#00FF00">$</text>
+  <text x="62" y="140" font-family="Courier New, monospace" font-size="13" fill="#00FF00">pbcompiler main.pb</text>
+  <text x="48" y="158" font-family="Courier New, monospace" font-size="13" fill="#00FF00">  -cl -o app</text>
+
+  <!-- Compiling line -->
+  <text x="48" y="182" font-family="Courier New, monospace" font-size="13" fill="#888">Compiling...</text>
+
+  <!-- Progress dots animation hint -->
+  <circle cx="170" cy="197" r="4" fill="#4A90D9"/>
+  <circle cx="185" cy="197" r="4" fill="#4A90D9" opacity="0.7"/>
+  <circle cx="200" cy="197" r="4" fill="#4A90D9" opacity="0.4"/>
+
+  <!-- Done line -->
+  <text x="48" y="220" font-family="Courier New, monospace" font-size="14" fill="#00FF00" font-weight="bold">Done.</text>
+
+  <!-- Blinking cursor -->
+  <rect x="48" y="232" width="10" height="16" fill="#00FF00"/>
+
+  <!-- Stats lines -->
+  <text x="48" y="268" font-family="Courier New, monospace" font-size="11" fill="#888">Optimization: -z</text>
+  <text x="48" y="285" font-family="Courier New, monospace" font-size="11" fill="#888">Output: 2.1 MB</text>
+
+  <!-- ===== RIGHT PANEL: Single file output + developer ===== -->
+  <rect x="402" y="64" width="394" height="264" fill="#FFFEF0"/>
+
+  <!-- Arrow from left to right (crossing panel boundary conceptually, shown inside right panel) -->
+  <!-- Arrow body -->
+  <line x1="420" y1="190" x2="490" y2="190" stroke="#1a1a1a" stroke-width="3"/>
+  <polygon points="490,183 506,190 490,197" fill="#1a1a1a"/>
+
+  <!-- File icon -->
+  <rect x="512" y="148" width="80" height="95" fill="white" stroke="#1a1a1a" stroke-width="2.5" rx="4"/>
+  <!-- Folded corner -->
+  <polygon points="572,148 592,148 592,168 572,168" fill="#DDD" stroke="#1a1a1a" stroke-width="1.5"/>
+  <polygon points="572,148 592,168 572,168" fill="white"/>
+  <!-- File label -->
+  <text x="552" y="205" font-family="Arial, sans-serif" font-size="14" fill="#1a1a1a" text-anchor="middle" font-weight="bold">app</text>
+  <!-- Lightning bolt on file -->
+  <polygon points="560,168 549,188 558,188 548,208 570,184 559,184" fill="#FFE000" stroke="#F39C12" stroke-width="1.5"/>
+
+  <!-- Glow effect around file -->
+  <rect x="508" y="144" width="88" height="103" fill="none" stroke="#FFE000" stroke-width="2" rx="6" opacity="0.5"/>
+
+  <!-- Developer character (thumbs up) -->
+  <!-- Body -->
+  <rect x="658" y="195" width="22" height="42" fill="#27AE60" stroke="#1a1a1a" stroke-width="2" rx="4"/>
+  <!-- Head -->
+  <circle cx="669" cy="183" r="18" fill="#F39C12" stroke="#1a1a1a" stroke-width="2"/>
+  <!-- Happy squint eyes -->
+  <path d="M663 180 Q665 177 667 180" stroke="#1a1a1a" stroke-width="2" fill="none"/>
+  <path d="M671 180 Q673 177 675 180" stroke="#1a1a1a" stroke-width="2" fill="none"/>
+  <!-- Big grin -->
+  <path d="M662 188 Q669 197 676 188" stroke="#1a1a1a" stroke-width="2" fill="none"/>
+  <!-- Thumbs up arm -->
+  <line x1="658" y1="205" x2="636" y2="214" stroke="#1a1a1a" stroke-width="2"/>
+  <!-- Thumb -->
+  <rect x="624" y="208" width="12" height="16" fill="#F39C12" stroke="#1a1a1a" stroke-width="1.5" rx="3"/>
+  <rect x="622" y="216" width="5" height="8" fill="#F39C12" stroke="#1a1a1a" stroke-width="1" rx="2"/>
+  <!-- Other arm up -->
+  <line x1="680" y1="205" x2="698" y2="195" stroke="#1a1a1a" stroke-width="2"/>
+  <!-- Legs -->
+  <line x1="662" y1="237" x2="658" y2="265" stroke="#1a1a1a" stroke-width="2"/>
+  <line x1="676" y1="237" x2="680" y2="265" stroke="#1a1a1a" stroke-width="2"/>
+
+  <!-- Label under file -->
+  <text x="552" y="255" font-family="Arial, sans-serif" font-size="11" fill="#888" text-anchor="middle">native binary</text>
+  <text x="552" y="270" font-family="Arial, sans-serif" font-size="11" fill="#888" text-anchor="middle">self-contained</text>
+
+  <!-- Bottom caption bar -->
+  <rect x="2" y="330" width="796" height="46" fill="#1a1a1a" rx="6"/>
+  <rect x="2" y="330" width="796" height="10" fill="#1a1a1a"/>
+  <text x="400" y="358" font-family="Arial, sans-serif" font-size="15" fill="white" text-anchor="middle">One command. One binary. No build tools.</text>
+</svg>

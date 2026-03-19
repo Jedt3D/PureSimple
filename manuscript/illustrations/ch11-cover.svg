@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="380" viewBox="0 0 800 380">
+  <!-- Background -->
+  <rect width="800" height="380" fill="#FFFEF0" rx="8"/>
+  <!-- Outer border -->
+  <rect x="2" y="2" width="796" height="376" fill="none" stroke="#1a1a1a" stroke-width="4" rx="6"/>
+
+  <!-- Top title banner -->
+  <rect x="2" y="4" width="796" height="60" fill="#1a1a1a" rx="6"/>
+  <rect x="2" y="46" width="796" height="18" fill="#1a1a1a"/>
+  <text x="400" y="42" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="23" fill="#FFE000" text-anchor="middle">Chapter 11: PureJinja Templates</text>
+
+  <!-- === TEMPLATE FILE (left side) === -->
+  <!-- Template document -->
+  <rect x="40" y="90" width="200" height="180" fill="#F0F0F0" stroke="#888" stroke-width="1" rx="4"/>
+  <rect x="40" y="90" width="200" height="24" fill="#F39C12" rx="4"/>
+  <rect x="40" y="106" width="200" height="8" fill="#F39C12"/>
+  <text x="140" y="107" font-family="Arial, sans-serif" font-weight="700" font-size="13" fill="white" text-anchor="middle">template.html</text>
+  <!-- Template code lines -->
+  <text x="52" y="133" font-family="Courier New, monospace" font-size="12" fill="#1a1a1a">&#x3C;h1&#x3E;{{ name }}&#x3C;/h1&#x3E;</text>
+  <text x="52" y="152" font-family="Courier New, monospace" font-size="12" fill="#8E44AD">{% for post in posts %}</text>
+  <text x="60" y="171" font-family="Courier New, monospace" font-size="12" fill="#1a1a1a">  &#x3C;p&#x3E;{{ post.title }}&#x3C;/p&#x3E;</text>
+  <text x="52" y="190" font-family="Courier New, monospace" font-size="12" fill="#8E44AD">{% endfor %}</text>
+  <text x="52" y="209" font-family="Courier New, monospace" font-size="12" fill="#27AE60">{% if user %}</text>
+  <text x="60" y="228" font-family="Courier New, monospace" font-size="12" fill="#1a1a1a">  Welcome, {{ user }}!</text>
+  <text x="52" y="247" font-family="Courier New, monospace" font-size="12" fill="#27AE60">{% endif %}</text>
+
+  <!-- === ARROWS (center) === -->
+  <!-- Arrow 1 -->
+  <line x1="250" y1="150" x2="370" y2="150" stroke="#F39C12" stroke-width="3"/>
+  <polygon points="370,144 382,150 370,156" fill="#F39C12"/>
+  <!-- Arrow 2 -->
+  <line x1="250" y1="200" x2="370" y2="200" stroke="#F39C12" stroke-width="3"/>
+  <polygon points="370,194 382,200 370,206" fill="#F39C12"/>
+  <!-- Arrow label -->
+  <text x="310" y="175" font-family="Arial, sans-serif" font-size="12" fill="#F39C12" text-anchor="middle" font-weight="700">render()</text>
+
+  <!-- === OUTPUT HTML (right side) === -->
+  <rect x="390" y="90" width="200" height="180" fill="#F0F0F0" stroke="#888" stroke-width="1" rx="4"/>
+  <rect x="390" y="90" width="200" height="24" fill="#4A90D9" rx="4"/>
+  <rect x="390" y="106" width="200" height="8" fill="#4A90D9"/>
+  <text x="490" y="107" font-family="Arial, sans-serif" font-weight="700" font-size="13" fill="white" text-anchor="middle">output.html</text>
+  <!-- Output code lines -->
+  <text x="402" y="133" font-family="Courier New, monospace" font-size="12" fill="#1a1a1a">&#x3C;h1&#x3E;Hello World&#x3C;/h1&#x3E;</text>
+  <text x="402" y="152" font-family="Courier New, monospace" font-size="12" fill="#1a1a1a">&#x3C;p&#x3E;First Post&#x3C;/p&#x3E;</text>
+  <text x="402" y="171" font-family="Courier New, monospace" font-size="12" fill="#1a1a1a">&#x3C;p&#x3E;Second Post&#x3C;/p&#x3E;</text>
+  <text x="402" y="190" font-family="Courier New, monospace" font-size="12" fill="#1a1a1a">&#x3C;p&#x3E;Third Post&#x3C;/p&#x3E;</text>
+  <text x="402" y="209" font-family="Courier New, monospace" font-size="12" fill="#1a1a1a">Welcome, Alice!</text>
+
+  <!-- === DEVELOPER CHARACTER (far right) === -->
+  <!-- Body -->
+  <rect x="650" y="158" width="24" height="44" fill="#4A90D9" stroke="#1a1a1a" stroke-width="2" rx="4"/>
+  <!-- Head -->
+  <circle cx="662" cy="145" r="18" fill="#FFDAB9" stroke="#1a1a1a" stroke-width="2"/>
+  <!-- Eyes -->
+  <circle cx="656" cy="143" r="2.5" fill="#1a1a1a"/>
+  <circle cx="668" cy="143" r="2.5" fill="#1a1a1a"/>
+  <!-- Smile -->
+  <path d="M657 151 Q662 156 667 151" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+  <!-- Left arm holding template stencil -->
+  <line x1="650" y1="168" x2="620" y2="155" stroke="#1a1a1a" stroke-width="2"/>
+  <!-- Stencil frame -->
+  <rect x="590" y="143" width="36" height="26" fill="none" stroke="#F39C12" stroke-width="2.5" rx="2"/>
+  <line x1="598" y1="150" x2="618" y2="150" stroke="#F39C12" stroke-width="1.5"/>
+  <line x1="598" y1="158" x2="618" y2="158" stroke="#F39C12" stroke-width="1.5"/>
+  <!-- Right arm -->
+  <line x1="674" y1="168" x2="700" y2="175" stroke="#1a1a1a" stroke-width="2"/>
+  <!-- Legs -->
+  <line x1="656" y1="202" x2="652" y2="230" stroke="#1a1a1a" stroke-width="2"/>
+  <line x1="668" y1="202" x2="672" y2="230" stroke="#1a1a1a" stroke-width="2"/>
+
+  <!-- Speech bubble -->
+  <rect x="690" y="100" width="88" height="50" fill="white" stroke="#1a1a1a" stroke-width="2" rx="8"/>
+  <polygon points="710,150 700,165 722,150" fill="white" stroke="#1a1a1a" stroke-width="2"/>
+  <polygon points="711,150 701,163 721,150" fill="white"/>
+  <text x="734" y="120" font-family="Arial, sans-serif" font-size="12" fill="#1a1a1a" text-anchor="middle">Write once,</text>
+  <text x="734" y="138" font-family="Arial, sans-serif" font-size="12" fill="#1a1a1a" text-anchor="middle">render many.</text>
+
+  <!-- Bottom caption bar -->
+  <rect x="2" y="330" width="796" height="46" fill="#1a1a1a" rx="6"/>
+  <rect x="2" y="330" width="796" height="10" fill="#1a1a1a"/>
+  <text x="400" y="358" font-family="Arial, sans-serif" font-size="15" fill="white" text-anchor="middle">PureJinja: Jinja templates compiled into your binary.</text>
+</svg>

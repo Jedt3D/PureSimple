@@ -1,5 +1,7 @@
 # บทที่ 9: การส่งข้อมูลกลับสู่ผู้ใช้ (Response Rendering)
 
+![Chapter 9 opening illustration](../../illustrations/ch09-cover.svg)
+
 *ให้เสียงกับเซิร์ฟเวอร์ของคุณ — JSON, HTML, redirect และไฟล์*
 
 ---

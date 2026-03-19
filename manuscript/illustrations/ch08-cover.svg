@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="380" viewBox="0 0 800 380">
+  <!-- Background -->
+  <rect width="800" height="380" fill="#FFFEF0" rx="8"/>
+  <!-- Outer border -->
+  <rect x="2" y="2" width="796" height="376" fill="none" stroke="#1a1a1a" stroke-width="4" rx="6"/>
+
+  <!-- Top title banner -->
+  <rect x="2" y="2" width="796" height="60" fill="#1a1a1a" rx="6"/>
+  <rect x="2" y="50" width="796" height="14" fill="#1a1a1a"/>
+  <text x="400" y="42" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="23" fill="#FFE000" text-anchor="middle">CHAPTER 8: REQUEST BINDING</text>
+
+  <!-- Bottom caption bar -->
+  <rect x="2" y="330" width="796" height="46" fill="#1a1a1a"/>
+  <rect x="2" y="328" width="796" height="6" fill="#1a1a1a"/>
+  <text x="400" y="358" font-family="Arial, sans-serif" font-size="15" fill="#FFFFFF" text-anchor="middle">Binding extracts structured data from raw HTTP.</text>
+
+  <!-- Panel divider at x=400 -->
+  <line x1="400" y1="64" x2="400" y2="328" stroke="#1a1a1a" stroke-width="3"/>
+
+  <!-- LEFT PANEL: Chaos -->
+  <!-- Panel label -->
+  <text x="200" y="88" font-family="Arial Black, Arial, sans-serif" font-size="16" font-weight="900" fill="#E74C3C" text-anchor="middle">RAW HTTP CHAOS</text>
+
+  <!-- Flying JSON blob -->
+  <rect x="30" y="110" width="130" height="50" fill="#4A90D9" stroke="#1a1a1a" stroke-width="2" rx="6" transform="rotate(-8 95 135)"/>
+  <text x="95" y="129" font-family="Courier New, monospace" font-size="11" fill="white" text-anchor="middle" transform="rotate(-8 95 135)">{"name":"Alice",</text>
+  <text x="95" y="144" font-family="Courier New, monospace" font-size="11" fill="white" text-anchor="middle" transform="rotate(-8 95 135)">"age":30}</text>
+
+  <!-- Flying form fields -->
+  <rect x="195" y="100" width="145" height="28" fill="#E74C3C" stroke="#1a1a1a" stroke-width="2" rx="4" transform="rotate(6 268 114)"/>
+  <text x="268" y="119" font-family="Courier New, monospace" font-size="11" fill="white" text-anchor="middle" transform="rotate(6 268 114)">name=Alice&amp;age=30</text>
+
+  <!-- Flying query string -->
+  <rect x="50" y="170" width="160" height="28" fill="#8E44AD" stroke="#1a1a1a" stroke-width="2" rx="4" transform="rotate(-5 130 184)"/>
+  <text x="130" y="189" font-family="Courier New, monospace" font-size="11" fill="white" text-anchor="middle" transform="rotate(-5 130 184)">?sort=asc&amp;page=2</text>
+
+  <!-- More chaotic elements -->
+  <rect x="180" y="158" width="140" height="28" fill="#F39C12" stroke="#1a1a1a" stroke-width="2" rx="4" transform="rotate(10 250 172)"/>
+  <text x="250" y="177" font-family="Courier New, monospace" font-size="11" fill="white" text-anchor="middle" transform="rotate(10 250 172)">Content-Type: json</text>
+
+  <rect x="35" y="218" width="120" height="28" fill="#27AE60" stroke="#1a1a1a" stroke-width="2" rx="4" transform="rotate(-12 95 232)"/>
+  <text x="95" y="237" font-family="Courier New, monospace" font-size="11" fill="white" text-anchor="middle" transform="rotate(-12 95 232)">Authorization: ...</text>
+
+  <rect x="200" y="205" width="130" height="28" fill="#E74C3C" stroke="#1a1a1a" stroke-width="2" rx="4" transform="rotate(7 265 219)"/>
+  <text x="265" y="224" font-family="Courier New, monospace" font-size="11" fill="white" text-anchor="middle" transform="rotate(7 265 219)">body: raw bytes</text>
+
+  <!-- Chaos squiggles -->
+  <path d="M60 270 Q90 255 120 270 Q150 285 180 270" stroke="#E74C3C" stroke-width="2.5" fill="none" stroke-dasharray="5,3"/>
+  <path d="M40 290 Q80 278 120 290 Q160 302 200 290" stroke="#8E44AD" stroke-width="2" fill="none" stroke-dasharray="4,4"/>
+  <text x="130" y="310" font-family="Arial, sans-serif" font-size="20" fill="#F39C12" text-anchor="middle">???</text>
+
+  <!-- CENTER: Binding Funnel -->
+  <!-- Funnel shape -->
+  <polygon points="370,100 430,100 415,195 385,195" fill="#FFE000" stroke="#1a1a1a" stroke-width="2.5"/>
+  <!-- Funnel tube -->
+  <rect x="392" y="195" width="16" height="40" fill="#FFE000" stroke="#1a1a1a" stroke-width="2.5"/>
+  <!-- Funnel label -->
+  <text x="400" y="160" font-family="Arial Black, Arial, sans-serif" font-size="12" font-weight="900" fill="#1a1a1a" text-anchor="middle">BINDING</text>
+  <!-- Arrow into funnel from left -->
+  <polygon points="368,145 358,139 358,151" fill="#1a1a1a"/>
+  <!-- Arrow out of funnel to right -->
+  <polygon points="432,235 442,229 442,241" fill="#1a1a1a"/>
+
+  <!-- RIGHT PANEL: Ordered data -->
+  <!-- Panel label -->
+  <text x="600" y="88" font-family="Arial Black, Arial, sans-serif" font-size="16" font-weight="900" fill="#27AE60" text-anchor="middle">STRUCTURED DATA</text>
+
+  <!-- Code box with bound variables -->
+  <rect x="430" y="100" width="340" height="210" fill="#F0F0F0" stroke="#888888" stroke-width="1.5" rx="6"/>
+  <!-- Code box header -->
+  <rect x="430" y="100" width="340" height="28" fill="#27AE60" stroke="#888888" stroke-width="1.5" rx="6"/>
+  <rect x="430" y="116" width="340" height="12" fill="#27AE60"/>
+  <text x="600" y="120" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white" text-anchor="middle">PureBasic Variables</text>
+
+  <text x="448" y="152" font-family="Courier New, monospace" font-size="14" fill="#1a1a1a">; From JSON body</text>
+  <text x="448" y="172" font-family="Courier New, monospace" font-size="14" fill="#E74C3C">name.s</text>
+  <text x="540" y="172" font-family="Courier New, monospace" font-size="14" fill="#1a1a1a"> = </text>
+  <text x="562" y="172" font-family="Courier New, monospace" font-size="14" fill="#27AE60">"Alice"</text>
+  <text x="448" y="193" font-family="Courier New, monospace" font-size="14" fill="#E74C3C">age.i</text>
+  <text x="527" y="193" font-family="Courier New, monospace" font-size="14" fill="#1a1a1a">   = </text>
+  <text x="556" y="193" font-family="Courier New, monospace" font-size="14" fill="#4A90D9">30</text>
+
+  <line x1="448" y1="204" x2="750" y2="204" stroke="#888888" stroke-width="1"/>
+  <text x="448" y="220" font-family="Courier New, monospace" font-size="14" fill="#1a1a1a">; From query string</text>
+  <text x="448" y="240" font-family="Courier New, monospace" font-size="14" fill="#E74C3C">sort.s</text>
+  <text x="540" y="240" font-family="Courier New, monospace" font-size="14" fill="#1a1a1a"> = </text>
+  <text x="562" y="240" font-family="Courier New, monospace" font-size="14" fill="#27AE60">"asc"</text>
+  <text x="448" y="260" font-family="Courier New, monospace" font-size="14" fill="#E74C3C">page.i</text>
+  <text x="540" y="260" font-family="Courier New, monospace" font-size="14" fill="#1a1a1a"> = </text>
+  <text x="562" y="260" font-family="Courier New, monospace" font-size="14" fill="#4A90D9">2</text>
+
+  <!-- Checkmark decoration -->
+  <circle cx="735" cy="155" r="14" fill="#27AE60" stroke="#1a1a1a" stroke-width="1.5"/>
+  <path d="M727 155 L733 161 L743 148" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <circle cx="735" cy="225" r="14" fill="#27AE60" stroke="#1a1a1a" stroke-width="1.5"/>
+  <path d="M727 225 L733 231 L743 218" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+</svg>

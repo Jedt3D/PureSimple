@@ -1,5 +1,7 @@
 # Chapter 14: Database Patterns
 
+![Chapter 14 opening illustration](../../illustrations/ch14-cover.svg)
+
 *Patterns that keep your data layer clean as the app grows.*
 
 ---

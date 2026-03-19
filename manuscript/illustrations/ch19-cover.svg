@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="380" viewBox="0 0 800 380">
+  <!-- Background -->
+  <rect width="800" height="380" fill="#FFFEF0" rx="8"/>
+  <!-- Outer border -->
+  <rect x="2" y="2" width="796" height="376" fill="none" stroke="#1a1a1a" stroke-width="4" rx="6"/>
+  <!-- Top title banner -->
+  <rect x="2" y="4" width="796" height="60" fill="#1a1a1a" rx="6"/>
+  <rect x="2" y="40" width="796" height="24" fill="#1a1a1a"/>
+  <text x="400" y="42" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="22" fill="#FFE000" text-anchor="middle" dominant-baseline="middle">Chapter 19: Deployment</text>
+
+  <!-- Panel divider -->
+  <line x1="400" y1="64" x2="400" y2="330" stroke="#1a1a1a" stroke-width="3"/>
+
+  <!-- ===== LEFT PANEL: Developer with deploy script ===== -->
+  <rect x="4" y="64" width="394" height="264" fill="#FFFEF0"/>
+
+  <!-- Laptop screen -->
+  <rect x="80" y="95" width="230" height="155" fill="#1a1a1a" stroke="#1a1a1a" stroke-width="3" rx="6"/>
+  <!-- Screen content -->
+  <rect x="86" y="101" width="218" height="143" fill="#1a1a1a" rx="3"/>
+  <!-- Terminal title bar -->
+  <rect x="86" y="101" width="218" height="18" fill="#333" rx="3"/>
+  <circle cx="97" cy="110" r="4" fill="#E74C3C"/>
+  <circle cx="109" cy="110" r="4" fill="#FFE000"/>
+  <circle cx="121" cy="110" r="4" fill="#27AE60"/>
+  <!-- Terminal text -->
+  <text x="95" y="135" font-family="monospace, Arial, sans-serif" font-size="10" fill="#27AE60">$ ./scripts/deploy.sh</text>
+  <text x="95" y="151" font-family="monospace, Arial, sans-serif" font-size="9" fill="#4A90D9">[1/5] Pulling latest...</text>
+  <text x="95" y="165" font-family="monospace, Arial, sans-serif" font-size="9" fill="#4A90D9">[2/5] Compiling...</text>
+  <text x="95" y="179" font-family="monospace, Arial, sans-serif" font-size="9" fill="#FFE000">[3/5] Stopping old app</text>
+  <text x="95" y="193" font-family="monospace, Arial, sans-serif" font-size="9" fill="#FFE000">[4/5] Swapping binary</text>
+  <text x="95" y="207" font-family="monospace, Arial, sans-serif" font-size="9" fill="#27AE60">[5/5] Health check OK!</text>
+  <!-- Blinking cursor -->
+  <rect x="95" y="218" width="7" height="12" fill="#27AE60"/>
+  <!-- Laptop base -->
+  <rect x="68" y="250" width="254" height="14" fill="#888" stroke="#1a1a1a" stroke-width="2" rx="3"/>
+  <rect x="160" y="250" width="70" height="8" fill="#666" rx="2"/>
+
+  <!-- Developer character (excited) -->
+  <!-- Body -->
+  <rect x="298" y="190" width="22" height="42" fill="#4A90D9" stroke="#1a1a1a" stroke-width="2" rx="4"/>
+  <!-- Head -->
+  <circle cx="309" cy="178" r="18" fill="#F39C12" stroke="#1a1a1a" stroke-width="2"/>
+  <!-- Excited eyes (wide) -->
+  <circle cx="303" cy="175" r="4" fill="white" stroke="#1a1a1a" stroke-width="1"/>
+  <circle cx="315" cy="175" r="4" fill="white" stroke="#1a1a1a" stroke-width="1"/>
+  <circle cx="304" cy="176" r="2.5" fill="#1a1a1a"/>
+  <circle cx="316" cy="176" r="2.5" fill="#1a1a1a"/>
+  <!-- Excited smile -->
+  <path d="M302 184 Q309 192 316 184" stroke="#1a1a1a" stroke-width="2" fill="none"/>
+  <!-- Fist pump arm -->
+  <line x1="298" y1="200" x2="278" y2="180" stroke="#1a1a1a" stroke-width="2"/>
+  <circle cx="275" cy="177" r="6" fill="#F39C12" stroke="#1a1a1a" stroke-width="1.5"/>
+  <!-- Other arm at laptop -->
+  <line x1="320" y1="200" x2="308" y2="215" stroke="#1a1a1a" stroke-width="2"/>
+  <!-- Legs -->
+  <line x1="302" y1="232" x2="298" y2="265" stroke="#1a1a1a" stroke-width="2"/>
+  <line x1="316" y1="232" x2="320" y2="265" stroke="#1a1a1a" stroke-width="2"/>
+
+  <!-- Speech bubble -->
+  <rect x="230" y="125" width="100" height="38" fill="white" stroke="#1a1a1a" stroke-width="2" rx="8"/>
+  <polygon points="285,163 279,176 295,163" fill="white" stroke="#1a1a1a" stroke-width="2"/>
+  <polygon points="286,164 280,175 294,164" fill="white"/>
+  <text x="280" y="142" font-family="Arial, sans-serif" font-size="12" fill="#27AE60" text-anchor="middle" font-weight="bold">Deploying!</text>
+  <text x="280" y="158" font-family="Arial, sans-serif" font-size="11" fill="#1a1a1a" text-anchor="middle">one script</text>
+
+  <!-- ===== RIGHT PANEL: Rocket launching to server in space ===== -->
+  <rect x="402" y="64" width="394" height="264" fill="#FFFEF0"/>
+
+  <!-- Space background (subtle) - stars -->
+  <circle cx="430" cy="90" r="1.5" fill="#1a1a1a"/>
+  <circle cx="460" cy="105" r="1" fill="#1a1a1a"/>
+  <circle cx="490" cy="80" r="1.5" fill="#1a1a1a"/>
+  <circle cx="520" cy="95" r="1" fill="#1a1a1a"/>
+  <circle cx="550" cy="75" r="1.5" fill="#1a1a1a"/>
+  <circle cx="580" cy="88" r="1" fill="#1a1a1a"/>
+  <circle cx="610" cy="100" r="1.5" fill="#1a1a1a"/>
+  <circle cx="640" cy="78" r="1" fill="#1a1a1a"/>
+  <circle cx="670" cy="92" r="1.5" fill="#1a1a1a"/>
+  <circle cx="700" cy="84" r="1" fill="#1a1a1a"/>
+  <circle cx="730" cy="96" r="1.5" fill="#1a1a1a"/>
+  <circle cx="760" cy="72" r="1" fill="#1a1a1a"/>
+  <circle cx="445" cy="130" r="1" fill="#1a1a1a"/>
+  <circle cx="475" cy="118" r="1.5" fill="#1a1a1a"/>
+  <circle cx="505" cy="140" r="1" fill="#1a1a1a"/>
+
+  <!-- Rocket body -->
+  <rect x="475" y="185" width="36" height="80" fill="#4A90D9" stroke="#1a1a1a" stroke-width="2" rx="4"/>
+  <!-- Rocket nose cone -->
+  <polygon points="475,185 511,185 493,145" fill="#E74C3C" stroke="#1a1a1a" stroke-width="2"/>
+  <!-- Rocket window -->
+  <circle cx="493" cy="210" r="10" fill="white" stroke="#1a1a1a" stroke-width="2"/>
+  <circle cx="493" cy="210" r="6" fill="#4A90D9"/>
+  <!-- Rocket fin left -->
+  <polygon points="475,240 475,270 455,270" fill="#E74C3C" stroke="#1a1a1a" stroke-width="2"/>
+  <!-- Rocket fin right -->
+  <polygon points="511,240 511,270 531,270" fill="#E74C3C" stroke="#1a1a1a" stroke-width="2"/>
+  <!-- Rocket label -->
+  <text x="493" y="240" font-family="Arial, sans-serif" font-size="9" fill="white" text-anchor="middle" font-weight="bold">app</text>
+  <text x="493" y="252" font-family="Arial, sans-serif" font-size="8" fill="#FFFEF0" text-anchor="middle">(binary)</text>
+
+  <!-- Rocket exhaust/trail -->
+  <polygon points="478,270 508,270 500,310 486,310" fill="#F39C12" stroke="#1a1a1a" stroke-width="1.5" opacity="0.8"/>
+  <polygon points="482,310 504,310 498,325 486,325" fill="#FFE000" stroke="#1a1a1a" stroke-width="1" opacity="0.7"/>
+  <polygon points="486,325 500,325 497,335 489,335" fill="#E74C3C" stroke="#1a1a1a" stroke-width="1" opacity="0.6"/>
+
+  <!-- Server cloud in top-right (space) -->
+  <!-- Cloud shape (simple server) -->
+  <rect x="615" y="85" width="130" height="90" fill="white" stroke="#1a1a1a" stroke-width="2" rx="6"/>
+  <!-- Server label -->
+  <text x="680" y="108" font-family="Arial, sans-serif" font-size="11" fill="#1a1a1a" text-anchor="middle" font-weight="bold">Server</text>
+  <text x="680" y="121" font-family="Arial, sans-serif" font-size="9" fill="#888" text-anchor="middle">129.212.236.80</text>
+  <!-- Server rack lines -->
+  <rect x="625" y="128" width="110" height="14" fill="#F0F0F0" stroke="#888" stroke-width="1" rx="2"/>
+  <rect x="625" y="147" width="110" height="14" fill="#F0F0F0" stroke="#888" stroke-width="1" rx="2"/>
+  <!-- Health check green light -->
+  <circle cx="726" cy="135" r="5" fill="#27AE60" stroke="#1a1a1a" stroke-width="1"/>
+  <circle cx="726" cy="154" r="5" fill="#27AE60" stroke="#1a1a1a" stroke-width="1"/>
+  <!-- GET /health label -->
+  <text x="680" y="170" font-family="Arial, sans-serif" font-size="9" fill="#27AE60" text-anchor="middle" font-weight="bold">GET /health → 200</text>
+
+  <!-- Arrow from rocket path to server -->
+  <path d="M511 170 Q570 130 615 130" stroke="#1a1a1a" stroke-width="2" fill="none" stroke-dasharray="5,3"/>
+  <polygon points="609,124 620,130 609,136" fill="#1a1a1a"/>
+
+  <!-- Bottom caption bar -->
+  <rect x="2" y="330" width="796" height="46" fill="#1a1a1a" rx="6"/>
+  <rect x="2" y="330" width="796" height="10" fill="#1a1a1a"/>
+  <text x="400" y="358" font-family="Arial, sans-serif" font-size="15" fill="white" text-anchor="middle">Compile once. Copy one file. Run forever.</text>
+</svg>

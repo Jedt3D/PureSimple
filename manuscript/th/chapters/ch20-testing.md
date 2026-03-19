@@ -1,5 +1,7 @@
 # บทที่ 20: Testing
 
+![Chapter 20 opening illustration](../../illustrations/ch20-cover.svg)
+
 *264 assertion ที่ทำให้คุณ refactor ได้โดยไม่หวาดกลัว*
 
 ---

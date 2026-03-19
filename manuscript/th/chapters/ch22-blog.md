@@ -1,5 +1,7 @@
 # บทที่ 22: สร้าง Blog — Wild & Still
 
+![Chapter 22 opening illustration](../../illustrations/ch22-cover.svg)
+
 *PureBasic 596 บรรทัด Binary ตัวเดียว Blog ที่ใช้งาน production ได้*
 
 ---

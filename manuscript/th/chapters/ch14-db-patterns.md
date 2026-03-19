@@ -1,5 +1,7 @@
 # บทที่ 14: รูปแบบการใช้งานฐานข้อมูล
 
+![Chapter 14 opening illustration](../../illustrations/ch14-cover.svg)
+
 *รูปแบบที่รักษา data layer ของคุณให้เป็นระเบียบเมื่อแอปพลิเคชันเติบโต*
 
 ---

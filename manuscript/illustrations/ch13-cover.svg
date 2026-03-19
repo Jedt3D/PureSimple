@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="380" viewBox="0 0 800 380">
+  <!-- Background -->
+  <rect width="800" height="380" fill="#FFFEF0" rx="8"/>
+  <!-- Outer border -->
+  <rect x="2" y="2" width="796" height="376" fill="none" stroke="#1a1a1a" stroke-width="4" rx="6"/>
+
+  <!-- Top title banner -->
+  <rect x="2" y="4" width="796" height="60" fill="#1a1a1a" rx="6"/>
+  <rect x="2" y="46" width="796" height="18" fill="#1a1a1a"/>
+  <text x="400" y="42" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="23" fill="#FFE000" text-anchor="middle">Chapter 13: SQLite Integration</text>
+
+  <!-- === DEVELOPER CHARACTER (left) === -->
+  <!-- Body -->
+  <rect x="88" y="168" width="24" height="44" fill="#4A90D9" stroke="#1a1a1a" stroke-width="2" rx="4"/>
+  <!-- Head -->
+  <circle cx="100" cy="155" r="18" fill="#FFDAB9" stroke="#1a1a1a" stroke-width="2"/>
+  <!-- Eyes -->
+  <circle cx="94" cy="153" r="2.5" fill="#1a1a1a"/>
+  <circle cx="106" cy="153" r="2.5" fill="#1a1a1a"/>
+  <!-- Smile -->
+  <path d="M95 161 Q100 166 105 161" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+  <!-- Left arm -->
+  <line x1="88" y1="178" x2="58" y2="188" stroke="#1a1a1a" stroke-width="2"/>
+  <!-- Right arm (throwing paper) -->
+  <line x1="112" y1="178" x2="145" y2="168" stroke="#1a1a1a" stroke-width="2"/>
+  <!-- Legs -->
+  <line x1="94" y1="212" x2="90" y2="240" stroke="#1a1a1a" stroke-width="2"/>
+  <line x1="106" y1="212" x2="110" y2="240" stroke="#1a1a1a" stroke-width="2"/>
+
+  <!-- === SQL PAPER SLIPS in flight === -->
+  <!-- INSERT slip -->
+  <rect x="155" y="148" width="90" height="26" fill="white" stroke="#27AE60" stroke-width="2" rx="3"/>
+  <text x="200" y="163" font-family="Courier New, monospace" font-size="12" fill="#27AE60" text-anchor="middle" font-weight="700">INSERT ▶</text>
+  <!-- Arrow -->
+  <line x1="245" y1="161" x2="285" y2="161" stroke="#27AE60" stroke-width="2"/>
+  <polygon points="285,155 297,161 285,167" fill="#27AE60"/>
+
+  <!-- SELECT slip -->
+  <rect x="155" y="192" width="90" height="26" fill="white" stroke="#4A90D9" stroke-width="2" rx="3"/>
+  <text x="200" y="207" font-family="Courier New, monospace" font-size="12" fill="#4A90D9" text-anchor="middle" font-weight="700">SELECT ▶</text>
+  <!-- Arrow -->
+  <line x1="245" y1="205" x2="285" y2="205" stroke="#4A90D9" stroke-width="2"/>
+  <polygon points="285,199 297,205 285,211" fill="#4A90D9"/>
+
+  <!-- UPDATE slip -->
+  <rect x="155" y="236" width="90" height="26" fill="white" stroke="#F39C12" stroke-width="2" rx="3"/>
+  <text x="200" y="251" font-family="Courier New, monospace" font-size="12" fill="#F39C12" text-anchor="middle" font-weight="700">UPDATE ▶</text>
+  <!-- Arrow -->
+  <line x1="245" y1="249" x2="285" y2="249" stroke="#F39C12" stroke-width="2"/>
+  <polygon points="285,243 297,249 285,255" fill="#F39C12"/>
+
+  <!-- === FILING CABINET / DATABASE CYLINDER === -->
+  <!-- Cylinder top ellipse -->
+  <ellipse cx="390" cy="148" rx="65" ry="18" fill="#E0E0E0" stroke="#1a1a1a" stroke-width="2"/>
+  <!-- Cylinder body -->
+  <rect x="325" y="148" width="130" height="120" fill="#C8C8C8" stroke="#1a1a1a" stroke-width="2"/>
+  <!-- Cylinder bottom ellipse -->
+  <ellipse cx="390" cy="268" rx="65" ry="18" fill="#B0B0B0" stroke="#1a1a1a" stroke-width="2"/>
+  <!-- DB label -->
+  <text x="390" y="200" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="18" fill="#1a1a1a" text-anchor="middle">app.db</text>
+  <!-- Drawer lines -->
+  <line x1="325" y1="185" x2="455" y2="185" stroke="#999" stroke-width="1.5"/>
+  <line x1="325" y1="222" x2="455" y2="222" stroke="#999" stroke-width="1.5"/>
+  <!-- Drawer handles -->
+  <rect x="375" y="198" width="30" height="8" fill="#888" rx="3"/>
+  <rect x="375" y="234" width="30" height="8" fill="#888" rx="3"/>
+
+  <!-- Return data arrow (cabinet → developer) -->
+  <line x1="325" y1="230" x2="200" y2="230" stroke="#8E44AD" stroke-width="2" stroke-dasharray="6,3"/>
+  <polygon points="200,224 188,230 200,236" fill="#8E44AD"/>
+  <text x="260" y="222" font-family="Arial, sans-serif" font-size="11" fill="#8E44AD" text-anchor="middle" font-weight="700">data rows</text>
+
+  <!-- === MIGRATION ROBOT (right side) === -->
+  <!-- Robot body -->
+  <rect x="560" y="175" width="36" height="46" fill="#8E44AD" stroke="#1a1a1a" stroke-width="2" rx="6"/>
+  <!-- Robot head -->
+  <rect x="564" y="152" width="28" height="26" fill="#8E44AD" stroke="#1a1a1a" stroke-width="2" rx="4"/>
+  <!-- Robot eyes (LED-style) -->
+  <rect x="569" y="158" width="7" height="5" fill="#FFE000" rx="1"/>
+  <rect x="581" y="158" width="7" height="5" fill="#FFE000" rx="1"/>
+  <!-- Robot antenna -->
+  <line x1="578" y1="152" x2="578" y2="140" stroke="#1a1a1a" stroke-width="2"/>
+  <circle cx="578" cy="137" r="4" fill="#E74C3C" stroke="#1a1a1a" stroke-width="1.5"/>
+  <!-- Robot mouth -->
+  <line x1="570" y1="170" x2="587" y2="170" stroke="#FFE000" stroke-width="1.5"/>
+  <!-- Robot left arm holding migration files -->
+  <line x1="560" y1="188" x2="530" y2="200" stroke="#1a1a1a" stroke-width="2"/>
+  <!-- Robot right arm -->
+  <line x1="596" y1="188" x2="626" y2="200" stroke="#1a1a1a" stroke-width="2"/>
+  <!-- Robot legs -->
+  <line x1="572" y1="221" x2="568" y2="248" stroke="#1a1a1a" stroke-width="2"/>
+  <line x1="584" y1="221" x2="588" y2="248" stroke="#1a1a1a" stroke-width="2"/>
+
+  <!-- Migration files stacked -->
+  <!-- File 3 (bottom) -->
+  <rect x="500" y="240" width="60" height="34" fill="white" stroke="#1a1a1a" stroke-width="1.5" rx="2"/>
+  <text x="530" y="261" font-family="Arial Black, Arial, sans-serif" font-size="14" fill="#888" text-anchor="middle">3</text>
+  <!-- File 2 (middle) -->
+  <rect x="504" y="220" width="60" height="34" fill="white" stroke="#1a1a1a" stroke-width="1.5" rx="2"/>
+  <text x="534" y="241" font-family="Arial Black, Arial, sans-serif" font-size="14" fill="#555" text-anchor="middle">2</text>
+  <!-- File 1 (top) -->
+  <rect x="508" y="200" width="60" height="34" fill="#FFE000" stroke="#1a1a1a" stroke-width="1.5" rx="2"/>
+  <text x="538" y="221" font-family="Arial Black, Arial, sans-serif" font-size="14" fill="#1a1a1a" text-anchor="middle">1</text>
+  <!-- Label -->
+  <text x="538" y="286" font-family="Arial, sans-serif" font-size="10" fill="#555" text-anchor="middle">migrations/</text>
+
+  <!-- Robot label -->
+  <text x="578" y="268" font-family="Arial, sans-serif" font-size="10" fill="#8E44AD" text-anchor="middle" font-weight="700">MigrationBot</text>
+
+  <!-- Bottom caption bar -->
+  <rect x="2" y="330" width="796" height="46" fill="#1a1a1a" rx="6"/>
+  <rect x="2" y="330" width="796" height="10" fill="#1a1a1a"/>
+  <text x="400" y="358" font-family="Arial, sans-serif" font-size="15" fill="white" text-anchor="middle">SQLite: the database that ships inside your binary.</text>
+</svg>

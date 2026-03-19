@@ -1,5 +1,7 @@
 # Chapter 7: Middleware
 
+![Chapter 7 opening illustration](../../illustrations/ch07-cover.svg)
+
 *The security gates every request must pass through.*
 
 ---

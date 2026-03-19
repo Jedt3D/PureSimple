@@ -1,5 +1,7 @@
 # Chapter 19: Deployment
 
+![Chapter 19 opening illustration](../../illustrations/ch19-cover.svg)
+
 *Getting your binary from your laptop to a server, without crossing your fingers.*
 
 ---

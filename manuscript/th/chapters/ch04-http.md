@@ -1,5 +1,7 @@
 # บทที่ 4: พื้นฐาน HTTP
 
+![Chapter 4 opening illustration](../../illustrations/ch04-cover.svg)
+
 *ภาษาที่ browser และ server ใช้สื่อสารกัน*
 
 ---

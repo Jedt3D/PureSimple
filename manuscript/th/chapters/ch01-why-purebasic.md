@@ -1,5 +1,7 @@
 # บทที่ 1: ทำไมต้องใช้ PureBasic สำหรับงาน Web?
 
+![Chapter 1 opening illustration](../../illustrations/ch01-cover.svg)
+
 *เหตุผลที่การ compile web application ให้กลายเป็นไฟล์เดียวที่รันได้เลยนั้นมีคุณค่ามากกว่าที่คิด*
 
 ---

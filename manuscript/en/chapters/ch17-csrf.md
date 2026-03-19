@@ -1,5 +1,7 @@
 # Chapter 17: CSRF Protection
 
+![Chapter 17 opening illustration](../../illustrations/ch17-cover.svg)
+
 *The invisible attack you only discover after it's too late.*
 
 ---

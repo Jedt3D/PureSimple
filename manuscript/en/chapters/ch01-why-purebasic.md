@@ -1,5 +1,7 @@
 # Chapter 1: Why PureBasic for the Web?
 
+![Chapter 1 opening illustration](../../illustrations/ch01-cover.svg)
+
 *The case for compiling your web app into a single file that just runs.*
 
 ---

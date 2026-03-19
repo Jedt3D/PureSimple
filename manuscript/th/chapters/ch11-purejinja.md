@@ -1,5 +1,7 @@
 # บทที่ 11: PureJinja — Jinja Templates ใน PureBasic
 
+![Chapter 11 opening illustration](../../illustrations/ch11-cover.svg)
+
 *Template engine ที่พูด syntax แบบ Python แต่ทำงานด้วยความเร็วระดับ C*
 
 ---

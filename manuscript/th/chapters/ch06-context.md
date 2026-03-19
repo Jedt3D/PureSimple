@@ -1,5 +1,7 @@
 # บทที่ 6: Request Context
 
+![Chapter 6 opening illustration](../../illustrations/ch06-cover.svg)
+
 *กระเป๋าเป้ที่ทุก request แบกติดตัวตลอดห่วงโซ่ handler*
 
 ---

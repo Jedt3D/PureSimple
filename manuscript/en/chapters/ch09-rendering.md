@@ -1,5 +1,7 @@
 # Chapter 9: Response Rendering
 
+![Chapter 9 opening illustration](../../illustrations/ch09-cover.svg)
+
 *Giving your server a voice -- JSON, HTML, redirects, and files.*
 
 ---

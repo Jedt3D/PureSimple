@@ -1,5 +1,7 @@
 # บทที่ 15: Cookie และ Session
 
+![Chapter 15 opening illustration](../../illustrations/ch15-cover.svg)
+
 *สอน protocol ที่ไม่มีความจำให้รู้จักว่าคุณเป็นใคร*
 
 ---

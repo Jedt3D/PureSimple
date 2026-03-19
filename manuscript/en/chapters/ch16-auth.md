@@ -1,5 +1,7 @@
 # Chapter 16: Authentication
 
+![Chapter 16 opening illustration](../../illustrations/ch16-cover.svg)
+
 *Making sure the person at the door is who they say they are.*
 
 ---

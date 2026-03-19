@@ -1,5 +1,7 @@
 # Chapter 21: Building a REST API -- To-Do List
 
+![Chapter 21 opening illustration](../../illustrations/ch21-cover.svg)
+
 *Your first API, from scaffold to curl, in one chapter.*
 
 ---

@@ -1,5 +1,7 @@
 # บทที่ 19: Deployment
 
+![Chapter 19 opening illustration](../../illustrations/ch19-cover.svg)
+
 *การนำไบนารีจาก laptop ไปยังเซิร์ฟเวอร์ โดยไม่ต้องอธิษฐาน*
 
 ---

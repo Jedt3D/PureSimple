@@ -1,5 +1,7 @@
 # Chapter 8: Request Binding
 
+![Chapter 8 opening illustration](../../illustrations/ch08-cover.svg)
+
 *Turning raw bytes into the data your handler needs.*
 
 ---

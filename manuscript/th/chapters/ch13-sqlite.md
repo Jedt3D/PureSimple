@@ -1,5 +1,7 @@
 # บทที่ 13: การผนวก SQLite
 
+![Chapter 13 opening illustration](../../illustrations/ch13-cover.svg)
+
 *ฐานข้อมูลของคุณคอมไพล์รวมเข้าไปในไบนารีด้วย*
 
 ---

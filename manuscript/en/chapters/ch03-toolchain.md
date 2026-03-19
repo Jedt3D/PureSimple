@@ -1,5 +1,7 @@
 # Chapter 3: The PureBasic Toolchain -- Compiler, Debugger, and PureUnit
 
+![Chapter 3 opening illustration](../../illustrations/ch03-cover.svg)
+
 *The three tools that turn your code into a tested, debugged binary.*
 
 ---

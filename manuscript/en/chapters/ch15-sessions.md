@@ -1,5 +1,7 @@
 # Chapter 15: Cookies and Sessions
 
+![Chapter 15 opening illustration](../../illustrations/ch15-cover.svg)
+
 *Teaching a stateless protocol to remember who you are.*
 
 ---

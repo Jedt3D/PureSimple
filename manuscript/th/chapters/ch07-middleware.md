@@ -1,5 +1,7 @@
 # บทที่ 7: Middleware
 
+![Chapter 7 opening illustration](../../illustrations/ch07-cover.svg)
+
 *ด่านตรวจที่ทุก request ต้องผ่าน*
 
 ---

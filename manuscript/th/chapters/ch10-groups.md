@@ -1,5 +1,7 @@
 # บทที่ 10: Route Groups
 
+![Chapter 10 opening illustration](../../illustrations/ch10-cover.svg)
+
 *จัดระเบียบ route ในแบบเดียวกับที่คุณจัดระเบียบโค้ด — แบ่งตามความรับผิดชอบ*
 
 ---

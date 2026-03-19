@@ -1,5 +1,7 @@
 # บทที่ 21: สร้าง REST API — รายการสิ่งที่ต้องทำ
 
+![Chapter 21 opening illustration](../../illustrations/ch21-cover.svg)
+
 *API แรกของคุณ ตั้งแต่ scaffold จนถึง curl ในบทเดียว*
 
 ---

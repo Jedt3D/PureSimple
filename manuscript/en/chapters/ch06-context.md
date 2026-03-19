@@ -1,5 +1,7 @@
 # Chapter 6: The Request Context
 
+![Chapter 6 opening illustration](../../illustrations/ch06-cover.svg)
+
 *The backpack every request carries through the handler chain.*
 
 ---

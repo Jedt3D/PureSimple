@@ -1,5 +1,7 @@
 # บทที่ 8: Request Binding
 
+![Chapter 8 opening illustration](../../illustrations/ch08-cover.svg)
+
 *แปลง raw byte ให้กลายเป็นข้อมูลที่ handler ต้องการ*
 
 ---

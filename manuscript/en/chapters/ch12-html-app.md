@@ -1,5 +1,7 @@
 # Chapter 12: Building an HTML Application
 
+![Chapter 12 opening illustration](../../illustrations/ch12-cover.svg)
+
 *From empty directory to rendered pages in one sitting.*
 
 ---

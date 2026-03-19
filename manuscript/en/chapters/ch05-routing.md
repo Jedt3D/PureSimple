@@ -1,5 +1,7 @@
 # Chapter 5: Routing
 
+![Chapter 5 opening illustration](../../illustrations/ch05-cover.svg)
+
 *Teaching your server which handler answers which URL.*
 
 ---

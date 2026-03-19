@@ -1,5 +1,7 @@
 # บทที่ 18: Configuration และ Logging
 
+![Chapter 18 opening illustration](../../illustrations/ch18-cover.svg)
+
 *Config แบบ twelve-factor และ log ที่บอกคุณว่าเกิดอะไรขึ้นตอนตีสาม*
 
 ---

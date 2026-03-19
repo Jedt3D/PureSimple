@@ -1,5 +1,7 @@
 # บทที่ 23: รองรับหลายฐานข้อมูล
 
+![Chapter 23 opening illustration](../../illustrations/ch23-cover.svg)
+
 *Interface เดียว สามไดรเวอร์ โค้ดไม่เปลี่ยนแม้แต่บรรทัดเดียว*
 
 ---

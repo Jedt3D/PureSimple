@@ -1,5 +1,7 @@
 # บทที่ 17: การป้องกัน CSRF
 
+![Chapter 17 opening illustration](../../illustrations/ch17-cover.svg)
+
 *การโจมตีที่มองไม่เห็น ซึ่งมักพบเมื่อสายเกินแก้*
 
 ---

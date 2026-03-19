@@ -1,5 +1,7 @@
 # Chapter 11: PureJinja -- Jinja Templates in PureBasic
 
+![Chapter 11 opening illustration](../../illustrations/ch11-cover.svg)
+
 *The template engine that speaks Python syntax and runs at C speed.*
 
 ---

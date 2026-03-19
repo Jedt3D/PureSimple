@@ -1,5 +1,7 @@
 # Chapter 13: SQLite Integration
 
+![Chapter 13 opening illustration](../../illustrations/ch13-cover.svg)
+
 *Your database compiles into the binary too.*
 
 ---

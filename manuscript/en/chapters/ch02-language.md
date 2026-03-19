@@ -1,5 +1,7 @@
 # Chapter 2: The PureBasic Language
 
+![Chapter 2 opening illustration](../../illustrations/ch02-cover.svg)
+
 *Everything you need to read framework code and write handlers.*
 
 ---

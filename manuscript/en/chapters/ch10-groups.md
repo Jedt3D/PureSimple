@@ -1,5 +1,7 @@
 # Chapter 10: Route Groups
 
+![Chapter 10 opening illustration](../../illustrations/ch10-cover.svg)
+
 *Organising routes the way you organise your code -- by responsibility.*
 
 ---

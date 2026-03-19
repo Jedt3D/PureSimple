@@ -1,5 +1,7 @@
 # บทที่ 3: Toolchain ของ PureBasic -- Compiler, Debugger และ PureUnit
 
+![Chapter 3 opening illustration](../../illustrations/ch03-cover.svg)
+
 *สามเครื่องมือที่เปลี่ยนโค้ดของคุณให้กลายเป็น binary ที่ผ่านการทดสอบและ debug แล้ว*
 
 ---

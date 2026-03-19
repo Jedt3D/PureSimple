@@ -1,5 +1,7 @@
 # Chapter 4: HTTP Fundamentals
 
+![Chapter 4 opening illustration](../../illustrations/ch04-cover.svg)
+
 *The language your browser and server speak to each other.*
 
 ---

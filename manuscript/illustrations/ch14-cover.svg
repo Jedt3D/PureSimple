@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="380" viewBox="0 0 800 380">
+  <!-- Background -->
+  <rect width="800" height="380" fill="#FFFEF0" rx="8"/>
+  <!-- Outer border -->
+  <rect x="2" y="2" width="796" height="376" fill="none" stroke="#1a1a1a" stroke-width="4" rx="6"/>
+
+  <!-- Top title banner -->
+  <rect x="2" y="4" width="796" height="60" fill="#1a1a1a" rx="6"/>
+  <rect x="2" y="46" width="796" height="18" fill="#1a1a1a"/>
+  <text x="400" y="42" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="23" fill="#FFE000" text-anchor="middle">Chapter 14: Database Patterns</text>
+
+  <!-- Panel divider -->
+  <line x1="400" y1="68" x2="400" y2="330" stroke="#1a1a1a" stroke-width="3"/>
+
+  <!-- === LEFT PANEL: BAD pattern === -->
+  <!-- Panel label BAD -->
+  <rect x="20" y="76" width="60" height="24" fill="#E74C3C" rx="4"/>
+  <text x="50" y="93" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="14" fill="white" text-anchor="middle">BAD</text>
+
+  <!-- Handler boxes (multiple hitting DB) -->
+  <!-- Handler 1 -->
+  <rect x="28" y="108" width="100" height="28" fill="#F0F0F0" stroke="#888" stroke-width="1" rx="3"/>
+  <text x="78" y="127" font-family="Courier New, monospace" font-size="11" fill="#1a1a1a" text-anchor="middle">handler A</text>
+  <!-- Handler 2 -->
+  <rect x="28" y="160" width="100" height="28" fill="#F0F0F0" stroke="#888" stroke-width="1" rx="3"/>
+  <text x="78" y="179" font-family="Courier New, monospace" font-size="11" fill="#1a1a1a" text-anchor="middle">handler B</text>
+  <!-- Handler 3 -->
+  <rect x="28" y="212" width="100" height="28" fill="#F0F0F0" stroke="#888" stroke-width="1" rx="3"/>
+  <text x="78" y="231" font-family="Courier New, monospace" font-size="11" fill="#1a1a1a" text-anchor="middle">handler C</text>
+  <!-- Handler 4 -->
+  <rect x="28" y="264" width="100" height="28" fill="#F0F0F0" stroke="#888" stroke-width="1" rx="3"/>
+  <text x="78" y="283" font-family="Courier New, monospace" font-size="11" fill="#1a1a1a" text-anchor="middle">handler D</text>
+
+  <!-- DB cylinder (left) -->
+  <ellipse cx="295" cy="195" rx="42" ry="12" fill="#C8C8C8" stroke="#1a1a1a" stroke-width="1.5"/>
+  <rect x="253" y="195" width="84" height="70" fill="#B0B0B0" stroke="#1a1a1a" stroke-width="1.5"/>
+  <ellipse cx="295" cy="265" rx="42" ry="12" fill="#A0A0A0" stroke="#1a1a1a" stroke-width="1.5"/>
+  <text x="295" y="236" font-family="Arial Black, Arial, sans-serif" font-size="12" fill="#1a1a1a" text-anchor="middle">DB</text>
+
+  <!-- Tangled lines from handlers to DB -->
+  <!-- H1 to DB - curved messy -->
+  <path d="M128,122 C190,110 220,180 253,205" fill="none" stroke="#E74C3C" stroke-width="2" stroke-dasharray="0"/>
+  <!-- H2 to DB -->
+  <path d="M128,174 C175,170 215,200 253,215" fill="none" stroke="#E74C3C" stroke-width="2"/>
+  <!-- H3 to DB -->
+  <path d="M128,226 C175,230 215,235 253,230" fill="none" stroke="#E74C3C" stroke-width="2"/>
+  <!-- H4 to DB - curved up -->
+  <path d="M128,278 C185,265 220,250 253,245" fill="none" stroke="#E74C3C" stroke-width="2"/>
+  <!-- Crossing chaos indicator -->
+  <text x="190" y="185" font-family="Arial Black, Arial, sans-serif" font-size="20" fill="#E74C3C" text-anchor="middle">✗</text>
+
+  <!-- Duplicate SQL labels on lines -->
+  <text x="175" y="118" font-family="Courier New, monospace" font-size="9" fill="#E74C3C">SELECT *</text>
+  <text x="178" y="158" font-family="Courier New, monospace" font-size="9" fill="#E74C3C">INSERT...</text>
+  <text x="178" y="238" font-family="Courier New, monospace" font-size="9" fill="#E74C3C">SELECT *</text>
+  <text x="178" y="278" font-family="Courier New, monospace" font-size="9" fill="#E74C3C">UPDATE...</text>
+
+  <!-- === RIGHT PANEL: GOOD pattern === -->
+  <!-- Panel label GOOD -->
+  <rect x="418" y="76" width="70" height="24" fill="#27AE60" rx="4"/>
+  <text x="453" y="93" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="14" fill="white" text-anchor="middle">GOOD</text>
+
+  <!-- Handler boxes (right panel) -->
+  <!-- Handler 1 -->
+  <rect x="424" y="108" width="100" height="28" fill="#F0F0F0" stroke="#888" stroke-width="1" rx="3"/>
+  <text x="474" y="127" font-family="Courier New, monospace" font-size="11" fill="#1a1a1a" text-anchor="middle">handler A</text>
+  <!-- Handler 2 -->
+  <rect x="424" y="160" width="100" height="28" fill="#F0F0F0" stroke="#888" stroke-width="1" rx="3"/>
+  <text x="474" y="179" font-family="Courier New, monospace" font-size="11" fill="#1a1a1a" text-anchor="middle">handler B</text>
+  <!-- Handler 3 -->
+  <rect x="424" y="212" width="100" height="28" fill="#F0F0F0" stroke="#888" stroke-width="1" rx="3"/>
+  <text x="474" y="231" font-family="Courier New, monospace" font-size="11" fill="#1a1a1a" text-anchor="middle">handler C</text>
+  <!-- Handler 4 -->
+  <rect x="424" y="264" width="100" height="28" fill="#F0F0F0" stroke="#888" stroke-width="1" rx="3"/>
+  <text x="474" y="283" font-family="Courier New, monospace" font-size="11" fill="#1a1a1a" text-anchor="middle">handler D</text>
+
+  <!-- Clean arrows from handlers to Repository -->
+  <line x1="524" y1="122" x2="570" y2="175" stroke="#27AE60" stroke-width="2"/>
+  <line x1="524" y1="174" x2="570" y2="192" stroke="#27AE60" stroke-width="2"/>
+  <line x1="524" y1="226" x2="570" y2="209" stroke="#27AE60" stroke-width="2"/>
+  <line x1="524" y1="278" x2="570" y2="225" stroke="#27AE60" stroke-width="2"/>
+
+  <!-- Repository box (center right) -->
+  <rect x="570" y="168" width="110" height="66" fill="#4A90D9" stroke="#1a1a1a" stroke-width="2" rx="6"/>
+  <text x="625" y="194" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="13" fill="white" text-anchor="middle">Repository</text>
+  <text x="625" y="212" font-family="Arial, sans-serif" font-size="10" fill="#E0E0FF" text-anchor="middle">Find / Save / Delete</text>
+  <text x="625" y="226" font-family="Arial, sans-serif" font-size="10" fill="#E0E0FF" text-anchor="middle">one place, one truth</text>
+
+  <!-- Arrow from Repository to DB -->
+  <line x1="680" y1="201" x2="716" y2="201" stroke="#27AE60" stroke-width="2"/>
+  <polygon points="716,195 728,201 716,207" fill="#27AE60"/>
+
+  <!-- DB cylinder (right) -->
+  <ellipse cx="754" cy="188" rx="38" ry="11" fill="#C8C8C8" stroke="#1a1a1a" stroke-width="1.5"/>
+  <rect x="716" y="188" width="76" height="60" fill="#B0B0B0" stroke="#1a1a1a" stroke-width="1.5"/>
+  <ellipse cx="754" cy="248" rx="38" ry="11" fill="#A0A0A0" stroke="#1a1a1a" stroke-width="1.5"/>
+  <text x="754" y="222" font-family="Arial Black, Arial, sans-serif" font-size="12" fill="#1a1a1a" text-anchor="middle">DB</text>
+
+  <!-- Checkmark GOOD -->
+  <text x="625" y="148" font-family="Arial Black, Arial, sans-serif" font-size="20" fill="#27AE60" text-anchor="middle">✓</text>
+
+  <!-- Bottom caption bar -->
+  <rect x="2" y="330" width="796" height="46" fill="#1a1a1a" rx="6"/>
+  <rect x="2" y="330" width="796" height="10" fill="#1a1a1a"/>
+  <text x="400" y="358" font-family="Arial, sans-serif" font-size="15" fill="white" text-anchor="middle">Patterns that keep your data layer honest.</text>
+</svg>

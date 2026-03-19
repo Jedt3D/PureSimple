@@ -1,5 +1,7 @@
 # Chapter 20: Testing
 
+![Chapter 20 opening illustration](../../illustrations/ch20-cover.svg)
+
 *The 264 assertions that let you refactor without fear.*
 
 ---

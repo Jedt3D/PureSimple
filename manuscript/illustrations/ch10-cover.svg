@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="380" viewBox="0 0 800 380">
+  <!-- Background -->
+  <rect width="800" height="380" fill="#FFFEF0" rx="8"/>
+  <!-- Outer border -->
+  <rect x="2" y="2" width="796" height="376" fill="none" stroke="#1a1a1a" stroke-width="4" rx="6"/>
+
+  <!-- Top title banner -->
+  <rect x="2" y="2" width="796" height="60" fill="#1a1a1a" rx="6"/>
+  <rect x="2" y="50" width="796" height="14" fill="#1a1a1a"/>
+  <text x="400" y="42" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="23" fill="#FFE000" text-anchor="middle">CHAPTER 10: ROUTE GROUPS</text>
+
+  <!-- Bottom caption bar -->
+  <rect x="2" y="330" width="796" height="46" fill="#1a1a1a"/>
+  <rect x="2" y="328" width="796" height="6" fill="#1a1a1a"/>
+  <text x="400" y="358" font-family="Arial, sans-serif" font-size="15" fill="#FFFFFF" text-anchor="middle">Groups share prefix and middleware -- nest as deep as you need.</text>
+
+  <!-- ROOT NODE: /api -->
+  <rect x="330" y="80" width="140" height="46" fill="#1a1a1a" stroke="#1a1a1a" stroke-width="2" rx="8"/>
+  <text x="400" y="98" font-family="Arial Black, Arial, sans-serif" font-size="16" font-weight="900" fill="#FFE000" text-anchor="middle">ROOT</text>
+  <text x="400" y="116" font-family="Courier New, monospace" font-size="15" fill="#FFE000" text-anchor="middle">/api</text>
+
+  <!-- Branch lines from root to v1 and v2 -->
+  <line x1="360" y1="126" x2="210" y2="172" stroke="#1a1a1a" stroke-width="3"/>
+  <line x1="440" y1="126" x2="590" y2="172" stroke="#1a1a1a" stroke-width="3"/>
+
+  <!-- /v1 node -->
+  <rect x="140" y="172" width="140" height="46" fill="#4A90D9" stroke="#1a1a1a" stroke-width="2.5" rx="8"/>
+  <text x="210" y="190" font-family="Arial Black, Arial, sans-serif" font-size="13" font-weight="900" fill="white" text-anchor="middle">GROUP</text>
+  <text x="210" y="208" font-family="Courier New, monospace" font-size="14" fill="white" text-anchor="middle">/v1</text>
+
+  <!-- /v2 node -->
+  <rect x="520" y="172" width="140" height="46" fill="#8E44AD" stroke="#1a1a1a" stroke-width="2.5" rx="8"/>
+  <text x="590" y="190" font-family="Arial Black, Arial, sans-serif" font-size="13" font-weight="900" fill="white" text-anchor="middle">GROUP</text>
+  <text x="590" y="208" font-family="Courier New, monospace" font-size="14" fill="white" text-anchor="middle">/v2</text>
+
+  <!-- Branch lines from /v1 -->
+  <line x1="175" y1="218" x2="80" y2="264" stroke="#1a1a1a" stroke-width="2.5"/>
+  <line x1="245" y1="218" x2="250" y2="264" stroke="#1a1a1a" stroke-width="2.5"/>
+
+  <!-- Branch lines from /v2 -->
+  <line x1="555" y1="218" x2="555" y2="264" stroke="#1a1a1a" stroke-width="2.5"/>
+  <line x1="625" y1="218" x2="720" y2="264" stroke="#1a1a1a" stroke-width="2.5"/>
+
+  <!-- /v1/users leaf -->
+  <rect x="30" y="264" width="108" height="52" fill="#27AE60" stroke="#1a1a1a" stroke-width="2" rx="6"/>
+  <text x="84" y="281" font-family="Courier New, monospace" font-size="12" fill="white" text-anchor="middle">/users</text>
+  <text x="84" y="298" font-family="Arial, sans-serif" font-size="11" fill="#FFE000" text-anchor="middle">GET  POST</text>
+
+  <!-- /v1/posts leaf -->
+  <rect x="196" y="264" width="108" height="52" fill="#27AE60" stroke="#1a1a1a" stroke-width="2" rx="6"/>
+  <text x="250" y="281" font-family="Courier New, monospace" font-size="12" fill="white" text-anchor="middle">/posts</text>
+  <text x="250" y="298" font-family="Arial, sans-serif" font-size="10" fill="#FFE000" text-anchor="middle">GET POST DEL</text>
+
+  <!-- /v2/users leaf -->
+  <rect x="497" y="264" width="118" height="52" fill="#8E44AD" stroke="#1a1a1a" stroke-width="2" rx="6"/>
+  <text x="556" y="281" font-family="Courier New, monospace" font-size="12" fill="white" text-anchor="middle">/users</text>
+  <text x="556" y="298" font-family="Arial, sans-serif" font-size="11" fill="#FFE000" text-anchor="middle">GET  POST</text>
+
+  <!-- /v2/posts leaf -->
+  <rect x="660" y="264" width="118" height="52" fill="#8E44AD" stroke="#1a1a1a" stroke-width="2" rx="6"/>
+  <text x="719" y="281" font-family="Courier New, monospace" font-size="12" fill="white" text-anchor="middle">/posts</text>
+  <text x="719" y="298" font-family="Arial, sans-serif" font-size="10" fill="#FFE000" text-anchor="middle">GET POST DEL</text>
+
+  <!-- Handler boxes under /v1/users (small) -->
+  <line x1="68" y1="316" x2="52" y2="326" stroke="#1a1a1a" stroke-width="1.5"/>
+  <rect x="30" y="326" width="44" height="18" fill="#F0F0F0" stroke="#888888" stroke-width="1" rx="3"/>
+  <text x="52" y="339" font-family="Arial, sans-serif" font-size="9" fill="#1a1a1a" text-anchor="middle">handler</text>
+
+  <line x1="96" y1="316" x2="96" y2="326" stroke="#1a1a1a" stroke-width="1.5"/>
+  <rect x="74" y="326" width="44" height="18" fill="#F0F0F0" stroke="#888888" stroke-width="1" rx="3"/>
+  <text x="96" y="339" font-family="Arial, sans-serif" font-size="9" fill="#1a1a1a" text-anchor="middle">handler</text>
+
+  <!-- Handler boxes under /v1/posts -->
+  <line x1="228" y1="316" x2="214" y2="326" stroke="#1a1a1a" stroke-width="1.5"/>
+  <rect x="192" y="326" width="44" height="18" fill="#F0F0F0" stroke="#888888" stroke-width="1" rx="3"/>
+  <text x="214" y="339" font-family="Arial, sans-serif" font-size="9" fill="#1a1a1a" text-anchor="middle">handler</text>
+
+  <line x1="254" y1="316" x2="262" y2="326" stroke="#1a1a1a" stroke-width="1.5"/>
+  <rect x="240" y="326" width="44" height="18" fill="#F0F0F0" stroke="#888888" stroke-width="1" rx="3"/>
+  <text x="262" y="339" font-family="Arial, sans-serif" font-size="9" fill="#1a1a1a" text-anchor="middle">handler</text>
+
+  <!-- Middleware tags on group nodes -->
+  <!-- v1 middleware tag -->
+  <rect x="140" y="148" width="90" height="20" fill="#FFE000" stroke="#1a1a1a" stroke-width="1.5" rx="3"/>
+  <text x="185" y="162" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#1a1a1a" text-anchor="middle">+ Auth MW</text>
+
+  <!-- v2 middleware tag -->
+  <rect x="520" y="148" width="110" height="20" fill="#FFE000" stroke="#1a1a1a" stroke-width="1.5" rx="3"/>
+  <text x="575" y="162" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#1a1a1a" text-anchor="middle">+ RateLimit MW</text>
+
+  <!-- Code snippet in top right -->
+  <rect x="396" y="80" width="0" height="0" fill="none"/>
+  <!-- Compact code hint box -->
+  <rect x="406" y="148" width="112" height="62" fill="#F0F0F0" stroke="#888888" stroke-width="1" rx="4"/>
+  <text x="414" y="164" font-family="Courier New, monospace" font-size="10" fill="#8E44AD">v1 := app</text>
+  <text x="414" y="178" font-family="Courier New, monospace" font-size="10" fill="#8E44AD">  .Group("/api")</text>
+  <text x="414" y="192" font-family="Courier New, monospace" font-size="10" fill="#8E44AD">  .Group("/v1")</text>
+  <text x="414" y="206" font-family="Courier New, monospace" font-size="10" fill="#4A90D9">v1.GET("/users")</text>
+</svg>

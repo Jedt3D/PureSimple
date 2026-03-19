@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="380" viewBox="0 0 800 380">
+  <!-- Background -->
+  <rect width="800" height="380" fill="#FFFEF0" rx="8"/>
+  <!-- Outer border -->
+  <rect x="2" y="2" width="796" height="376" fill="none" stroke="#1a1a1a" stroke-width="4" rx="6"/>
+
+  <!-- Top title banner -->
+  <rect x="2" y="2" width="796" height="60" fill="#1a1a1a" rx="6"/>
+  <rect x="2" y="50" width="796" height="14" fill="#1a1a1a"/>
+  <text x="400" y="42" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="22" fill="#FFE000" text-anchor="middle">CHAPTER 9: RESPONSE RENDERING</text>
+
+  <!-- Bottom caption bar -->
+  <rect x="2" y="330" width="796" height="46" fill="#1a1a1a"/>
+  <rect x="2" y="328" width="796" height="6" fill="#1a1a1a"/>
+  <text x="400" y="358" font-family="Arial, sans-serif" font-size="15" fill="#FFFFFF" text-anchor="middle">Rendering writes the response: JSON, HTML, files, redirects.</text>
+
+  <!-- Panel divider at x=400 -->
+  <line x1="400" y1="64" x2="400" y2="328" stroke="#1a1a1a" stroke-width="3"/>
+
+  <!-- LEFT PANEL: Developer typing -->
+  <text x="200" y="88" font-family="Arial Black, Arial, sans-serif" font-size="15" font-weight="900" fill="#4A90D9" text-anchor="middle">DEVELOPER CALLS RENDERER</text>
+
+  <!-- Developer character -->
+  <!-- Head -->
+  <circle cx="130" cy="155" r="22" fill="#F5CBA7" stroke="#1a1a1a" stroke-width="2"/>
+  <!-- Eyes focused on screen -->
+  <circle cx="122" cy="151" r="3" fill="#1a1a1a"/>
+  <circle cx="138" cy="151" r="3" fill="#1a1a1a"/>
+  <!-- Glasses -->
+  <rect x="117" y="146" width="12" height="10" fill="none" stroke="#1a1a1a" stroke-width="1.5" rx="2"/>
+  <rect x="133" y="146" width="12" height="10" fill="none" stroke="#1a1a1a" stroke-width="1.5" rx="2"/>
+  <line x1="129" y1="151" x2="133" y2="151" stroke="#1a1a1a" stroke-width="1.5"/>
+  <!-- Concentration lines -->
+  <line x1="148" y1="148" x2="155" y2="145" stroke="#1a1a1a" stroke-width="1.5"/>
+  <line x1="148" y1="152" x2="156" y2="152" stroke="#1a1a1a" stroke-width="1.5"/>
+  <!-- Body -->
+  <rect x="114" y="177" width="32" height="48" fill="#4A90D9" stroke="#1a1a1a" stroke-width="2" rx="4"/>
+  <!-- Arms reaching to keyboard -->
+  <line x1="146" y1="187" x2="210" y2="208" stroke="#1a1a1a" stroke-width="2"/>
+  <line x1="114" y1="187" x2="95" y2="200" stroke="#1a1a1a" stroke-width="2"/>
+  <!-- Legs -->
+  <line x1="122" y1="225" x2="115" y2="260" stroke="#1a1a1a" stroke-width="2"/>
+  <line x1="138" y1="225" x2="145" y2="260" stroke="#1a1a1a" stroke-width="2"/>
+
+  <!-- Monitor / screen -->
+  <rect x="170" y="155" width="195" height="130" fill="#1a1a1a" stroke="#1a1a1a" stroke-width="2.5" rx="6"/>
+  <rect x="175" y="160" width="185" height="118" fill="#0D1117" rx="3"/>
+  <!-- Monitor stand -->
+  <rect x="244" y="285" width="24" height="14" fill="#888888" stroke="#1a1a1a" stroke-width="1.5"/>
+  <rect x="228" y="296" width="56" height="8" fill="#888888" stroke="#1a1a1a" stroke-width="1.5" rx="3"/>
+
+  <!-- Code on screen -->
+  <text x="183" y="180" font-family="Courier New, monospace" font-size="12" fill="#8E44AD">; Build response</text>
+  <text x="183" y="198" font-family="Courier New, monospace" font-size="12" fill="#F39C12">Rendering</text>
+  <text x="247" y="198" font-family="Courier New, monospace" font-size="12" fill="#888888">::</text>
+  <text x="259" y="198" font-family="Courier New, monospace" font-size="12" fill="#4A90D9">JSON</text>
+  <text x="183" y="216" font-family="Courier New, monospace" font-size="12" fill="#888888">  (*Ctx, data)</text>
+  <line x1="183" y1="225" x2="352" y2="225" stroke="#333333" stroke-width="1"/>
+  <text x="183" y="242" font-family="Courier New, monospace" font-size="12" fill="#F39C12">Rendering</text>
+  <text x="247" y="242" font-family="Courier New, monospace" font-size="12" fill="#888888">::</text>
+  <text x="259" y="242" font-family="Courier New, monospace" font-size="12" fill="#27AE60">HTML</text>
+  <text x="183" y="260" font-family="Courier New, monospace" font-size="12" fill="#F39C12">Rendering</text>
+  <text x="247" y="260" font-family="Courier New, monospace" font-size="12" fill="#888888">::</text>
+  <text x="259" y="260" font-family="Courier New, monospace" font-size="12" fill="#E74C3C">Redirect</text>
+  <!-- Cursor blink -->
+  <rect x="348" y="249" width="8" height="14" fill="#FFE000" rx="1"/>
+
+  <!-- RIGHT PANEL: Printing press + response packet flying out -->
+  <text x="600" y="88" font-family="Arial Black, Arial, sans-serif" font-size="15" font-weight="900" fill="#27AE60" text-anchor="middle">FORMATTED RESPONSE FLIES OUT</text>
+
+  <!-- Printing press body -->
+  <rect x="420" y="175" width="120" height="110" fill="#888888" stroke="#1a1a1a" stroke-width="2.5" rx="6"/>
+  <!-- Press top arm -->
+  <rect x="435" y="158" width="90" height="22" fill="#555555" stroke="#1a1a1a" stroke-width="2" rx="4"/>
+  <!-- Press roller -->
+  <rect x="428" y="217" width="104" height="16" fill="#333333" stroke="#1a1a1a" stroke-width="2" rx="3"/>
+  <!-- Press label -->
+  <text x="480" y="207" font-family="Arial Black, Arial, sans-serif" font-size="11" fill="white" text-anchor="middle">RENDER</text>
+  <text x="480" y="222" font-family="Arial Black, Arial, sans-serif" font-size="10" fill="#FFE000" text-anchor="middle">ENGINE</text>
+  <!-- Paper going in (top) -->
+  <rect x="455" y="136" width="50" height="24" fill="#FFFFFF" stroke="#1a1a1a" stroke-width="1.5" rx="2"/>
+  <text x="480" y="152" font-family="Courier New, monospace" font-size="10" fill="#4A90D9" text-anchor="middle">data{}</text>
+  <!-- Arrow into press -->
+  <polygon points="480,158 474,148 486,148" fill="#1a1a1a"/>
+
+  <!-- Response packet flying out to the right -->
+  <rect x="570" y="155" width="190" height="110" fill="white" stroke="#1a1a1a" stroke-width="2.5" rx="8"/>
+  <!-- Packet header bar -->
+  <rect x="570" y="155" width="190" height="28" fill="#27AE60" stroke="#1a1a1a" stroke-width="2.5" rx="8"/>
+  <rect x="570" y="172" width="190" height="12" fill="#27AE60"/>
+  <text x="665" y="175" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white" text-anchor="middle">HTTP/1.1 200 OK</text>
+  <!-- Content-Type label -->
+  <text x="582" y="204" font-family="Courier New, monospace" font-size="11" fill="#888888">Content-Type:</text>
+  <text x="582" y="220" font-family="Courier New, monospace" font-size="11" fill="#4A90D9">application/json</text>
+  <!-- Body -->
+  <line x1="582" y1="228" x2="748" y2="228" stroke="#CCCCCC" stroke-width="1"/>
+  <text x="582" y="244" font-family="Courier New, monospace" font-size="12" fill="#27AE60">{"hello":</text>
+  <text x="660" y="244" font-family="Courier New, monospace" font-size="12" fill="#E74C3C">"world"</text>
+  <text x="716" y="244" font-family="Courier New, monospace" font-size="12" fill="#27AE60">}</text>
+
+  <!-- Speed lines showing packet flying -->
+  <line x1="542" y1="188" x2="568" y2="188" stroke="#F39C12" stroke-width="2.5"/>
+  <line x1="548" y1="200" x2="568" y2="200" stroke="#F39C12" stroke-width="2"/>
+  <line x1="542" y1="212" x2="568" y2="212" stroke="#F39C12" stroke-width="2.5"/>
+  <line x1="550" y1="224" x2="568" y2="224" stroke="#F39C12" stroke-width="1.5"/>
+  <!-- Arrow -->
+  <polygon points="568,205 554,198 554,212" fill="#F39C12"/>
+
+  <!-- "sends out" star burst -->
+  <circle cx="560" cy="207" r="6" fill="#FFE000" stroke="#1a1a1a" stroke-width="1"/>
+</svg>

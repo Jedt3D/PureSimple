@@ -1,5 +1,7 @@
 # Chapter 18: Configuration and Logging
 
+![Chapter 18 opening illustration](../../illustrations/ch18-cover.svg)
+
 *Twelve-factor config and logs that tell you what happened at 3 AM.*
 
 ---

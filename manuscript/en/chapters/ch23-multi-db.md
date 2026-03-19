@@ -1,5 +1,7 @@
 # Chapter 23: Multi-Database Support
 
+![Chapter 23 opening illustration](../../illustrations/ch23-cover.svg)
+
 *One interface, three drivers, zero code changes.*
 
 ---
