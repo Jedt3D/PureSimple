@@ -10,6 +10,53 @@ Versioning follows `v0.{phase}.0` during the pre-1.0 development phases.
 
 ---
 
+## [0.10.0] — 2026-03-20 · P10: Multi-DB Abstraction (PostgreSQL, MySQL)
+
+### Added
+- `src/DB/Connect.pbi` — `DBConnect` module: DSN-based connection factory for
+  SQLite, PostgreSQL, and MySQL/MariaDB:
+  - `DBConnect::Driver(DSN.s)` — detect driver from DSN prefix;
+    returns `#Driver_SQLite`, `#Driver_Postgres`, `#Driver_MySQL`, or
+    `#Driver_Unknown`
+  - `DBConnect::Open(DSN.s)` — parse DSN, activate the correct PureBasic
+    database plugin (`#PB_Database_SQLite` / `_PostgreSQL` / `_MySQL`),
+    and return a handle usable with all `DB::*` procedures
+  - `DBConnect::OpenFromConfig()` — read `DB_DSN` from the Config store
+    (default: `"sqlite::memory:"`) and call `Open()`
+  - `DBConnect::ConnStr(DSN.s)` — parse a URL-style DSN into PureBasic's
+    `"host=H [port=P] [dbname=D]"` key=value format (used internally;
+    exposed for testing)
+- Supported DSN schemes:
+  - `sqlite::memory:` / `sqlite:path/to/db.sqlite`
+  - `postgres://user:pass@host:5432/dbname`
+  - `postgresql://user:pass@host:5432/dbname` (alias)
+  - `mysql://user:pass@host:3306/dbname`
+- `tests/P10_MultiDB_Test.pbi` — 35 assertions: driver detection for all
+  three drivers, ConnStr parsing (with and without port/dbname), SQLite
+  Open + full DB pipeline, migration runner via Connect handle,
+  OpenFromConfig with explicit and default DSN
+
+### Changed
+- `src/PureSimple.pb` — added `DB/Connect.pbi` include (after Config and Log,
+  since `OpenFromConfig` depends on `Config::Get`)
+- `tests/run_all.pb` — enabled `P10_MultiDB_Test.pbi`
+
+### Notes
+- `DB/Connect.pbi` calls `UseSQLiteDatabase()`, `UsePostgreSQLDatabase()`, and
+  `UseMySQLDatabase()` at the module level so all three drivers are compiled in.
+  PureBasic 6.x selects the correct driver via the `#PB_Database_*` plugin
+  constant passed as the 5th argument to `OpenDatabase()`.
+- `DBConnect::Open` must be called before `DB::Migrate` if you want migrations
+  to run against a non-SQLite database — the `DB::*` procedures are driver-
+  agnostic once the handle is obtained.
+- PostgreSQL and MySQL paths are not integration-tested (no server available in
+  CI); the SQLite driver is used for all test assertions. DSN parsing correctness
+  is verified via `ConnStr()` unit tests.
+- `DB/Connect.pbi` must be included AFTER `Config.pbi` in the include order
+  (it calls `Config::Get` inside `OpenFromConfig`).
+
+---
+
 ## [0.9.0] — 2026-03-20 · P9: Documentation, Example Apps, Book Outline
 
 ### Added

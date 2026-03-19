@@ -27,6 +27,7 @@ XIncludeFile "P6_SQLite_Test.pbi"
 XIncludeFile "P7_Auth_Test.pbi"
 XIncludeFile "P8_Config_Test.pbi"
 XIncludeFile "P9_Examples_Test.pbi"
+XIncludeFile "P10_MultiDB_Test.pbi"
 
 ; ------------------------------------------------------------------
 ; Print summary and exit with non-zero code on failure

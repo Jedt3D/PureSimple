@@ -1,13 +1,21 @@
 {
   "version": "0.1.0",
-  "indexedAt": "2026-03-19T17:33:59Z",
-  "projectHash": "458622bc9c7a88752e43bb81604948f173379b0cd8fea9092e564c9eaf15729e",
-  "fileCount": 29,
+  "indexedAt": "2026-03-19T17:43:59Z",
+  "projectHash": "59dc4b4fe0ad434b94be08dcd30244a7a85b2b63aee46e2090ce0b8273ad5b73",
+  "fileCount": 32,
   "duration": "6ms",
   "files": {
+    "examples/blog/main.pb": {
+      "mtime": "2026-03-19T17:43:41Z",
+      "size": 3317
+    },
     "examples/hello_world/main.pb": {
       "mtime": "2026-03-19T17:33:43Z",
       "size": 1344
+    },
+    "examples/todo/main.pb": {
+      "mtime": "2026-03-19T17:43:41Z",
+      "size": 3173
     },
     "src/Binding.pbi": {
       "mtime": "2026-03-19T16:37:37Z",
@@ -113,13 +121,17 @@
       "mtime": "2026-03-19T17:33:43Z",
       "size": 4204
     },
+    "tests/P9_Examples_Test.pbi": {
+      "mtime": "2026-03-19T17:43:41Z",
+      "size": 6970
+    },
     "tests/TestHarness.pbi": {
       "mtime": "2026-03-19T15:05:37Z",
       "size": 3740
     },
     "tests/run_all.pb": {
-      "mtime": "2026-03-19T17:33:43Z",
-      "size": 1152
+      "mtime": "2026-03-19T17:43:41Z",
+      "size": 1188
     }
   }
 }

@@ -1,9 +1,51 @@
-# DB (SQLite)
+# DB (SQLite) and DBConnect (Multi-Driver)
 
 `src/DB/SQLite.pbi` — SQLite adapter and migration runner.
+`src/DB/Connect.pbi` — DSN-based connection factory for SQLite, PostgreSQL, MySQL.
+
+All handles returned by `DBConnect::Open` are compatible with every `DB::*`
+procedure below.
+
+## DBConnect (Multi-Driver Factory)
+
+```purebasic
+; Open by DSN
+db = DBConnect::Open("sqlite::memory:")
+db = DBConnect::Open("sqlite:data/app.db")
+db = DBConnect::Open("postgres://user:pass@host:5432/mydb")
+db = DBConnect::Open("mysql://user:pass@host:3306/mydb")
+
+; Open from .env (reads DB_DSN key, defaults to "sqlite::memory:")
+db = DBConnect::OpenFromConfig()
+
+; Detect driver from DSN
+drv = DBConnect::Driver("postgres://...")   ; #Driver_Postgres, #Driver_SQLite, etc.
+
+; Build key=value connection string from URL DSN (for testing / custom use)
+cs = DBConnect::ConnStr("postgres://alice:s3cr3t@db.host.io:5432/myapp")
+; → "host=db.host.io port=5432 dbname=myapp"
+```
+
+### Driver Constants
+| Constant | Value | DSN Prefix |
+|----------|-------|------------|
+| `DBConnect::#Driver_SQLite`   | 0 | `sqlite:` |
+| `DBConnect::#Driver_Postgres` | 1 | `postgres://` or `postgresql://` |
+| `DBConnect::#Driver_MySQL`    | 2 | `mysql://` |
+| `DBConnect::#Driver_Unknown`  | -1 | anything else |
+
+### .env Example
+```
+DB_DSN=postgres://alice:s3cr3t@db.example.com:5432/myapp
+```
+
+---
+
+## DB (SQLite-Direct)
 
 Requires PureBasic's built-in SQLite support (enabled via `UseSQLiteDatabase()`
-inside the module).
+inside the module). Use `DBConnect::Open("sqlite:...")` for the DSN-based
+API, or `DB::Open` for direct SQLite access.
 
 ## Opening and Closing
 

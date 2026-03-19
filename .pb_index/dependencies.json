@@ -1,6 +1,12 @@
 {
   "includes": {
+    "examples/blog/main.pb": [
+      "src/PureSimple.pb"
+    ],
     "examples/hello_world/main.pb": [
+      "src/PureSimple.pb"
+    ],
+    "examples/todo/main.pb": [
       "src/PureSimple.pb"
     ],
     "src/PureSimple.pb": [
@@ -36,7 +42,8 @@
       "tests/P5_Groups_Test.pbi",
       "tests/P6_SQLite_Test.pbi",
       "tests/P7_Auth_Test.pbi",
-      "tests/P8_Config_Test.pbi"
+      "tests/P8_Config_Test.pbi",
+      "tests/P9_Examples_Test.pbi"
     ]
   },
   "reverse": {
@@ -83,8 +90,10 @@
       "src/PureSimple.pb"
     ],
     "src/PureSimple.pb": [
+      "examples/blog/main.pb",
       "tests/run_all.pb",
-      "examples/hello_world/main.pb"
+      "examples/hello_world/main.pb",
+      "examples/todo/main.pb"
     ],
     "src/Rendering.pbi": [
       "src/PureSimple.pb"
@@ -93,8 +102,8 @@
       "src/PureSimple.pb"
     ],
     "src/Types.pbi": [
-      "tests/P0_Harness_Test.pbi",
-      "src/PureSimple.pb"
+      "src/PureSimple.pb",
+      "tests/P0_Harness_Test.pbi"
     ],
     "tests/P0_Harness_Test.pbi": [
       "tests/run_all.pb"
@@ -121,6 +130,9 @@
       "tests/run_all.pb"
     ],
     "tests/P8_Config_Test.pbi": [
+      "tests/run_all.pb"
+    ],
+    "tests/P9_Examples_Test.pbi": [
       "tests/run_all.pb"
     ],
     "tests/TestHarness.pbi": [
