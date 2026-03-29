@@ -50,6 +50,8 @@ PureSimple/
   scripts/
     deploy.sh        # Local → server deploy pipeline (SSH, compile, swap, health check)
     rollback.sh      # Emergency rollback (swap app.bak, restart)
+    new-project.sh   # Scaffold a new PureSimple app (bash)
+    new-project.ps1  # Scaffold a new PureSimple app (PowerShell)
   deploy/
     Caddyfile        # Caddy reverse proxy config (→ /etc/caddy/Caddyfile)
     puresimple.service  # systemd unit file
@@ -109,6 +111,17 @@ All modules are `.pbi` files included via `XIncludeFile` (never `IncludeFile`). 
 - **Strings use `~"..."` prefix** for escape sequences (`\n`, `\t`).
 - **Thread safety** requires `pbcompiler -t` flag when using threads.
 
+## Cross-Platform Development
+
+PureSimple targets Windows, macOS, and Linux. All framework source code must remain platform-agnostic.
+
+- **Use forward slashes in paths** — PureBasic converts them on all platforms. `"templates/"` works on Windows.
+- **Use `GetHomeDirectory()`, `GetTemporaryDirectory()`** for portable system paths.
+- **Wrap OS-specific code** in `CompilerIf #PB_Compiler_OS = #PB_OS_Windows` / `#PB_OS_MacOS` / `#PB_OS_Linux` blocks.
+- **Recovery middleware** works on Linux and Windows. macOS arm64 cannot catch OS-level signals (SIGSEGV) via `OnErrorGoto`.
+- **Scripts**: `deploy.sh` and `rollback.sh` are bash (target Linux server via SSH, works from Git Bash/WSL on Windows). `new-project.sh` has a PowerShell equivalent `new-project.ps1` for Windows developers.
+- **When adding new scripts**, provide both `.sh` and `.ps1` variants if the script runs on the developer's local machine. Server-side scripts (deploy, rollback, setup) only need bash.
+
 ## Git & Phase Workflow
 
 Every phase follows this workflow:
@@ -135,6 +148,8 @@ Commit message prefix convention: `P0:`, `P1:`, ..., `P10:` matching the phase.
 ```
 
 The app runs as `www-data` under systemd (`/opt/puresimple/app`). Caddy handles HTTPS and proxies to `localhost:8080`. Health check endpoint: `GET /health` → 200 OK.
+
+**Windows deployment**: The binary compiles and runs identically on Windows. Use NSSM as the service wrapper and Caddy for Windows (or IIS) as the reverse proxy. See `manuscript/en/chapters/ch19-deployment.md` Section 19.9 for details.
 
 ## Phase Roadmap (current status: P0)
 
