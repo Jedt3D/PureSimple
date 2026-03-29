@@ -2,6 +2,10 @@
 # deploy.sh — Local → production deploy pipeline for PureSimple
 # Usage: ./scripts/deploy.sh
 # Requires: SSH key at ~/.ssh/id_ed25519, PUREBASIC_HOME set on remote
+#
+# Cross-platform note: This script targets a Linux server via SSH and works
+# from any OS with bash (Linux, macOS, Git Bash on Windows, WSL).
+# No PowerShell equivalent is needed since the remote target is Linux.
 
 set -euo pipefail
 

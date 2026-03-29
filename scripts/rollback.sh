@@ -2,6 +2,10 @@
 # rollback.sh — Emergency rollback: restore app.bak and restart
 # Usage: ./scripts/rollback.sh  (run locally to trigger remote rollback)
 #        Can also be called directly on the server as bash scripts/rollback.sh
+#
+# Cross-platform note: This script targets a Linux server via SSH and works
+# from any OS with bash (Linux, macOS, Git Bash on Windows, WSL).
+# No PowerShell equivalent is needed since the remote target is Linux.
 
 set -euo pipefail
 

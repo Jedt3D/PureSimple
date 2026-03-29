@@ -353,6 +353,101 @@ Engine::GET("/health", @HealthHandler())
 
 > **เบื้องหลังการทำงาน:** deploy script ใช้ `curl -sf` สำหรับ health check flag `-s` ระงับ progress output และ `-f` ทำให้ curl คืน non-zero exit code เมื่อเกิด HTTP error (4xx, 5xx) ซึ่งหมายความว่าเงื่อนไข `if` ใน script แยกแยะได้อย่างถูกต้องระหว่าง "เซิร์ฟเวอร์ตอบ 200" กับ "เซิร์ฟเวอร์ตอบ 500" หรือ "เซิร์ฟเวอร์ไม่ listen เลย"
 
+## 19.9 การ Deploy บน Windows
+
+ทุกอย่างในบทนี้จนถึงตอนนี้เน้น Linux กับ systemd และ Caddy แต่ไบนารี PureSimple รันได้เหมือนกันทุกประการบน Windows -- source code เดียวกัน compiler เดียวกัน output เดียวกัน สิ่งที่ต่างคือวิธีจัดการ process และวาง reverse proxy ข้างหน้า
+
+### การ Compile บน Windows
+
+PureBasic compiler บน Windows อยู่ในโฟลเดอร์ย่อย `Compilers` ของที่ติดตั้ง PureBasic ใน Command Prompt:
+
+```cmd
+:: ตัวอย่างที่ 19.16 -- Compile บน Windows
+"%PUREBASIC_HOME%\Compilers\pbcompiler.exe" src\main.pb -z -o app.exe
+```
+
+หรือใน PowerShell:
+
+```powershell
+# ตัวอย่างที่ 19.17 -- Compile บน Windows (PowerShell)
+& "$env:PUREBASIC_HOME\Compilers\pbcompiler.exe" src\main.pb -z -o app.exe
+```
+
+flag `-z` optimizer ทำงานเหมือนกัน flag `-cl` console ไม่จำเป็นบน Windows เพราะไบนารี PureBasic บน Windows เป็น console mode โดยปริยาย เว้นแต่คุณสร้าง GUI window โดยตรง
+
+### รันเป็น Windows Service ด้วย NSSM
+
+บน Linux, systemd จัดการ process ของแอปพลิเคชัน บน Windows สิ่งที่เทียบเท่าคือ Windows Service PureSimple ไม่ใช่ native Windows Service (ไม่ได้ implement Service Control Manager API) ดังนั้นคุณต้องใช้ wrapper NSSM (the Non-Sucking Service Manager) เป็นตัวเลือกที่ง่ายที่สุด
+
+```cmd
+:: ตัวอย่างที่ 19.18 -- ติดตั้ง PureSimple เป็น Windows service
+nssm install PureSimple C:\opt\puresimple\app.exe
+nssm set PureSimple AppDirectory C:\opt\puresimple
+nssm set PureSimple AppEnvironmentExtra PURESIMPLE_MODE=release
+nssm set PureSimple AppRestartDelay 5000
+nssm start PureSimple
+```
+
+`AppDirectory` ตั้ง working directory ซึ่งสำคัญเพราะ PureSimple มองหาไฟล์ `.env` และ template directory แบบ relative กับ working directory -- เหตุผลเดียวกับที่เราตั้ง `WorkingDirectory` ใน systemd unit file `AppRestartDelay` เทียบเท่า `RestartSec=5` NSSM จะ restart process อัตโนมัติเมื่อล้มเหลว
+
+การจัดการ service หลังติดตั้ง:
+
+```cmd
+:: ตัวอย่างที่ 19.19 -- จัดการ Windows service
+nssm start PureSimple
+nssm stop PureSimple
+nssm restart PureSimple
+nssm status PureSimple
+```
+
+> **เคล็ดลับ:** NSSM เป็น executable เดียวไม่มี installer ดาวน์โหลดจาก nssm.cc วาง `nssm.exe` ไว้ใน PATH แค่นี้ก็เสร็จ เป็น service wrapper มาตรฐานบน Windows มากว่าสิบปี
+
+### Reverse Proxy บน Windows
+
+**Caddy for Windows** เป็นตัวเลือกที่แนะนำ Caddyfile จาก Section 19.4 ใช้งานได้โดยไม่ต้องแก้ไข ดาวน์โหลด Caddy จาก caddyserver.com ติดตั้งเป็น service ด้วย `caddy run --config Caddyfile` แล้วคุณจะได้ automatic HTTPS และ reverse proxying เหมือนกับบน Linux
+
+สำหรับสภาพแวดล้อมที่ต้องใช้ **IIS** ให้ใช้โมดูล URL Rewrite กับ Application Request Routing (ARR) เพื่อ proxy request ไปที่ `localhost:8080` การกำหนดค่า IIS ซับซ้อนกว่า Caddyfile เจ็ดบรรทัด แต่จะ integrate กับ Windows Authentication และ IIS infrastructure ที่มีอยู่
+
+### Health Check
+
+endpoint `/health` เดียวกันทำงานบน Windows ตรวจสอบด้วย PowerShell:
+
+```powershell
+# ตัวอย่างที่ 19.20 -- Health check บน Windows
+Invoke-WebRequest -Uri http://localhost:8080/health -UseBasicParsing
+```
+
+หรือด้วย `curl.exe` (มาพร้อมกับ Windows 10 ขึ้นไป):
+
+```cmd
+curl.exe -sf http://localhost:8080/health
+```
+
+### การอัปเดตแอปพลิเคชัน
+
+โดยไม่มี SSH-based deploy script การอัปเดต Windows ทำตามรูปแบบ manual อย่างง่าย:
+
+1. Compile ไบนารีใหม่เป็น `app_new.exe`
+2. หยุด service: `nssm stop PureSimple`
+3. สำรอง binary ปัจจุบัน: `copy app.exe app.bak.exe`
+4. แทนที่: `move /Y app_new.exe app.exe`
+5. เริ่ม service: `nssm start PureSimple`
+6. ตรวจสอบ: `curl.exe -sf http://localhost:8080/health`
+
+นี่คือ swap pattern เดียวกับที่ `deploy.sh` ทำอัตโนมัติบน Linux คุณสามารถ wrap ขั้นตอนเหล่านี้ใน PowerShell script หาก deploy บ่อย
+
+### Windows Firewall
+
+หากเซิร์ฟเวอร์ Windows ของคุณเปิดให้เข้าถึงจากอินเทอร์เน็ตโดยตรง เปิด port 443 สำหรับ Caddy:
+
+```powershell
+# ตัวอย่างที่ 19.21 -- Windows Firewall rule สำหรับ HTTPS
+New-NetFirewallRule -DisplayName "PureSimple HTTPS" `
+    -Direction Inbound -Protocol TCP -LocalPort 443 -Action Allow
+```
+
+หาก Caddy และ PureSimple อยู่บนเครื่องเดียวกัน (การตั้งค่าปกติ) ไม่จำเป็นต้องมี firewall rule สำหรับ port 8080 เพราะ traffic อยู่บน localhost
+
 ---
 
 ## สรุป

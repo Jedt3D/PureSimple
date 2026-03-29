@@ -347,6 +347,101 @@ Two lines of code. But those two lines are the difference between "the deploy su
 
 > **Under the Hood:** The deploy script uses `curl -sf` for the health check. The `-s` flag suppresses progress output, and `-f` makes curl return a non-zero exit code on HTTP errors (4xx, 5xx). This means the `if` condition in the script correctly distinguishes between "the server responded 200" and "the server responded 500" or "the server is not listening at all."
 
+## 19.9 Windows Deployment
+
+Everything in this chapter so far targets Linux with systemd and Caddy. But the PureSimple binary runs identically on Windows -- the same source code, the same compiler, the same output. The differences are in how you manage the process and front it with a reverse proxy.
+
+### Compiling on Windows
+
+The PureBasic compiler on Windows lives in the `Compilers` subdirectory of your PureBasic installation. In a Command Prompt:
+
+```cmd
+:: Listing 19.16 -- Compiling on Windows
+"%PUREBASIC_HOME%\Compilers\pbcompiler.exe" src\main.pb -z -o app.exe
+```
+
+Or in PowerShell:
+
+```powershell
+# Listing 19.17 -- Compiling on Windows (PowerShell)
+& "$env:PUREBASIC_HOME\Compilers\pbcompiler.exe" src\main.pb -z -o app.exe
+```
+
+The `-z` optimiser flag works the same way. The `-cl` console flag is not needed on Windows because PureBasic Windows binaries default to console mode unless you explicitly create a GUI window.
+
+### Running as a Windows Service with NSSM
+
+On Linux, systemd manages your application process. On Windows, the equivalent is a Windows Service. PureSimple is not a native Windows Service (it does not implement the Service Control Manager API), so you need a wrapper. NSSM (the Non-Sucking Service Manager) is the simplest option.
+
+```cmd
+:: Listing 19.18 -- Installing PureSimple as a Windows service
+nssm install PureSimple C:\opt\puresimple\app.exe
+nssm set PureSimple AppDirectory C:\opt\puresimple
+nssm set PureSimple AppEnvironmentExtra PURESIMPLE_MODE=release
+nssm set PureSimple AppRestartDelay 5000
+nssm start PureSimple
+```
+
+`AppDirectory` sets the working directory, which matters because PureSimple looks for `.env` files and template directories relative to it -- the same reason we set `WorkingDirectory` in the systemd unit file. `AppRestartDelay` is the equivalent of `RestartSec=5`. NSSM automatically restarts the process on failure.
+
+To manage the service after installation:
+
+```cmd
+:: Listing 19.19 -- Managing the Windows service
+nssm start PureSimple
+nssm stop PureSimple
+nssm restart PureSimple
+nssm status PureSimple
+```
+
+> **Tip:** NSSM is a single executable with no installer. Download it from nssm.cc, drop `nssm.exe` somewhere in your PATH, and you are done. It has been the standard Windows service wrapper for over a decade.
+
+### Reverse Proxy on Windows
+
+**Caddy for Windows** is the recommended option. The Caddyfile from Section 19.4 works without modification. Download Caddy from caddyserver.com, install it as a service with `caddy run --config Caddyfile`, and you get the same automatic HTTPS and reverse proxying as on Linux.
+
+For environments that require **IIS**, use the URL Rewrite module with Application Request Routing (ARR) to proxy requests to `localhost:8080`. The IIS configuration is more involved than Caddy's seven lines, but it integrates with Windows Authentication and existing IIS infrastructure.
+
+### Health Check
+
+The same `/health` endpoint works on Windows. Verify it with PowerShell:
+
+```powershell
+# Listing 19.20 -- Health check on Windows
+Invoke-WebRequest -Uri http://localhost:8080/health -UseBasicParsing
+```
+
+Or with `curl.exe` (bundled with Windows 10 and later):
+
+```cmd
+curl.exe -sf http://localhost:8080/health
+```
+
+### Updating the Application
+
+Without the SSH-based deploy script, Windows updates follow a simple manual pattern:
+
+1. Compile the new binary as `app_new.exe`
+2. Stop the service: `nssm stop PureSimple`
+3. Back up the current binary: `copy app.exe app.bak.exe`
+4. Replace: `move /Y app_new.exe app.exe`
+5. Start the service: `nssm start PureSimple`
+6. Verify: `curl.exe -sf http://localhost:8080/health`
+
+This is the same swap pattern that `deploy.sh` automates on Linux. You could wrap these steps in a PowerShell script if you deploy frequently.
+
+### Windows Firewall
+
+If your Windows server is directly exposed to the internet, open port 443 for Caddy:
+
+```powershell
+# Listing 19.21 -- Windows Firewall rule for HTTPS
+New-NetFirewallRule -DisplayName "PureSimple HTTPS" `
+    -Direction Inbound -Protocol TCP -LocalPort 443 -Action Allow
+```
+
+If Caddy and PureSimple are on the same machine (the typical setup), no firewall rule is needed for port 8080 because the traffic stays on localhost.
+
 ---
 
 ## Summary
